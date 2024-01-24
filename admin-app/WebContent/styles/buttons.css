@@ -1,0 +1,60 @@
+.btn-style {
+    text-transform: uppercase;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 100%;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    border: none;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition-property: background-color, border-color, color, 
+        box-shadow;
+    transition-duration: .15s;
+    cursor: pointer;
+}
+
+.btn-style:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.btn-style:active {
+    transform: scale(0.99, 0.99);
+}
+
+.btn-large {
+    font-size: 1.125rem;
+    height: 3rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.btn-medium {
+    height: 2.2rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.btn-small {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 1.8rem;
+    font-size: .875rem;
+}
+
+.bg-accent {
+    background-color: var(--clr-accent);
+    color: var(--clr-primary);
+}
+
+.bg-accent:hover {
+    background-color: var(--clr-accent-hover);
+}
+
+.bg-secondary {
+    background-color: var(--clr-secondary);
+    color: var(--clr-text);
+}
+
+.bg-secondary:hover {
+    background-color: var(--clr-secondary-hover);
+}

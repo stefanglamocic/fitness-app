@@ -1,0 +1,87 @@
+:root {
+    --clr-primary: #5f0f40;
+    --clr-primary-dark: #4d0933;
+    --clr-secondary: #86717B;
+    --clr-secondary-hover: #79666f;
+    --clr-text: #EEF0E5;
+    --clr-highlight: #F1F6F9;
+    --clr-accent: #FB8B24;
+    --clr-accent-hover: #e98120;
+
+    --icn-warning: '\f071';
+    --icn-error: '\f06a';
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.v-cont {
+    display: flex;
+    flex-direction: column;
+}
+
+.h-cont {
+    display: flex;
+}
+
+.m-1 {
+    margin: 0.25rem;
+}
+
+.m-2 {
+    margin: 0.5rem;
+}
+
+.m-3 {
+    margin: 0.75rem;
+}
+
+.m-4 {
+    margin: 1rem;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.maina-center {
+    justify-content: center;
+}
+
+.crossa-center {
+    align-items: center;
+}
+
+.main-cont {
+    flex-basis: 0px;
+    flex-grow: 1;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon::before {
+    display: inline-block;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.t-text {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: var(--clr-text);
+    color: transparent;
+}

@@ -1,0 +1,33 @@
+.search-cont {
+    border: 2px solid var(--clr-primary);
+    border-radius: 1.37rem;
+    overflow: hidden;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: white;
+}
+
+input[type=search] {
+    height: 28px;
+    padding-right: 3px;
+    border: none;
+    outline: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.search-cont:focus-within {
+    border-color: var(--clr-accent);
+}
+
+.search-bar::before {
+    content: '\f002';
+    color: rgba(0, 0, 0, 0.75);
+    margin-left: 0.7em;
+    font-size: 0.8em;
+}

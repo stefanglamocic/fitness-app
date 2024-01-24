@@ -1,0 +1,11 @@
+*.class
+
+*.jar
+*.war
+*.ear
+
+*/.classpath
+*/.project
+*/.settings/
+
+*/WebContent/lib
