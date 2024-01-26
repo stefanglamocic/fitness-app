@@ -6,6 +6,7 @@
     align-items: center;
     background-image: 
         linear-gradient(rgba(0,0,0,0), var(--clr-primary-dark));
+   	padding-right: 1.5rem;
 }
 
 .header-menu {

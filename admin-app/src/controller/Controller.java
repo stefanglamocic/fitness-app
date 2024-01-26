@@ -51,6 +51,11 @@ public class Controller extends HttpServlet {
 				path = "/WEB-INF/main.jsp";
 			}
 		}
+		else if("logout".equals(action)) {
+			UserBean userBean = (UserBean) session.getAttribute("userBean");
+			userBean.logout();
+			session.invalidate();
+		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
 		

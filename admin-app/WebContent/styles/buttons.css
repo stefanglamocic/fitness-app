@@ -11,6 +11,7 @@
         box-shadow;
     transition-duration: .15s;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .btn-style:hover {
@@ -57,4 +58,27 @@
 
 .bg-secondary:hover {
     background-color: var(--clr-secondary-hover);
+}
+
+.btn-icon::before {
+    margin-right: .3em;
+    font-size: 90%;
+}
+
+.btn-link::before {
+    text-decoration: none;
+    color: var(--clr-text);
+    font-size: 1.35rem;
+}
+
+.btn-add {
+	align-self: flex-end;
+}
+
+.btn-add::before {
+    content: '\2b';
+}
+
+.btn-logout::before {
+    content: '\f2f5';
 }

@@ -1,4 +1,4 @@
-:root {
+:root, ::backdrop {
     --clr-primary: #5f0f40;
     --clr-primary-dark: #4d0933;
     --clr-secondary: #86717B;
@@ -66,14 +66,21 @@ body {
     flex-basis: 0px;
     flex-grow: 1;
     overflow-y: auto;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+}
+
+.table-cont {
+	padding: 1.2rem;
+	flex-grow: 1;
+	width: 100%; 
+	gap: 1.5rem;
 }
 
 .icon::before {
     display: inline-block;
     font-family: "Font Awesome 6 Free";
-    font-weight: 900;
+    font-weight: 600;
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;

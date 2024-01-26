@@ -1,0 +1,34 @@
+.table-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table {
+    cursor: default;
+    background-color: var(--clr-secondary);
+    border-collapse: collapse;
+    width: 100%;
+    color: var(--clr-text);
+    overflow: hidden;
+}
+
+table tr {
+    height: 20px;
+    border: 2px solid var(--clr-secondary-hover);
+}
+
+table th {
+    color: var(--clr-accent);
+}
+
+table td {
+    text-align: center;
+}
+
+table td, th {
+    padding: .4rem;
+}
+
+table tr:hover:not(tr:first-child) {
+    background-color: var(--clr-primary);
+}
