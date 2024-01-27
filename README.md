@@ -1,9 +1,9 @@
-## fitness-app
-# Projektni zadatak iz Internet programiranja 2024
+# fitness-app
+## Projektni zadatak iz Internet programiranja 2024
 Napraviti jednostavnu aplikaciju za online fitnes, koja korisnicima pruža mogućnost
 pretraživanja fitnes programa, vođenje dnevnika aktivnosti, kao i prijedlog vježbi. Sistem se
 sastoji od nekoliko dijelova koji su opisani u nastavku:
-Fitness online aplikacija
+### Fitness online aplikacija
 Ovo je centralna aplikacija sistema koja se koristi za pružanje i traženje online fitnes
 programa. Aplikacija omogućava korisnicima pregled i učestvovanje u različitim fitnes
 programima. Svaki program ima naziv, opis, kategoriju (npr. kardio, snaga, fleksibilnost,
@@ -55,21 +55,20 @@ Aplikacija mora imati uniforman izgled svih stranica i mora biti responsivna. Za
 Angular i SpringBoot i bazu podataka po izboru. Dozvoljeno je koristiti gotove biblioteke kao
 što je Bootstrap ili Material. Sve funkcionalnosti SpringBoot aplikacije dostupne su preko
 RESTful servisa.
-Administratorska aplikacija
+### Administratorska aplikacija
 Za pristup administratorskoj aplikaciji potrebno je imati nalog koji se otvara direktno u bazi
 podataka (ime, prezime, korisničko ime, lozinka). Na početnoj stranici nalazi se forma za
 prijavu. Ako je prijava uspješna otvara se stranica na kojoj se nalazi meni sa opcijama:
-●
-●
-●
-Kategorije: omogućava upravljanje podacima (CRUD) o kategorijama i specifičnim
-kategorijama fitnes programa.
-Korisnici: omogućava upravljanje podacima (CRUD) o korisnicima fitness online
-aplikacije.
-Statistika: omogućava pregled logova fitness backend aplikacije.
+
+- Kategorije: omogućava upravljanje podacima (CRUD) o kategorijama i specifičnim kategorijama fitnes programa.
+- Korisnici: omogućava upravljanje podacima (CRUD) o korisnicima fitness online aplikacije.
+- Statistika: omogućava pregled logova fitness backend aplikacije.
+
 Implementacija administratorske aplikacije mora biti pomoću JSP M2. Dozvoljeno je
 korištenje gotovih biblioteka za dizajn korisničkog interfejsa.
-Aplikacija za savjetovanjeZa pristup aplikaciji za savjetovanje potrebno je imati nalog koji mora biti otvoren od strane
+
+### Aplikacija za savjetovanje
+Za pristup aplikaciji za savjetovanje potrebno je imati nalog koji mora biti otvoren od strane
 administratora kroz administratorski dio aplikacije. Ovaj nalog nije isti kao nalog za
 administratorsku ili fitness online aplikaciju. Ako je prijava uspješna otvara se stranica na
 kojoj savjetnik može pregledati sve primljene poruke. U tabeli se prikazuju sve nepročitane
@@ -77,17 +76,18 @@ poruke, a otvaranjem jedne status se mijenja u pročitana. Na poruke se odgovara
 mail-a. Pored teksta, potrebno je omogućiti savjetniku i slanje dokumenta sa dodatnim
 opisima ili slikom. Savjetnik može pretražiti sve poruke po sadržaju.
 Aplikaciju za savjetovanje implementirati upotrebom JSP-a.
+
 Napomene:
-● Projektni zadatak se radi pojedinačno.
-● Prilikom predaje projektnog zadatka potrebno je predati kompletan izvorni kod, model
+- Projektni zadatak se radi pojedinačno.
+- Prilikom predaje projektnog zadatka potrebno je predati kompletan izvorni kod, model
 podataka, kao i model aplikacija. Poželjno je definisati testne podatke.
-● Pri realizaciji projektnog zadatka zabranjeno je korištenje generatora koda, osim onih
+- Pri realizaciji projektnog zadatka zabranjeno je korištenje generatora koda, osim onih
 koji su korišteni na laboratorijskim vježbama ili predavanjima.
-● Interfejs prema korisniku treba da bude organizovan na jednoobrazan način tj., sve
+- Interfejs prema korisniku treba da bude organizovan na jednoobrazan način tj., sve
 stranice treba da imaju sličan izgled i intuitivne kontrole i prikaz.
-● Svaki vid serverske validacije potrebno je da bude što efikasnije realizovan.
+- Svaki vid serverske validacije potrebno je da bude što efikasnije realizovan.
 Obavezno napraviti klijentsku validaciju.
-● Nije dozvoljeno koristiti stored procedure, funkcije i okidače (triggere). Dakle, baza
+- Nije dozvoljeno koristiti stored procedure, funkcije i okidače (triggere). Dakle, baza
 podataka ne smije imati bilo kakvu logiku osim definisanih tabela i ograničenja koja
 važe među njima.
-● Ovaj projektni zadatak vrijedi do objave novog projektnog zadataka.
+- Ovaj projektni zadatak vrijedi do objave novog projektnog zadataka.
