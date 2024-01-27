@@ -15,13 +15,24 @@ public class UserDAO implements IUserDAO{
 	
 	@Override
 	public List<User> getAll() {
+		return getUsersOfType("_");
+	}
+	
+	@Override
+	public List<User> getFitnessAppUsers() {
+		return getUsersOfType("F");
+	}
+	
+	@Override
+	public List<User> getUsersOfType(String type) {
 		List<User> users = new ArrayList<User>();
-		Connection conn = null;
+		Connection conn =  null;
 		ResultSet rs = null;
+		Object[] values = {type};
 		
 		try {
 			conn = connectionPool.checkOut();
-			PreparedStatement ps = conn.prepareStatement(SQL_GET_ALL);
+			PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_GET_USERS_OF_TYPE, false, values);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				users.add(getUser(rs));
@@ -29,7 +40,6 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			//log exception
 			e.printStackTrace();
 		}
 		finally {

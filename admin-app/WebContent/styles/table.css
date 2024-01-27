@@ -18,7 +18,7 @@ table tr {
 }
 
 table th {
-    color: var(--clr-accent);
+    color: var(--clr-primary);
 }
 
 table td {

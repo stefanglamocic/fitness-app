@@ -20,6 +20,10 @@
     height: 100%;
 }
 
+.activated {
+    color: var(--clr-accent);
+}
+
 .header-menu li {
     display: flex;
     align-items: center;

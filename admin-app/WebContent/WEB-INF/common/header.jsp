@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<% String currentPage = (String)session.getAttribute("page"); %>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,9 +32,15 @@
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <label for="nav-toggle" class="nav-toggle-lbl icon"></label>
         <ul class="header-menu">
-            <li><a href="#">Kategorije</a></li>
-            <li><a href="#">Korisnici</a></li>
-            <li><a href="#">Statistika</a></li>
+            <li <% if ("first".equals(currentPage)) { %>
+            	class="activated"
+            	<% } %>><a href="?action=programs">Kategorije</a></li>
+            <li <% if ("second".equals(currentPage)) { %>
+            	class="activated"
+            	<% } %>><a href="?action=users">Korisnici</a></li>
+            <li <% if ("third".equals(currentPage)) { %>
+            	class="activated"
+            	<% } %>><a href="?action=stats">Statistika</a></li>
         </ul>
         <div style="flex-grow: 1;"></div>
         <a href="?action=logout" class="icon btn-link btn-logout"></a>

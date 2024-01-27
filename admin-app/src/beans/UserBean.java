@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.List;
+
 import dao.IUserDAO;
 import dto.User;
 
@@ -7,6 +9,8 @@ public class UserBean {
 	private User user;
 	private boolean isLoggedIn = false;
 	private IUserDAO userDAO = null;
+	
+	public UserBean() {}
 	
 	public UserBean(IUserDAO userDAO) {
 		this.userDAO = userDAO;
@@ -29,11 +33,6 @@ public class UserBean {
 		return LoginResult.SUCCESS;
 	}
 	
-	public void logout() {
-		isLoggedIn = false;
-		user = null;
-	}
-	
 	public boolean isAdmin() {
 		if (user == null)
 			return false;
@@ -49,5 +48,7 @@ public class UserBean {
 		return isLoggedIn;
 	}
 	
-	
+	public List<User> getFitnessAppUsers() {
+		return userDAO.getFitnessAppUsers();
+	}
 }
