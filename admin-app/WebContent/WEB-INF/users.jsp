@@ -5,15 +5,7 @@
 <jsp:useBean id="userBean" type="beans.UserBean" scope="session"/>
 <jsp:include page="/WEB-INF/common/header.jsp" flush="true"></jsp:include>
 
-<dialog class="modal" id="modal">
-	<h2 class="modal-title">Dodajte novog korisnika</h2>
-	<div class="h-cont btn-cont">
-		<button class="btn-style btn-small m-2 bg-secondary"
-			onclick="closeModal()">Poništi</button>
-		<button class="btn-style btn-small m-2 bg-accent">Sačuvaj</button>
-	</div>
-</dialog>
-
+<jsp:include page="/WEB-INF/dialogs/user_dialog.jsp" flush="true"></jsp:include>
 <!-- page body -->
 <div class="v-cont table-cont">
 	<button class="btn-style btn-small m-1 bg-accent icon btn-icon btn-add"
@@ -39,6 +31,8 @@
 					<td> <%= u.getCity() %> </td>
 					<td> <%= u.getMail() %> </td>
 					<td> <%= u.getActivated() %> </td>
+					<td><a href="#" class="icon btn-link btn-change clr-accent f-3"></a></td>
+                    <td><a href="#" class="icon btn-link btn-remove clr-red f-3"></a></td>
 				</tr>
 			<% } %>
 		</table>

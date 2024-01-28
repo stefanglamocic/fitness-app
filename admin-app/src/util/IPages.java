@@ -6,4 +6,15 @@ public interface IPages {
 	static final String FITNESS_PROGRAMS = MAIN;
 	static final String USERS = "/WEB-INF/users.jsp";
 	static final String STATS = "/WEB-INF/stats.jsp";
+	
+	static String pageMapping(String page) {
+		switch (page) {
+		case "second": 
+			return "Korisnici";
+		case "third":
+			return "Statistika";
+			default:
+				return "Kategorije";
+		}
+	}
 }

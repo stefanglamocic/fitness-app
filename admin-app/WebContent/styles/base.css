@@ -10,6 +10,9 @@
 
     --icn-warning: '\f071';
     --icn-error: '\f06a';
+    --icn-remove: '\f1f8';
+    --icn-add: '\2b';
+    --icn-change: '\f304';
 }
 
 *,
@@ -50,6 +53,38 @@ body {
     margin: 1rem;
 }
 
+.f-1 {
+    font-size: 0.85rem;
+}
+
+.f-2 {
+    font-size: 1rem;
+}
+
+.f-3 {
+    font-size: 1.35rem;
+}
+
+.clr-primary {
+    color: var(--clr-primary);
+}
+
+.clr-secondary {
+    color: var(--clr-secondary);
+}
+
+.clr-text {
+    color: var(--clr-text);
+}
+
+.clr-accent {
+    color: var(--clr-accent);
+}
+
+.clr-red {
+    color: rgb(185, 3, 3);
+}
+
 .wrap {
     flex-wrap: wrap;
 }
@@ -70,13 +105,6 @@ body {
     align-items: center;
 }
 
-.table-cont {
-	padding: 1.2rem;
-	flex-grow: 1;
-	width: 100%; 
-	gap: 1.5rem;
-}
-
 .icon::before {
     display: inline-block;
     font-family: "Font Awesome 6 Free";
@@ -91,4 +119,11 @@ body {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: var(--clr-text);
     color: transparent;
+}
+
+.table-cont {
+	padding: 1.2rem;
+	flex-grow: 1;
+	width: 100%; 
+	gap: 1.5rem;
 }

@@ -1,3 +1,4 @@
+<%@page import="util.IPages"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -9,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrator</title>
+    <title>Administrator &bull;</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap"
@@ -24,10 +25,11 @@
     <link rel="stylesheet" type="text/css" href="styles/buttons.css">
     <link rel="stylesheet" type="text/css" href="styles/table.css">
     <link rel="stylesheet" type="text/css" href="styles/modal.css">
+    <link rel="stylesheet" type="text/css" href="styles/form.css">
     <script type="application/javascript" src="scripts/script.js"></script>
 </head>
 
-<body class="v-cont" onload="init()">
+<body class="v-cont" onload="init('<%= IPages.pageMapping(currentPage) %>')">
     <div class="header">
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <label for="nav-toggle" class="nav-toggle-lbl icon"></label>
@@ -43,6 +45,6 @@
             	<% } %>><a href="?action=stats">Statistika</a></li>
         </ul>
         <div style="flex-grow: 1;"></div>
-        <a href="?action=logout" class="icon btn-link btn-logout"></a>
+        <a href="?action=logout" class="icon btn-link btn-logout f-3 clr-text"></a>
     </div>
     <div class="main-cont v-cont">

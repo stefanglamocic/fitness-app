@@ -65,20 +65,30 @@
     font-size: 90%;
 }
 
-.btn-link::before {
-    text-decoration: none;
-    color: var(--clr-text);
-    font-size: 1.35rem;
-}
-
-.btn-add {
-	align-self: flex-end;
-}
-
 .btn-add::before {
     content: '\2b';
 }
 
+.btn-add {
+    align-self: flex-end;
+}
+
+.btn-link::before {
+    text-decoration: none;
+}
+
 .btn-logout::before {
     content: '\f2f5';
+}
+
+.btn-change::before {
+    content: var(--icn-change);
+}
+
+.btn-add::before {
+    content: var(--icn-add);
+}
+
+.btn-remove::before {
+    content: var(--icn-remove);
 }

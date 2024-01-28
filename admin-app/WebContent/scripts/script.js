@@ -1,9 +1,12 @@
-function init() {
+function init(text) {
   addModalEventListener();
+  addToTitle(text);
 }
 
 function addModalEventListener() {
   const modal = document.getElementById('modal');
+  if (modal == null)
+	  return;
   modal.addEventListener("click", e => {
     const modalDimensions = modal.getBoundingClientRect()
     if (
@@ -23,4 +26,9 @@ function showModal() {
 
 function closeModal() {
   modal.close();
+}
+
+function addToTitle(text) {
+	const current = document.title;
+	document.title = `${current} ${text}`;
 }

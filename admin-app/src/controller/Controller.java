@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 
 import beans.LoginResult;
 import beans.UserBean;
@@ -39,15 +42,26 @@ public class Controller extends HttpServlet {
 		String path = IPages.LOGIN;
 		String action = request.getParameter("action") == null ? "" : request.getParameter("action");
 		
-		if("login".equals(action)) {
+		switch (action) {
+		case "login": {
 			path = login(request);
 			session.setAttribute("page", "first");
 		}
-		else if("logout".equals(action)) {
+			break;
+		case "logout": {
 			session.invalidate();
 		}
-		else {
+			break;
+		case "": 
+			break;
+		case "add-user": {
+			addUser(request, response);
+		}
+			break;
+		default: {
 			path = pageSwitch(session, action);
+		}
+			break;
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
@@ -100,5 +114,21 @@ public class Controller extends HttpServlet {
 			}
 		}
 		return path;
+	}
+	
+	private void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		/*
+		HttpSession session = request.getSession();
+		UserBean userBean = (UserBean) session.getAttribute("userBean");
+		if (userBean == null || !userBean.isLoggedIn())
+			return;*/
+		
+		JSONObject obj = new JSONObject();
+		obj.put("test", "hello world");
+		
+		PrintWriter writer = response.getWriter();
+		writer.println(obj.toString(1));
 	}
 }

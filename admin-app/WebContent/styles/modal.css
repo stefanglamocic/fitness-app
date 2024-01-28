@@ -1,6 +1,6 @@
 .modal {
-    padding: 1rem;
-    max-width: 60ch;
+    padding: 1.6rem;
+    width: 420px;
     border: none;
     box-shadow: 0 0 1em rgb(0 0 0 / .3);
     background-color: var(--clr-primary);
@@ -8,6 +8,7 @@
     top: 50%;
     left: 50%;
     translate: -50% -50%;
+    font-size: .85em;
 }
 
 .modal::backdrop {
@@ -16,9 +17,19 @@
 }
 
 .btn-cont {
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .modal-title {
+    font-size: 1.5rem;
     text-align: center;
+    margin-bottom: .8em;
+}
+
+.modal-form {
+    padding: 0 1.2rem 0 1.2rem;
+}
+
+.h-gap {
+    gap: .6em;
 }
