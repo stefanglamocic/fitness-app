@@ -10,7 +10,8 @@ public interface IUserDAO extends IDAO<User>{
 	static final String SQL_IS_USERNAME_USED = "SELECT * FROM user WHERE username=?";
 	static final String SQL_INSERT = "INSERT INTO user (username, password, user_type, name, surname, "
 			+ "city, mail, activated) VALUES (?,?,?,?,?,?,?,?)";
-	static final String SQL_DELETE = "UPDATE user SET activated=0 user WHERE username=?";
+	static final String SQL_DELETE = "DELETE FROM user WHERE username=?";
+	static final String SQL_ACC_ACTIVATION = "UPDATE user SET activated=? user WHERE username=?";
 	static final String SQL_UPDATE = "UPDATE user SET password=?, user_type=?, name=?, surname=?, "
 			+ "city=?, mail=?, activated=? WHERE username=?";
 	static final String SQL_UPDATE_USERNAME = "UPDATE user SET username=? WHERE username=?";

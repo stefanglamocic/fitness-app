@@ -92,3 +92,19 @@
 .btn-remove::before {
     content: var(--icn-remove);
 }
+
+.btn-check {
+    display: none;
+}
+
+.check-lbl {
+    cursor: pointer;
+}
+
+.btn-check:checked + .check-lbl::before {
+    content: var(--icn-true);
+}
+
+.check-lbl::before {
+    content: var(--icn-false);
+}

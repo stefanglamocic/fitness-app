@@ -128,15 +128,21 @@ public class Controller extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setStatus(200);
 		
-		/*
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userBean");
 		if (userBean == null || !userBean.isLoggedIn()) {
-			response.setStatus(403);
+			response.setStatus(401);
 			return;
-		}	*/
+		}
 		
-		JSONObject obj = new JSONObject(getUser(request));
+		User newUser = getUser(request);
+		boolean success = userBean.insert(newUser);
+		if (!success) {
+			response.setStatus(406);
+			return;
+		}
+		
+		JSONObject obj = new JSONObject(newUser);
 		PrintWriter writer = response.getWriter();
 		writer.println(obj.toString(1));
 		writer.flush();

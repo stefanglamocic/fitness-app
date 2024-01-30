@@ -12,6 +12,10 @@ public class User implements Serializable{
 	
 	public User() {}
 	
+	public User(String username) {
+		this.username = username;
+	}
+	
 	public User(String username, String password, String userType, String name, String surname, String city,
 			String mail, Boolean activated) {
 		super();

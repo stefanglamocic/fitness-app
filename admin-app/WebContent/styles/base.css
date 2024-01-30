@@ -13,6 +13,8 @@
     --icn-remove: '\f1f8';
     --icn-add: '\2b';
     --icn-change: '\f304';
+    --icn-true: '\f00c';
+    --icn-false: '\f00d';
 }
 
 *,

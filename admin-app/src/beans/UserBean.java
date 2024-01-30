@@ -51,4 +51,13 @@ public class UserBean {
 	public List<User> getFitnessAppUsers() {
 		return userDAO.getFitnessAppUsers();
 	}
+	
+	public boolean insert(User user) {
+		return userDAO.insert(user);
+	}
+	
+	public boolean delete(String username) {
+		User user = new User(username);
+		return userDAO.delete(user);
+	}
 }

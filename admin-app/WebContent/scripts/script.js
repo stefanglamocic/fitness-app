@@ -1,6 +1,8 @@
 function init(text) {
   addModalEventListener();
   addToTitle(text);
+  addRemoveEventListeners();
+  addChangeEventListeners();
 }
 
 function addModalEventListener() {
@@ -50,6 +52,70 @@ function addUser() {
 	  closeModal(formName);
 }
 
-	function addToTable(user) {
+function getChangeButton(name) {
+	  return '<a href="#"' 
+	    + 'class="icon btn-link btn-change clr-accent f-3" '
+	    + 'id=' + name + 'C></a>';
+}
+
+function getRemoveButton(name) {
+	  return '<a href="#"' 
+	    + 'class="icon btn-link btn-remove clr-red f-3" '
+	    + 'id=' + name + 'R></a>';
+}
+
+function getCheckBox(name, checked) {
+	let check = checked ? 'checked' : '';
+	let id = `${name}Ch-b`;
+	return '<input type="checkbox" class="btn-check" id="' + id + '" ' + check +
+    	'><label for="' + id + '" class="icon clr-text check-lbl"></label>';
+}
+
+function addToTable(user) {
+	  const table = document.getElementById('usersTable');
+	  const row = table.insertRow(-1);//append row at the end
+
+	  addCell(row, user.name);
+	  addCell(row, user.surname);
+	  addCell(row, user.username);
+	  addCell(row, user.city);
+	  addCell(row, user.mail);
+	  addCell(row, getCheckBox(user.username, user.activated));
+	  addCell(row, getChangeButton(user.username));
+	  addCell(row, getRemoveButton(user.username));
+}
+
+function addCell(row, content) {
+	  let cell = row.insertCell(-1);
+	  cell.innerHTML = content;
+}
+
+function addRemoveEventListeners() {
+	  let removeButtons = document.querySelectorAll('.btn-remove');
+	  removeButtons.forEach(e => 
+	    e.addEventListener('click', openRemoveUserModal));
+}
+
+function addChangeEventListeners() {
+	document.querySelectorAll('.btn-change')
+    .forEach(b => b.addEventListener('click', openChangeUserModal));
+}
+
+function openRemoveUserModal(event) {
+	let rowId = event.currentTarget.parentNode.parentNode.id;
+	  const title = 'Brisanje korisnika';
+		const content = `Da li ste sigurni da želite obrisati korisnika `;
+
+	  document.querySelector('#pop-up-title').innerHTML = title;
+	  document.querySelector('#pop-up-content').innerHTML = 
+	    `${content} <strong>${rowId}</strong>?`;
+	  document.querySelector('#pop-up').showModal();
 	  
+	  // add events for yes/no buttons...
+}
+
+function openChangeUserModal(event) {
+	let rowId = event.currentTarget.parentNode.parentNode.id;
+	const title = 'Izmjena korisnika';
+	//modal sa formom
 }
