@@ -10,6 +10,8 @@ public class User implements Serializable{
 	private String username, password, userType, name, surname, city, mail;
 	private Boolean activated;
 	
+	public User() {}
+	
 	public User(String username, String password, String userType, String name, String surname, String city,
 			String mail, Boolean activated) {
 		super();
@@ -110,5 +112,11 @@ public class User implements Serializable{
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", userType=" + userType + ", name=" + name
+				+ ", surname=" + surname + ", city=" + city + ", mail=" + mail + ", activated=" + activated + "]";
+	}
 }

@@ -24,11 +24,32 @@ function showModal() {
   modal.showModal();
 }
 
-function closeModal() {
-  modal.close();
+function closeModal(formName) {
+	  document.getElementById(formName).reset();
+	  modal.close();
 }
 
 function addToTitle(text) {
 	const current = document.title;
 	document.title = `${current} ${text}`;
+}
+
+function addUser() {
+	  let formName = 'userForm';
+	  let form = document.getElementById(formName);
+	  const url = 'http://localhost:8080/admin-app/?action=add-user';
+
+	  fetch(url, {
+	    method: 'POST',
+	    body: JSON.stringify(Object.fromEntries(new FormData(form)))
+	  })
+	  .then(response => response.json())
+	  .then(user => addToTable(user))
+	  .catch(error => console.log(`Greska ${error}`));
+
+	  closeModal(formName);
+}
+
+	function addToTable(user) {
+	  
 }

@@ -1,7 +1,9 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import beans.LoginResult;
 import beans.UserBean;
 import dao.IUserDAO;
 import dao.UserDAO;
+import dto.User;
 import util.IPages;
 
 /**
@@ -37,6 +40,10 @@ public class Controller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+		
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String path = IPages.LOGIN;
@@ -56,8 +63,8 @@ public class Controller extends HttpServlet {
 			break;
 		case "add-user": {
 			addUser(request, response);
+			return;
 		}
-			break;
 		default: {
 			path = pageSwitch(session, action);
 		}
@@ -119,16 +126,28 @@ public class Controller extends HttpServlet {
 	private void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
+		response.setStatus(200);
+		
 		/*
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userBean");
-		if (userBean == null || !userBean.isLoggedIn())
-			return;*/
+		if (userBean == null || !userBean.isLoggedIn()) {
+			response.setStatus(403);
+			return;
+		}	*/
 		
-		JSONObject obj = new JSONObject();
-		obj.put("test", "hello world");
-		
+		JSONObject obj = new JSONObject(getUser(request));
 		PrintWriter writer = response.getWriter();
 		writer.println(obj.toString(1));
+		writer.flush();
+	}
+	
+	private User getUser(HttpServletRequest request) throws IOException{
+		BufferedReader reader = request.getReader();
+		String source = reader.lines().collect(Collectors.joining());
+		JSONObject obj = new JSONObject(source);
+		
+		return new User(obj.getString("username"), obj.getString("password"), "F", 
+				obj.getString("name"), obj.getString("surname"), obj.getString("city"), obj.getString("mail"), true);
 	}
 }

@@ -63,6 +63,5 @@
         <button class="btn-style m-4 bg-accent btn-large 
             full-width" type="submit" form="login">Prijavi se</button>
     </div>
-    
 </body>
 </html>

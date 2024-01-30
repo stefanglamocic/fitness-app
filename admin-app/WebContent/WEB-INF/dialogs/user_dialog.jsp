@@ -36,8 +36,7 @@
                 </div>
             </form>
             <div class="h-cont btn-cont">
-                <button type="submit" form="userForm" class="btn-style btn-small m-2 bg-secondary"
-                	formmethod="dialog">Poništi</button>
-                <button type="submit" form="userForm" class="btn-style btn-small m-2 bg-accent">Sačuvaj</button>
+                <button class="btn-style btn-small m-2 bg-secondary" onclick="closeModal('userForm')">Poništi</button>
+                <button class="btn-style btn-small m-2 bg-accent" onclick="addUser()">Sačuvaj</button>
             </div>
         </dialog>
