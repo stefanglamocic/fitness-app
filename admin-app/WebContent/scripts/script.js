@@ -1,12 +1,13 @@
 function init(text) {
-  addModalEventListener();
+  addModalEventListener('modal');
+  addModalEventListener('pop-up');
   addToTitle(text);
   addRemoveEventListeners();
   addChangeEventListeners();
 }
 
-function addModalEventListener() {
-  const modal = document.getElementById('modal');
+function addModalEventListener(id) {
+  const modal = document.getElementById(id);
   if (modal == null)
 	  return;
   modal.addEventListener("click", e => {
@@ -103,15 +104,31 @@ function addChangeEventListeners() {
 
 function openRemoveUserModal(event) {
 	let rowId = event.currentTarget.parentNode.parentNode.id;
-	  const title = 'Brisanje korisnika';
-		const content = `Da li ste sigurni da želite obrisati korisnika `;
-
-	  document.querySelector('#pop-up-title').innerHTML = title;
-	  document.querySelector('#pop-up-content').innerHTML = 
-	    `${content} <strong>${rowId}</strong>?`;
-	  document.querySelector('#pop-up').showModal();
+	const title = 'Brisanje korisnika';
+	const content = `Da li ste sigurni da želite obrisati korisnika ${rowId}?`;
+		
+	let dialog = getConfirmDialog(title, content);
 	  
-	  // add events for yes/no buttons...
+	 document.querySelector('#cancelBtn').addEventListener('click', closePopUp);
+	 document.querySelector('#confirmBtn').addEventListener('click', () => removeUser(rowId));
+	  
+	 dialog.showModal();
+}
+
+function removeUser(username) {
+	const url = '?action=remove-user';
+	
+	fetch(url, {
+		method: 'POST',
+		body: JSON.stringify({username})
+	})
+	.then(response => {
+		if (response.ok)
+			document.getElementById(username).remove();
+	})
+	.catch(error => console.log(`Greska ${error}`));
+	
+	closePopUp();
 }
 
 function openChangeUserModal(event) {

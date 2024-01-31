@@ -7,7 +7,11 @@
                 <p id="pop-up-content" class="f-2"></p>
             </div>
             <div class="h-cont btn-cont">
-                <button class="btn-style btn-small m-2 bg-secondary">Ne</button>
-                <button class="btn-style btn-small m-2 bg-accent">Da</button>
+                <button 
+                    id="okBtn" class="btn-style btn-medium m-2 bg-accent">OK</button>
+                <button
+                    id="cancelBtn" class="btn-style btn-small m-2 bg-secondary">Ne</button>
+                <button 
+                    id="confirmBtn" class="btn-style btn-small m-2 bg-accent">Da</button>
             </div>
         </dialog>

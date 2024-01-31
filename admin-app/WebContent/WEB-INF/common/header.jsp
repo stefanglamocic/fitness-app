@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="styles/modal.css">
     <link rel="stylesheet" type="text/css" href="styles/form.css">
     <script type="application/javascript" src="scripts/script.js"></script>
+    <script type="application/javascript" src="scripts/pop-up.js"></script>
 </head>
 
 <body class="v-cont" onload="init('<%= IPages.pageMapping(currentPage) %>')">

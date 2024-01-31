@@ -65,6 +65,10 @@ public class Controller extends HttpServlet {
 			addUser(request, response);
 			return;
 		}
+		case "remove-user": {
+			removeUser(request, response);
+			return;
+		}
 		default: {
 			path = pageSwitch(session, action);
 		}
@@ -123,17 +127,26 @@ public class Controller extends HttpServlet {
 		return path;
 	}
 	
-	private void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	private UserBean setEnv(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.setStatus(200);
 		
 		HttpSession session = request.getSession();
 		UserBean userBean = (UserBean) session.getAttribute("userBean");
-		if (userBean == null || !userBean.isLoggedIn()) {
+		if (userBean == null || !userBean.isLoggedIn())
 			response.setStatus(401);
-			return;
-		}
+		
+		return userBean;
+	}
+	
+	private String readRequestBody(HttpServletRequest request) throws IOException {
+		BufferedReader reader = request.getReader();
+		return reader.lines().collect(Collectors.joining());
+	}
+	
+	private void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		UserBean userBean = setEnv(request, response);
 		
 		User newUser = getUser(request);
 		boolean success = userBean.insert(newUser);
@@ -149,11 +162,20 @@ public class Controller extends HttpServlet {
 	}
 	
 	private User getUser(HttpServletRequest request) throws IOException{
-		BufferedReader reader = request.getReader();
-		String source = reader.lines().collect(Collectors.joining());
+		String source = readRequestBody(request);
 		JSONObject obj = new JSONObject(source);
 		
 		return new User(obj.getString("username"), obj.getString("password"), "F", 
 				obj.getString("name"), obj.getString("surname"), obj.getString("city"), obj.getString("mail"), true);
+	}
+	
+	private void removeUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		String username = new JSONObject(
+				readRequestBody(request))
+				.getString("username");
+		boolean success = userBean.delete(username);
+		if (!success)
+			response.setStatus(406);
 	}
 }
