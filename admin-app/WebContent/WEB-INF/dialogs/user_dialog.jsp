@@ -14,11 +14,25 @@
                         <input class="form-input" type="text" id="surname" name="surname">
                     </div>
                 </div>
-
-                <div class="v-cont form-group">
-                    <label class="form-label" for="username">Korisničko ime</label>
-                    <input class="form-input" type="text" id="username" name="username">
+				
+				<div class="h-cont h-gap">
+                    <div class="v-cont form-group fg-2">
+                        <label class="form-label" for="username">Korisničko ime</label>
+                        <input class="form-input" type="text" id="username" name="username">
+                    </div>
+    
+                    <div class="v-cont form-group fg-1">
+                        <label for="userType" class="form-label">Tip korisnika</label>
+                        <div class="custom-select">
+                            <select id="userType" name="userType">
+                                <option value="F" id="F">Obični korisnik</option>
+                                <option value="S" id="S">Savjetnik</option>
+                            </select>
+                            <!-- <span class="arrow icon"></span> -->
+                        </div>
+                    </div>
                 </div>
+				
                 <div class="v-cont form-group">
                     <label class="form-label" for="password">Lozinka</label>
                     <input class="form-input" type="password" id="password" name="password">

@@ -67,6 +67,18 @@ body {
     font-size: 1.35rem;
 }
 
+.fg-1 {
+    flex-grow: 1;
+}
+
+.fg-2 {
+    flex-grow: 2;
+}
+
+.fg-3 {
+    flex-grow: 3;
+}
+
 .clr-primary {
     color: var(--clr-primary);
 }

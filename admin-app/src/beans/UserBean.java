@@ -36,7 +36,7 @@ public class UserBean {
 	public boolean isAdmin() {
 		if (user == null)
 			return false;
-		return user.getUserType().equals("A");
+		return user.getUserType().equals("Admin");
 	}
 	
 	public User getUser() {
@@ -48,8 +48,8 @@ public class UserBean {
 		return isLoggedIn;
 	}
 	
-	public List<User> getFitnessAppUsers() {
-		return userDAO.getFitnessAppUsers();
+	public List<User> getUsersNotOfTypeAdmin() {
+		return userDAO.getUsersNotOfType("A");
 	}
 	
 	public boolean insert(User user) {

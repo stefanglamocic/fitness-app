@@ -17,18 +17,20 @@
 				<th>Ime</th>
 				<th>Prezime</th>
 				<th>Korisničko ime</th>
+				<th>Tip korisnika</th>
 				<th>Grad</th>
 				<th>E-mail</th>
 				<th>Aktiviran</th>
 			</tr>
 			<% 
-				List<User> users = userBean.getFitnessAppUsers();
+				List<User> users = userBean.getUsersNotOfTypeAdmin();
 				for (User u : users) {
 			%>
 				<tr id="<%= u.getUsername() %>">
 					<td> <%= u.getName() %></td>
 					<td> <%= u.getSurname() %></td>
 					<td> <%= u.getUsername() %> </td>
+					<td> <%= u.getUserType() %> </td>
 					<td> <%= u.getCity() %> </td>
 					<td> <%= u.getMail() %> </td>
 					<td>

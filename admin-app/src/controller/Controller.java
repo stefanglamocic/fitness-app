@@ -165,7 +165,7 @@ public class Controller extends HttpServlet {
 		String source = readRequestBody(request);
 		JSONObject obj = new JSONObject(source);
 		
-		return new User(obj.getString("username"), obj.getString("password"), "F", 
+		return new User(obj.getString("username"), obj.getString("password"), obj.getString("userType"), 
 				obj.getString("name"), obj.getString("surname"), obj.getString("city"), obj.getString("mail"), true);
 	}
 	

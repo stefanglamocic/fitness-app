@@ -11,7 +11,9 @@ function addModalEventListener(id) {
   if (modal == null)
 	  return;
   modal.addEventListener("click", e => {
-    const modalDimensions = modal.getBoundingClientRect()
+	  if (['SELECT', 'OPTION'].includes(e.target.tagName))
+		  return;
+    const modalDimensions = modal.getBoundingClientRect();
     if (
       e.clientX < modalDimensions.left ||
       e.clientX > modalDimensions.right ||
@@ -56,13 +58,13 @@ function addUser() {
 function getChangeButton(name) {
 	  return '<a href="#"' 
 	    + 'class="icon btn-link btn-change clr-accent f-3" '
-	    + 'id=' + name + 'C></a>';
+	    + 'id=' + name + 'C onclick="openChangeUserModal(event)"></a>';
 }
 
 function getRemoveButton(name) {
 	  return '<a href="#"' 
 	    + 'class="icon btn-link btn-remove clr-red f-3" '
-	    + 'id=' + name + 'R></a>';
+	    + 'id=' + name + 'R onclick="openRemoveUserModal(event)"></a>';
 }
 
 function getCheckBox(name, checked) {
@@ -75,10 +77,12 @@ function getCheckBox(name, checked) {
 function addToTable(user) {
 	  const table = document.getElementById('usersTable');
 	  const row = table.insertRow(-1);//append row at the end
+	  row.id = user.username;
 
 	  addCell(row, user.name);
 	  addCell(row, user.surname);
 	  addCell(row, user.username);
+	  addCell(row, user.userType);
 	  addCell(row, user.city);
 	  addCell(row, user.mail);
 	  addCell(row, getCheckBox(user.username, user.activated));

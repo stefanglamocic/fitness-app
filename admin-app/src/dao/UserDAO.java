@@ -15,24 +15,29 @@ public class UserDAO implements IUserDAO{
 	
 	@Override
 	public List<User> getAll() {
-		return getUsersOfType("_");
+		return getUsersWhere(SQL_GET_USERS_OF_TYPE, "_");
 	}
 	
 	@Override
 	public List<User> getFitnessAppUsers() {
-		return getUsersOfType("F");
+		return getUsersWhere(SQL_GET_USERS_OF_TYPE, "F");
 	}
 	
 	@Override
-	public List<User> getUsersOfType(String type) {
+	public List<User> getUsersNotOfType(String type) {
+		return getUsersWhere(SQL_GET_USERS_NOT_OF_TYPE, type);
+	}
+	
+	@Override
+	public List<User> getUsersWhere(String query, String param) {
 		List<User> users = new ArrayList<User>();
 		Connection conn =  null;
 		ResultSet rs = null;
-		Object[] values = {type};
+		Object[] values = {param};
 		
 		try {
 			conn = connectionPool.checkOut();
-			PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_GET_USERS_OF_TYPE, false, values);
+			PreparedStatement ps = DAOUtil.prepareStatement(conn, query, false, values);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				users.add(getUser(rs));
@@ -55,7 +60,7 @@ public class UserDAO implements IUserDAO{
 			return false;
 		boolean result = false;
 		Connection conn = null;
-		Object[] values = {user.getUsername(), user.getPassword(), user.getUserType(), 
+		Object[] values = {user.getUsername(), user.getPassword(), user.getTypeAbbr(), 
 				user.getName(), user.getSurname(), user.getCity(), user.getMail(), user.getActivated()};
 		
 		try {

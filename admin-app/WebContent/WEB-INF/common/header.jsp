@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="styles/table.css">
     <link rel="stylesheet" type="text/css" href="styles/modal.css">
     <link rel="stylesheet" type="text/css" href="styles/form.css">
+    <link rel="stylesheet" type="text/css" href="styles/select.css">
     <script type="application/javascript" src="scripts/script.js"></script>
     <script type="application/javascript" src="scripts/pop-up.js"></script>
 </head>

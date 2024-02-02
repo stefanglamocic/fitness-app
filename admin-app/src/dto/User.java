@@ -44,9 +44,22 @@ public class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getTypeAbbr() {
+		return userType;
+	}
 
 	public String getUserType() {
-		return userType;
+		switch (userType) {
+		case "A":
+			return "Admin";
+		case "F":
+			return "Obični korisnik";
+		case "S":
+			return "Savjetnik";
+			default: 
+				return "Nepoznato";
+		}
 	}
 
 	public void setUserType(String userType) {
