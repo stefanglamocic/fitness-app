@@ -19,6 +19,7 @@ public interface IUserDAO extends IDAO<User>{
 	
 	boolean usernameExists(String username);
 	User login(String username, String password);
+	User getUser(String username);
 	boolean updateUsername(String username, String other);
 	List<User> getFitnessAppUsers();
 	List<User> getUsersWhere(String query, String param);

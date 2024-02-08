@@ -218,6 +218,31 @@ public class UserDAO implements IUserDAO{
 		return user;
 	}
 	
+	@Override
+	public User getUser(String username) {
+		User user = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		Object[] values = {username};
+		
+		try {
+			conn = connectionPool.checkOut();
+			PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_IS_USERNAME_USED, false, values);
+			rs = ps.executeQuery();
+			if (rs.next())
+				user = getUser(rs);
+			ps.close();
+		}
+		catch (SQLException e) {
+			// TODO: handle exception
+		}
+		finally {
+			connectionPool.checkIn(conn);
+		}
+		
+		return user;
+	}
+	
 	private User getUser(ResultSet rs) throws SQLException{
 		return new User(rs.getString("username"), rs.getString("password"), rs.getString("user_type"), 
 				rs.getString("name"), rs.getString("surname"), rs.getString("city"), rs.getString("mail"), 

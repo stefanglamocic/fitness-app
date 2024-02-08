@@ -60,4 +60,12 @@ public class UserBean {
 		User user = new User(username);
 		return userDAO.delete(user);
 	}
+	
+	public User getUser(String username) {
+		return userDAO.getUser(username);
+	}
+	
+	public boolean update(User user) {
+		return userDAO.update(user);
+	}
 }

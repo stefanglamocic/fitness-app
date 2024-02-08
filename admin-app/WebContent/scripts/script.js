@@ -1,6 +1,7 @@
 function init(text) {
   addModalEventListener('modal');
   addModalEventListener('pop-up');
+  addModalEventListener('changeModal');
   addToTitle(text);
   addRemoveEventListeners();
   addChangeEventListeners();
@@ -29,9 +30,11 @@ function showModal() {
   modal.showModal();
 }
 
-function closeModal(formName) {
-	  document.getElementById(formName).reset();
-	  modal.close();
+function closeModal(modalId) {
+	const modal = document.getElementById(modalId);
+	const form = modal.getElementsByTagName('form')[0];
+	form.reset();
+	modal.close();
 }
 
 function addToTitle(text) {
@@ -42,6 +45,12 @@ function addToTitle(text) {
 function addUser() {
 	  let formName = 'userForm';
 	  let form = document.getElementById(formName);
+	  
+	  for (let e of form.querySelectorAll('[required]')) {
+		  if (!e.reportValidity())
+			  return;
+	  }
+	  
 	  const url = 'http://localhost:8080/admin-app/?action=add-user';
 
 	  fetch(url, {
@@ -52,7 +61,7 @@ function addUser() {
 	  .then(user => addToTable(user))
 	  .catch(error => console.log(`Greska ${error}`));
 
-	  closeModal(formName);
+	  closeModal('modal');
 }
 
 function getChangeButton(name) {
@@ -130,13 +139,52 @@ function removeUser(username) {
 		if (response.ok)
 			document.getElementById(username).remove();
 	})
-	.catch(error => console.log(`Greska ${error}`));
+	.catch(error => console.log(`Greska: ${error}`));
 	
 	closePopUp();
 }
 
 function openChangeUserModal(event) {
 	let rowId = event.currentTarget.parentNode.parentNode.id;
-	const title = 'Izmjena korisnika';
-	//modal sa formom
+	const changeModal = document.getElementById('changeModal');
+	const url = `?action=get-user&username=${rowId}`;
+	
+	changeModal.querySelector('.modal-title').innerText = `Izmjenite detalja o korisniku ${rowId}`;
+	
+	fetch(url)
+	.then(response => response.json())
+	.then(user => fillOutForm(user))
+	.catch(error => console.log(`Greska: ${error}`))
+	
+	changeModal.showModal();
+}
+
+function fillOutForm(user) {
+	const changeForm = document.getElementById('changeUserForm');
+	
+	changeForm.querySelector('#name').value = user.name;
+	changeForm.querySelector('#surname').value = user.surname;
+	changeForm.querySelector('#password').value = user.password;
+	changeForm.querySelector('#city').value = user.city;
+	changeForm.querySelector('#mail').value = user.mail;
+	changeForm.querySelector('#userType').value = user.typeAbbr;
+}
+
+async function changeUser() {
+	const changeModal = document.getElementById('changeModal');
+	const changeForm = document.querySelector('#changeUserForm');
+	const modalTitle = changeModal.querySelector('.modal-title').innerText;
+	const username = modalTitle.split(' ').pop();
+	
+	const url = `?action=get-user&username=${username}`;
+	let user = await fetch(url).then(response => response.json());
+	
+	user.name = changeForm.querySelector('#name').value;
+	user.surname = changeForm.querySelector('#surname').value;
+	user.password = changeForm.querySelector('#password').value;
+	user.city = changeForm.querySelector('#city').value;
+	user.mail = changeForm.querySelector('#mail').value;
+	user.userType = changeForm.querySelector('#userType').value;
+	
+	console.log(user);
 }

@@ -7,18 +7,18 @@
                 <div class="h-cont h-gap">
                     <div class="v-cont form-group">
                         <label class="form-label" for="name">Ime</label>
-                        <input class="form-input" type="text" id="name" name="name">
+                        <input class="form-input" type="text" id="name" name="name" required>
                     </div>
                     <div class="v-cont form-group">
                         <label class="form-label" for="surname">Prezime</label>
-                        <input class="form-input" type="text" id="surname" name="surname">
+                        <input class="form-input" type="text" id="surname" name="surname" required>
                     </div>
                 </div>
 				
 				<div class="h-cont h-gap">
                     <div class="v-cont form-group fg-2">
                         <label class="form-label" for="username">Korisničko ime</label>
-                        <input class="form-input" type="text" id="username" name="username">
+                        <input class="form-input" type="text" id="username" name="username" required>
                     </div>
     
                     <div class="v-cont form-group fg-1">
@@ -35,7 +35,7 @@
 				
                 <div class="v-cont form-group">
                     <label class="form-label" for="password">Lozinka</label>
-                    <input class="form-input" type="password" id="password" name="password">
+                    <input class="form-input" type="password" id="password" name="password" required>
                 </div>
 
                 <div class="h-cont h-gap">
@@ -45,12 +45,12 @@
                     </div>
                     <div class="v-cont form-group">
                         <label class="form-label" for="mail">E-mail</label>
-                        <input class="form-input" type="email" id="mail" name="mail">
+                        <input class="form-input" type="email" id="mail" name="mail" required>
                     </div>
                 </div>
             </form>
             <div class="h-cont btn-cont">
-                <button class="btn-style btn-small m-2 bg-secondary" onclick="closeModal('userForm')">Poništi</button>
+                <button class="btn-style btn-small m-2 bg-secondary" onclick="closeModal('modal')">Poništi</button>
                 <button class="btn-style btn-small m-2 bg-accent" onclick="addUser()">Sačuvaj</button>
             </div>
         </dialog>

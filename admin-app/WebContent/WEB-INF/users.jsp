@@ -6,6 +6,7 @@
 <jsp:include page="/WEB-INF/common/header.jsp" flush="true"></jsp:include>
 
 <jsp:include page="/WEB-INF/dialogs/user_dialog.jsp" flush="true"></jsp:include>
+<jsp:include page="/WEB-INF/dialogs/change_user_dialog.jsp" flush="true"></jsp:include>
 <jsp:include page="/WEB-INF/dialogs/pop_up.jsp" flush="true"></jsp:include>
 <!-- page body -->
 <div class="v-cont table-cont">

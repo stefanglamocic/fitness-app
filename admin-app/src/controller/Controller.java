@@ -69,6 +69,14 @@ public class Controller extends HttpServlet {
 			removeUser(request, response);
 			return;
 		}
+		case "get-user": {
+			sendUserData(request, response);
+			return;
+		}
+		case "change-user": {
+			changeUser(request, response);
+			return;
+		}
 		default: {
 			path = pageSwitch(session, action);
 		}
@@ -166,7 +174,8 @@ public class Controller extends HttpServlet {
 		JSONObject obj = new JSONObject(source);
 		
 		return new User(obj.getString("username"), obj.getString("password"), obj.getString("userType"), 
-				obj.getString("name"), obj.getString("surname"), obj.getString("city"), obj.getString("mail"), true);
+				obj.getString("name"), obj.getString("surname"), obj.getString("city"), obj.getString("mail"), 
+					obj.has("activated") ? obj.getBoolean("activated") : true);
 	}
 	
 	private void removeUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -175,6 +184,26 @@ public class Controller extends HttpServlet {
 				readRequestBody(request))
 				.getString("username");
 		boolean success = userBean.delete(username);
+		if (!success)
+			response.setStatus(406);
+	}
+	
+	private void sendUserData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		String username = request.getParameter("username");
+		if (username == null)
+			return;
+		User reqUser = userBean.getUser(username);
+		PrintWriter writer = response.getWriter();
+		JSONObject json = new JSONObject(reqUser);
+		writer.print(json.toString(1));
+		writer.flush();
+	}
+	
+	private void changeUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		User user = getUser(request);
+		boolean success = userBean.update(user);
 		if (!success)
 			response.setStatus(406);
 	}
