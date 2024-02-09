@@ -36,7 +36,7 @@ public class UserBean {
 	public boolean isAdmin() {
 		if (user == null)
 			return false;
-		return user.getUserType().equals("Admin");
+		return user.getUserType().equals("A");
 	}
 	
 	public User getUser() {

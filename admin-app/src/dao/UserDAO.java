@@ -60,7 +60,7 @@ public class UserDAO implements IUserDAO{
 			return false;
 		boolean result = false;
 		Connection conn = null;
-		Object[] values = {user.getUsername(), user.getPassword(), user.getTypeAbbr(), 
+		Object[] values = {user.getUsername(), user.getPassword(), user.getUserType(), 
 				user.getName(), user.getSurname(), user.getCity(), user.getMail(), user.getActivated()};
 		
 		try {

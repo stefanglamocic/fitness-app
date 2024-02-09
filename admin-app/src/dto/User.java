@@ -45,11 +45,7 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
-	public String getTypeAbbr() {
-		return userType;
-	}
-
-	public String getUserType() {
+	public String fullUserType() {
 		switch (userType) {
 		case "A":
 			return "Admin";
@@ -60,6 +56,10 @@ public class User implements Serializable{
 			default: 
 				return "Nepoznato";
 		}
+	}
+
+	public String getUserType() {
+		return userType;
 	}
 
 	public void setUserType(String userType) {

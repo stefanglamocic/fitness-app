@@ -31,7 +31,7 @@
 					<td> <%= u.getName() %></td>
 					<td> <%= u.getSurname() %></td>
 					<td> <%= u.getUsername() %> </td>
-					<td> <%= u.getUserType() %> </td>
+					<td> <%= u.fullUserType() %> </td>
 					<td> <%= u.getCity() %> </td>
 					<td> <%= u.getMail() %> </td>
 					<td>

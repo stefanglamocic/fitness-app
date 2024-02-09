@@ -167,17 +167,18 @@ function fillOutForm(user) {
 	changeForm.querySelector('#password').value = user.password;
 	changeForm.querySelector('#city').value = user.city;
 	changeForm.querySelector('#mail').value = user.mail;
-	changeForm.querySelector('#userType').value = user.typeAbbr;
+	changeForm.querySelector('#userType').value = user.userType;
 }
 
 async function changeUser() {
+	const changeUrl = '?action=change-user';
 	const changeModal = document.getElementById('changeModal');
 	const changeForm = document.querySelector('#changeUserForm');
 	const modalTitle = changeModal.querySelector('.modal-title').innerText;
 	const username = modalTitle.split(' ').pop();
 	
-	const url = `?action=get-user&username=${username}`;
-	let user = await fetch(url).then(response => response.json());
+	const getUrl = `?action=get-user&username=${username}`;
+	let user = await fetch(getUrl).then(response => response.json());
 	
 	user.name = changeForm.querySelector('#name').value;
 	user.surname = changeForm.querySelector('#surname').value;
@@ -186,5 +187,36 @@ async function changeUser() {
 	user.mail = changeForm.querySelector('#mail').value;
 	user.userType = changeForm.querySelector('#userType').value;
 	
-	console.log(user);
+	fetch(changeUrl, {
+		method: 'POST',
+		body: JSON.stringify(user)
+	})
+	.then(response => {
+		if (response.ok) {
+			changeUserRow(user);
+			closeModal('changeModal');
+		}
+	})
+	.catch(error => console.log(`Greska: ${error}`));
+}
+
+function changeUserRow(user) {
+	const row = document.getElementById(user.username);
+	const cells = row.cells;
+	
+	cells[0].innerText = user.name;
+	cells[1].innerText = user.surname;
+	cells[2].innerText = user.username;
+	cells[4].innerText = user.city;
+	cells[5].innerText = user.mail;
+	
+	let userType = '';
+	switch(user.userType) {
+		case 'F':
+			userType = 'Obični korisnik';
+			break;
+		case 'S':
+			userType = 'Savjetnik';
+	}
+	cells[3].innerText = userType;
 }
