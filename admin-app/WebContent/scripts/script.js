@@ -80,7 +80,7 @@ function getCheckBox(name, checked) {
 	let check = checked ? 'checked' : '';
 	let id = `${name}Ch-b`;
 	return '<input type="checkbox" class="btn-check" id="' + id + '" ' + check +
-    	'><label for="' + id + '" class="icon clr-text check-lbl"></label>';
+    	' onclick="accActivation(event)"><label for="' + id + '" class="icon clr-text check-lbl"></label>';
 }
 
 function addToTable(user) {
@@ -219,4 +219,14 @@ function changeUserRow(user) {
 			userType = 'Savjetnik';
 	}
 	cells[3].innerText = userType;
+}
+
+function accActivation(event) {
+	const rowId = event.currentTarget.parentNode.parentNode.id;
+	const checkBox = document.getElementById(rowId + 'Ch-b');
+	const checked = checkBox.checked;
+	const url = `?action=user-acc&activate=${checked}&username=${rowId}`;
+	
+	fetch(url)
+	.catch(error => console.log(`Greska: ${error}`));
 }

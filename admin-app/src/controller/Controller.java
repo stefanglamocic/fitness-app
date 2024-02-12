@@ -77,6 +77,10 @@ public class Controller extends HttpServlet {
 			changeUser(request, response);
 			return;
 		}
+		case "user-acc": {
+			activateAccount(request, response);
+			return;
+		}
 		default: {
 			path = pageSwitch(session, action);
 		}
@@ -204,6 +208,15 @@ public class Controller extends HttpServlet {
 		UserBean userBean = setEnv(request, response);
 		User user = getUser(request);
 		boolean success = userBean.update(user);
+		if (!success)
+			response.setStatus(406);
+	}
+	
+	private void activateAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		Boolean activate = Boolean.valueOf(request.getParameter("activate"));
+		String username = request.getParameter("username");
+		boolean success = userBean.activateAccount(username, activate);
 		if (!success)
 			response.setStatus(406);
 	}

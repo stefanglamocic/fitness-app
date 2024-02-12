@@ -248,5 +248,29 @@ public class UserDAO implements IUserDAO{
 				rs.getString("name"), rs.getString("surname"), rs.getString("city"), rs.getString("mail"), 
 				rs.getBoolean("activated"));
 	}
-
+	
+	@Override
+	public boolean activateAccount(String username, Boolean activate) {
+		boolean result = false;
+		Connection conn = null;
+		Object[] values = {activate, username};
+		
+		try {
+			conn = connectionPool.checkOut();
+			PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_ACC_ACTIVATION, false, values);
+			ps.executeUpdate();
+			if (ps.getUpdateCount() > 0) {
+				result = true;
+			}
+			ps.close();
+		}
+		catch (SQLException e) {
+			System.out.println(e);
+		}
+		finally {
+			connectionPool.checkIn(conn);
+		}
+		
+		return result;
+	}
 }

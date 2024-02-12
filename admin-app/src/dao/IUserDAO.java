@@ -12,7 +12,7 @@ public interface IUserDAO extends IDAO<User>{
 	static final String SQL_INSERT = "INSERT INTO user (username, password, user_type, name, surname, "
 			+ "city, mail, activated) VALUES (?,?,?,?,?,?,?,?)";
 	static final String SQL_DELETE = "DELETE FROM user WHERE username=?";
-	static final String SQL_ACC_ACTIVATION = "UPDATE user SET activated=? user WHERE username=?";
+	static final String SQL_ACC_ACTIVATION = "UPDATE user SET activated=? WHERE username=?";
 	static final String SQL_UPDATE = "UPDATE user SET password=?, user_type=?, name=?, surname=?, "
 			+ "city=?, mail=?, activated=? WHERE username=?";
 	static final String SQL_UPDATE_USERNAME = "UPDATE user SET username=? WHERE username=?";
@@ -24,4 +24,5 @@ public interface IUserDAO extends IDAO<User>{
 	List<User> getFitnessAppUsers();
 	List<User> getUsersWhere(String query, String param);
 	List<User> getUsersNotOfType(String type);
+	boolean activateAccount(String username, Boolean activate);
 }

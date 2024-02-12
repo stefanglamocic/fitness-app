@@ -38,7 +38,7 @@
 						<input type="checkbox" class="btn-check" id="<%= u.getUsername() %>Ch-b"
 							<% if (u.getActivated()) {%>
 								checked
-							<% } %>>
+							<% } %> onclick="accActivation(event)">
                         <label for="<%= u.getUsername() %>Ch-b" class="icon clr-text check-lbl"></label>
 					</td>
 					<td><a href="#" class="icon btn-link btn-change clr-accent f-3" id="<%= u.getUsername() %>C"></a></td>

@@ -68,4 +68,8 @@ public class UserBean {
 	public boolean update(User user) {
 		return userDAO.update(user);
 	}
+	
+	public boolean activateAccount(String username, Boolean activate) {
+		return userDAO.activateAccount(username, activate);
+	}
 }
