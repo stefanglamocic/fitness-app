@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import beans.CategoryBean;
 import beans.LoginResult;
 import beans.UserBean;
 import dao.IUserDAO;
@@ -106,10 +107,13 @@ public class Controller extends HttpServlet {
 		IUserDAO userDAO = new UserDAO();
 		UserBean userBean = new UserBean(userDAO);
 		
+		CategoryBean categoryBean = new CategoryBean();
+		
 		LoginResult loginResult = userBean.login(username, password);
 		session.setAttribute("notification", loginResult.toString());
 		if (loginResult == LoginResult.SUCCESS) {
 			session.setAttribute("userBean", userBean);
+			session.setAttribute("categoryBean", categoryBean);
 			return IPages.MAIN;
 		}
 		return IPages.LOGIN;

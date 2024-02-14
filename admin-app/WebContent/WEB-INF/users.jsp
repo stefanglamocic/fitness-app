@@ -11,7 +11,7 @@
 <!-- page body -->
 <div class="v-cont table-cont">
 	<button class="btn-style btn-small m-1 bg-accent icon btn-icon btn-add"
-		onclick="showModal()">Dodaj korisnika</button>
+		onclick="showModal('modal')">Dodaj korisnika</button>
 	<div class="table-wrapper">
 		<table id="usersTable">
 			<tr>

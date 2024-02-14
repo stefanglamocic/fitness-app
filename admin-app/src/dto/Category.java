@@ -77,5 +77,14 @@ public class Category implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
+	
+	public String buildAttributes() {
+		StringBuilder sb = new StringBuilder();
+		for (String a : attributes) {
+			sb.append(a);
+			sb.append(", ");
+		}
+		return sb.substring(0, sb.length() - 2);
+	}
 }

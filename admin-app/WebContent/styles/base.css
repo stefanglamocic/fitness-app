@@ -111,6 +111,10 @@ body {
     align-items: center;
 }
 
+.crossa-lbaseline {
+	align-items: last baseline;
+}
+
 .main-cont {
     flex-basis: 0px;
     flex-grow: 1;
