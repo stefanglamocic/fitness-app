@@ -10,35 +10,24 @@ function showAddCategoryModal() {
 	
 	fetch(categoriesUrl)
 	.then(response => response.json())
-	.then(data => populateCategoriesSelect(data))
+	.then(data => populateSelect(data, 'categoryName'))
 	.catch(error => console.log(`Greska: ${error}`));
 	
 	fetch(attributesUrl)
 	.then(response => response.json())
-	.then(data => populateAttributesSelect(data))
+	.then(data => populateSelect(data, 'attributeName'))
 	.catch(error => console.log(`Greska: ${error}`));
 	
 	modal.showModal();
 }
 
-function populateCategoriesSelect(data) {
-	const categoriesSelect = document.getElementById('categoryName');
-	categoriesSelect.innerHTML = '';
-	for (const category of data) {
+function populateSelect(data, selectId) {
+	const select = document.getElementById(selectId);
+	select.innerHTML =  '';
+	for (const entry of data) {
 		const option = document.createElement('option');
-		option.text = category;
-		option.value = category;
-		categoriesSelect.add(option);
-	}
-}
-
-function populateAttributesSelect(data) {
-	const attributesSelect = document.getElementById('attributeName');
-	attributesSelect.innerHTML = '';
-	for (const attribute of data) {
-		const option = document.createElement('option');
-		option.text = attribute;
-		option.value = attribute;
-		attributesSelect.add(option);
+		option.text = entry;
+		option.value = entry;
+		select.add(option);
 	}
 }
