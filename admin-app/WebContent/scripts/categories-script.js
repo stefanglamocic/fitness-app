@@ -8,11 +8,6 @@ function showAddCategoryModal() {
 	const categoriesUrl = '?action=categories';
 	const attributesUrl = '?action=attributes';
 	
-	fetch(categoriesUrl)
-	.then(response => response.json())
-	.then(data => populateSelect(data, 'categoryName'))
-	.catch(error => console.log(`Greska: ${error}`));
-	
 	fetch(attributesUrl)
 	.then(response => response.json())
 	.then(data => populateSelect(data, 'attributeName'))
