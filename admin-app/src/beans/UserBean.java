@@ -9,11 +9,13 @@ public class UserBean {
 	private User user;
 	private boolean isLoggedIn = false;
 	private IUserDAO userDAO = null;
+	private CategoryBean categoryBean;
 	
 	public UserBean() {}
 	
-	public UserBean(IUserDAO userDAO) {
+	public UserBean(IUserDAO userDAO, CategoryBean categoryBean) {
 		this.userDAO = userDAO;
+		this.categoryBean = categoryBean;
 	}
 	
 	public LoginResult login(String username, String password) {
@@ -33,6 +35,14 @@ public class UserBean {
 		return LoginResult.SUCCESS;
 	}
 	
+	public CategoryBean getCategoryBean() {
+		return categoryBean;
+	}
+
+	public void setCategoryBean(CategoryBean categoryBean) {
+		this.categoryBean = categoryBean;
+	}
+
 	public boolean isAdmin() {
 		if (user == null)
 			return false;

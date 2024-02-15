@@ -70,4 +70,51 @@ public class CategoryDAO implements ICategoryDAO{
 		return false;
 	}
 
+	@Override
+	public List<String> getCategoryNames() {
+		List<String> catNames = new ArrayList<String>();
+		Connection conn = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = connectionPool.checkOut();
+			PreparedStatement ps = conn.prepareStatement(SQL_CATEGORY_NAMES);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				catNames.add(rs.getString("name"));
+			}
+			ps.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connectionPool.checkIn(conn);
+		}
+		return catNames;
+	}
+
+	@Override
+	public List<String> getAttributeNames() {
+		List<String> attNames = new ArrayList<String>();
+		Connection conn = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = connectionPool.checkOut();
+			PreparedStatement ps = conn.prepareStatement(SQL_ATTRIBUTE_NAMES);
+			rs = ps.executeQuery();
+			while(rs.next())
+				attNames.add(rs.getString("name"));
+			ps.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connectionPool.checkIn(conn);
+		}
+		return attNames;
+	}
+
 }

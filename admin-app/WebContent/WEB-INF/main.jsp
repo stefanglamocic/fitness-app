@@ -1,8 +1,9 @@
+<%@page import="beans.CategoryBean"%>
 <%@page import="dto.Category"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="categoryBean" type="beans.CategoryBean" scope="session"/>
+<jsp:useBean id="userBean" type="beans.UserBean" scope="session"/>
 <jsp:include page="/WEB-INF/common/header.jsp" flush="true"></jsp:include>
 <script type="application/javascript" src="scripts/categories-script.js"></script>
 <jsp:include page="/WEB-INF/dialogs/add_category_dialog.jsp" flush="true"></jsp:include>
@@ -19,6 +20,7 @@
 				<th>&nbsp;</th>
 			</tr>
 			<%
+				CategoryBean categoryBean = userBean.getCategoryBean();
 				for (Category c : categoryBean.getAll()) {
 			%>
 				<tr >

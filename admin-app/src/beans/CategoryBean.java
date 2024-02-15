@@ -12,4 +12,12 @@ public class CategoryBean {
 	public List<Category> getAll() {
 		return categoryDAO.getAll();
 	}
+	
+	public List<String> getCategoryNames() {
+		return categoryDAO.getCategoryNames();
+	}
+	
+	public List<String> getAttributeNames() {
+		return categoryDAO.getAttributeNames();
+	}
 }

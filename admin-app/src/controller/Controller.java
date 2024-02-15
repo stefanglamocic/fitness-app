@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import beans.CategoryBean;
@@ -82,6 +83,14 @@ public class Controller extends HttpServlet {
 			activateAccount(request, response);
 			return;
 		}
+		case "categories": {
+			sendCategories(request, response);
+			return;
+		}
+		case "attributes": {
+			sendAttributes(request, response);
+			return;
+		}
 		default: {
 			path = pageSwitch(session, action);
 		}
@@ -105,9 +114,8 @@ public class Controller extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		IUserDAO userDAO = new UserDAO();
-		UserBean userBean = new UserBean(userDAO);
-		
 		CategoryBean categoryBean = new CategoryBean();
+		UserBean userBean = new UserBean(userDAO, categoryBean);
 		
 		LoginResult loginResult = userBean.login(username, password);
 		session.setAttribute("notification", loginResult.toString());
@@ -223,5 +231,23 @@ public class Controller extends HttpServlet {
 		boolean success = userBean.activateAccount(username, activate);
 		if (!success)
 			response.setStatus(406);
+	}
+	
+	private void sendCategories(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		CategoryBean categoryBean = userBean.getCategoryBean();
+		JSONArray json = new JSONArray(categoryBean.getCategoryNames());
+		PrintWriter writer = response.getWriter();
+		writer.print(json.toString(1));
+		writer.flush();
+	}
+	
+	private void sendAttributes(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		CategoryBean categoryBean = userBean.getCategoryBean();
+		JSONArray json = new JSONArray(categoryBean.getAttributeNames());
+		PrintWriter writer = response.getWriter();
+		writer.print(json.toString(1));
+		writer.flush();
 	}
 }
