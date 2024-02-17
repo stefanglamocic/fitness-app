@@ -61,8 +61,6 @@ public class Controller extends HttpServlet {
 			session.invalidate();
 		}
 			break;
-		case "": 
-			break;
 		case "add-user": {
 			addUser(request, response);
 			return;
@@ -89,6 +87,10 @@ public class Controller extends HttpServlet {
 		}
 		case "attributes": {
 			sendAttributes(request, response);
+			return;
+		}
+		case "add-attr": {
+			addAttribute(request, response);
 			return;
 		}
 		default: {
@@ -121,7 +123,6 @@ public class Controller extends HttpServlet {
 		session.setAttribute("notification", loginResult.toString());
 		if (loginResult == LoginResult.SUCCESS) {
 			session.setAttribute("userBean", userBean);
-			session.setAttribute("categoryBean", categoryBean);
 			return IPages.MAIN;
 		}
 		return IPages.LOGIN;
@@ -249,5 +250,16 @@ public class Controller extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		writer.print(json.toString(1));
 		writer.flush();
+	}
+	
+	private void addAttribute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		CategoryBean categoryBean = userBean.getCategoryBean();
+		String attribute = new JSONObject(
+				readRequestBody(request))
+				.getString("attribute");
+		boolean success = categoryBean.insertAttribute(attribute);
+		if (!success)
+			response.setStatus(406);
 	}
 }

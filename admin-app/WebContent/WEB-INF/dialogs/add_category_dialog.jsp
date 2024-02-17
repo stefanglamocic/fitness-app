@@ -8,9 +8,8 @@
 		<div class="h-cont h-gap crossa-lbaseline">
 			<div class="v-cont form-group fg-1">
 				<label class="form-label" for="newCategory">Kategorija</label>
-				<input class="form-input" type="text" name="newCategory" id="newCategory" placeholder="Dodajte novu kategoriju...">
+				<input class="form-input" type="text" name="newCategory" id="newCategory">
 			</div>
-			<button class="btn-style btn-small m-2 bg-accent" >Dodaj</button>
 		</div>
 		
 		<div class="v-cont form-group">
@@ -25,11 +24,11 @@
 				<label class="form-label" for="newAttribute">Atribut</label>
 				<input class="form-input" type="text" name="newAttribute" id="newAttribute" placeholder="Dodajte novi atribut...">
 			</div>
-			<button class="btn-style btn-small m-2 bg-accent" >Dodaj</button>
+			<button type="button" class="btn-style btn-small m-2 bg-accent" onclick="addAttribute()">Dodaj</button>
 		</div>
 	</form>
 	<div class="h-cont btn-cont">
 		<button class="btn-style btn-small m-2 bg-secondary" onclick="closeModal('addCategoryDialog')">Poništi</button>
-		<button class="btn-style btn-small m-2 bg-accent" >Sačuvaj</button>
+		<button class="btn-style btn-small m-2 bg-accent">Sačuvaj</button>
 	</div>
 </dialog>

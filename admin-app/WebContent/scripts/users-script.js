@@ -56,7 +56,7 @@ function addToTable(user) {
 	  addCell(row, user.name);
 	  addCell(row, user.surname);
 	  addCell(row, user.username);
-	  addCell(row, user.userType);
+	  addCell(row, getUserType(user));
 	  addCell(row, user.city);
 	  addCell(row, user.mail);
 	  addCell(row, getCheckBox(user.username, user.activated));
@@ -175,6 +175,11 @@ function changeUserRow(user) {
 	cells[4].innerText = user.city;
 	cells[5].innerText = user.mail;
 	
+	let userType = getUserType(user);
+	cells[3].innerText = userType;
+}
+
+function getUserType(user) {
 	let userType = '';
 	switch(user.userType) {
 		case 'F':
@@ -183,7 +188,8 @@ function changeUserRow(user) {
 		case 'S':
 			userType = 'Savjetnik';
 	}
-	cells[3].innerText = userType;
+	
+	return userType;
 }
 
 function accActivation(event) {

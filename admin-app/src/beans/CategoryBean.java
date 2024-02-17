@@ -20,4 +20,12 @@ public class CategoryBean {
 	public List<String> getAttributeNames() {
 		return categoryDAO.getAttributeNames();
 	}
+	
+	public boolean insertAttribute(String attribute) {
+		return categoryDAO.insertAttribute(attribute);
+	}
+	
+	public int insertCategory(String category) {
+		return categoryDAO.insertCategory(category);
+	}
 }

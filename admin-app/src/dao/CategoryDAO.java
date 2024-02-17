@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,6 +116,54 @@ public class CategoryDAO implements ICategoryDAO{
 			connectionPool.checkIn(conn);
 		}
 		return attNames;
+	}
+
+	@Override
+	public boolean insertAttribute(String attribute) {
+		Connection conn = null;
+		Object[] values = {attribute};
+		
+		try {
+			conn = connectionPool.checkOut();
+			PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_INSERT_ATTRIBUTE, false, values);
+			ps.executeUpdate();
+			ps.close();
+		}
+		catch (SQLIntegrityConstraintViolationException e) {
+			return false;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connectionPool.checkIn(conn);
+		}
+		return true;
+	}
+
+	@Override
+	public int insertCategory(String category) {
+		int id = 0;
+		Connection conn = null;
+		ResultSet rs = null;
+		Object[] values = {category};
+		
+		try {
+			conn = connectionPool.checkOut();
+			PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_INSERT_CATEGORY_NAME, true, values);
+			if (ps.executeUpdate() > 0) {
+				rs = ps.getGeneratedKeys();
+				if (rs.next())
+					id = rs.getInt(1);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connectionPool.checkIn(conn);
+		}
+		return id;
 	}
 
 }
