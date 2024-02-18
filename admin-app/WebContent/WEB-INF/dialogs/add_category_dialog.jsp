@@ -3,7 +3,7 @@
 
     
 <dialog class="modal" id="addCategoryDialog">
-	<h2 class="modal-title">Dodajte novu kategoriju</h2>
+	<h2 class="modal-title"></h2>
 	<form class="form v-cont modal-form" method="post" id="categoryForm">
 		<div class="h-cont h-gap crossa-lbaseline">
 			<div class="v-cont form-group fg-1">
@@ -24,11 +24,11 @@
 				<label class="form-label" for="newAttribute">Atribut</label>
 				<input class="form-input" type="text" name="newAttribute" id="newAttribute" placeholder="Dodajte novi atribut...">
 			</div>
-			<button type="button" class="btn-style btn-small m-2 bg-accent" onclick="addAttribute()">Dodaj</button>
+			<button type="button" class="btn-style btn-small m-2 bg-accent" id="addAttributeBtn">Dodaj</button>
 		</div>
 	</form>
 	<div class="h-cont btn-cont">
-		<button class="btn-style btn-small m-2 bg-secondary" onclick="closeModal('addCategoryDialog')">Poništi</button>
-		<button class="btn-style btn-small m-2 bg-accent" onclick="addCategory()">Sačuvaj</button>
+		<button class="btn-style btn-small m-2 bg-secondary" id="btnCancel">Poništi</button>
+		<button class="btn-style btn-small m-2 bg-accent" id="btnSave">Sačuvaj</button>
 	</div>
 </dialog>

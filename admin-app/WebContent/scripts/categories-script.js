@@ -5,8 +5,17 @@ function init(text) {
 
 function showAddCategoryModal() {
 	const modal = document.getElementById('addCategoryDialog');
+	const modalTitle = document.querySelector('.modal-title');
+	const addAttributeBtn = document.getElementById('addAttributeBtn');
+	const btnCancel = document.getElementById('btnCancel');
+	const btnSave = document.getElementById('btnSave');
 	const categoriesUrl = '?action=categories';
 	const attributesUrl = '?action=attributes';
+	
+	modalTitle.innerText = 'Dodajte novu kategoriju';
+	addAttributeBtn.addEventListener('click', addAttribute);
+	btnCancel.addEventListener('click', () => closeModal('addCategoryDialog'));
+	btnSave.addEventListener('click', addCategory);
 	
 	fetch(attributesUrl)
 	.then(response => response.json())
