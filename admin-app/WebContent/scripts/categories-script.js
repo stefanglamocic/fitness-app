@@ -35,8 +35,11 @@ function populateSelect(data, selectId) {
 
 function addAttribute() {
 	const attrInput = document.getElementById('newAttribute');
-	const attribute = attrInput.value;
+	const attribute = attrInput.value.trim();
 	const url = '?action=add-attr';
+	
+	if(attribute === '')
+		return;
 	
 	fetch(url, {
 		method: 'POST',
@@ -53,4 +56,70 @@ function addAttribute() {
 	.catch(error => console.log(`Greska: ${error}`));
 	
 	attrInput.value = "";
+}
+
+async function insertCategory() {
+	const url = '?action=add-cat';
+	const categoryInput = document.getElementById('newCategory');
+	const categoryName = categoryInput.value.trim();
+	
+	let categoryId = 
+		await fetch(url, {
+			method: 'POST',
+			body: JSON.stringify({category: categoryName})
+		})
+		.then(response => response.json())
+		.catch(error => console.log(error));
+	
+	return {categoryId, categoryName};
+}
+
+async function addCategory() {
+	const url = '?action=new-category';
+	const category = await insertCategory();
+	const attrSelect = document.getElementById('attributeName');
+	let attributes = [];
+	
+	for (const option of attrSelect.options) {
+		if (option.selected){
+			attributes.push(option.value);
+			
+			fetch(url, {
+				method: 'POST',
+				body: JSON.stringify({
+					id: category.categoryId,
+					attribute: option.value
+				})
+			})
+			.catch(error => console.log(error));
+		}
+	}
+	
+	addRow(category, joinAttributes(attributes));
+	
+	closeModal('addCategoryDialog');
+}
+
+function addRow(category, attributes) {
+	const table = document.getElementById('categoriesTable');
+	const row = table.insertRow(-1);
+	row.id = category.categoryId;
+	
+	addCell(row, category.categoryName);
+	addCell(row, attributes);
+	addCell(row, getChangeBtn());
+	addCell(row, getRemoveBtn());
+}
+
+function joinAttributes(attributes) {
+	let temp = attributes.join(', ');
+	return temp;
+}
+
+function getChangeBtn(){
+	return `<a href="#" class="icon btn-link btn-change clr-accent f-3"></a>`;
+}
+
+function getRemoveBtn(){
+	return `<a href="#" class="icon btn-link btn-remove clr-red f-3"></a>`;
 }

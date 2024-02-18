@@ -93,6 +93,14 @@ public class Controller extends HttpServlet {
 			addAttribute(request, response);
 			return;
 		}
+		case "add-cat": {
+			insertCategory(request, response);
+			return;
+		}
+		case "new-category": {
+			addCategory(request, response);
+			return;
+		}
 		default: {
 			path = pageSwitch(session, action);
 		}
@@ -261,5 +269,25 @@ public class Controller extends HttpServlet {
 		boolean success = categoryBean.insertAttribute(attribute);
 		if (!success)
 			response.setStatus(406);
+	}
+	
+	private void insertCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		CategoryBean categoryBean = userBean.getCategoryBean();
+		String category = new JSONObject(
+				readRequestBody(request))
+				.getString("category");
+		int categoryId = categoryBean.insertCategory(category);
+		PrintWriter writer = response.getWriter();
+		writer.print(categoryId);
+		writer.flush();
+	}
+	
+	private void addCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		CategoryBean categoryBean = userBean.getCategoryBean();
+		JSONObject obj = new JSONObject(
+				readRequestBody(request));
+		categoryBean.addCategory(obj.getInt("id"), obj.getString("attribute"));
 	}
 }

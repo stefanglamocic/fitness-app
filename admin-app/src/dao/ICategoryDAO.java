@@ -14,10 +14,11 @@ public interface ICategoryDAO extends IDAO<Category>{
 	public static final String SQL_ATTRIBUTE_NAMES = "SELECT name FROM attribute";
 	public static final String SQL_INSERT_CATEGORY_NAME = "INSERT INTO category(name) VALUES (?)";
 	public static final String SQL_INSERT_ATTRIBUTE = "INSERT INTO attribute(name) VALUES (?)";
-	public static final String SQL_ADD_CATEGORY = "";
+	public static final String SQL_ADD_CATEGORY = "INSERT INTO category_has_attribute(category_id, attribute_name) VALUES (?,?)";
 	
 	List<String> getCategoryNames();
 	List<String> getAttributeNames();
 	boolean insertAttribute(String attribute);
 	int insertCategory(String category);
+	void addCategory(int categoryId, String attribute);
 }

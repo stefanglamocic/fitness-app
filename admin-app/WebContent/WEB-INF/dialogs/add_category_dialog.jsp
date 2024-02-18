@@ -8,7 +8,7 @@
 		<div class="h-cont h-gap crossa-lbaseline">
 			<div class="v-cont form-group fg-1">
 				<label class="form-label" for="newCategory">Kategorija</label>
-				<input class="form-input" type="text" name="newCategory" id="newCategory">
+				<input class="form-input" type="text" name="newCategory" id="newCategory" required>
 			</div>
 		</div>
 		
@@ -29,6 +29,6 @@
 	</form>
 	<div class="h-cont btn-cont">
 		<button class="btn-style btn-small m-2 bg-secondary" onclick="closeModal('addCategoryDialog')">Poništi</button>
-		<button class="btn-style btn-small m-2 bg-accent">Sačuvaj</button>
+		<button class="btn-style btn-small m-2 bg-accent" onclick="addCategory()">Sačuvaj</button>
 	</div>
 </dialog>

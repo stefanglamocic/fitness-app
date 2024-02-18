@@ -28,4 +28,8 @@ public class CategoryBean {
 	public int insertCategory(String category) {
 		return categoryDAO.insertCategory(category);
 	}
+	
+	public void addCategory(int categoryId, String attribute) {
+		categoryDAO.addCategory(categoryId, attribute);
+	}
 }

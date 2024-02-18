@@ -23,7 +23,7 @@
 				CategoryBean categoryBean = userBean.getCategoryBean();
 				for (Category c : categoryBean.getAll()) {
 			%>
-				<tr >
+				<tr id="<%= c.getId() %>">
 					<td> <%= c.getName() %> </td>
 					<td> <%= c.buildAttributes() %> </td>
 					<td> 

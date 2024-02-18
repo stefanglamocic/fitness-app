@@ -166,4 +166,22 @@ public class CategoryDAO implements ICategoryDAO{
 		return id;
 	}
 
+	@Override
+	public void addCategory(int categoryId, String attribute) {
+			Connection conn = null;
+			Object[] values = {categoryId, attribute};
+			
+			try {
+				conn = connectionPool.checkOut();
+				PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_ADD_CATEGORY, false, values);
+				ps.executeUpdate();
+				ps.close();
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				connectionPool.checkIn(conn);
+			}
+	}
 }

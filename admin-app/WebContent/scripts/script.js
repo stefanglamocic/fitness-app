@@ -37,3 +37,8 @@ function closeModal(modalId) {
 	form.reset();
 	modal.close();
 }
+
+function addCell(row, content) {
+	  let cell = row.insertCell(-1);
+	  cell.innerHTML = content;
+}

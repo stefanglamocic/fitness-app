@@ -64,11 +64,6 @@ function addToTable(user) {
 	  addCell(row, getRemoveButton(user.username));
 }
 
-function addCell(row, content) {
-	  let cell = row.insertCell(-1);
-	  cell.innerHTML = content;
-}
-
 function addRemoveEventListeners() {
 	  let removeButtons = document.querySelectorAll('.btn-remove');
 	  removeButtons.forEach(e => 
