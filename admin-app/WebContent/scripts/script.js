@@ -42,3 +42,14 @@ function addCell(row, content) {
 	  let cell = row.insertCell(-1);
 	  cell.innerHTML = content;
 }
+
+function isValid(formName) {
+	const form = document.getElementById(formName);
+	
+	for (let e of form.querySelectorAll('[required]')) {
+		  if (!e.reportValidity())
+			  return false;
+	  }
+	
+	return true;
+}

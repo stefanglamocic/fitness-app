@@ -11,10 +11,8 @@ function addUser() {
 	  let formName = 'userForm';
 	  let form = document.getElementById(formName);
 	  
-	  for (let e of form.querySelectorAll('[required]')) {
-		  if (!e.reportValidity())
-			  return;
-	  }
+	  if (!isValid(formName))
+		  return;
 	  
 	  const url = 'http://localhost:8080/admin-app/?action=add-user';
 

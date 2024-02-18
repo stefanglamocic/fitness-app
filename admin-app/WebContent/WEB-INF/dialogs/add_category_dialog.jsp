@@ -4,7 +4,7 @@
     
 <dialog class="modal" id="addCategoryDialog">
 	<h2 class="modal-title">Dodajte novu kategoriju</h2>
-	<form class="form v-cont modal-form" method="post" >
+	<form class="form v-cont modal-form" method="post" id="categoryForm">
 		<div class="h-cont h-gap crossa-lbaseline">
 			<div class="v-cont form-group fg-1">
 				<label class="form-label" for="newCategory">Kategorija</label>

@@ -75,6 +75,9 @@ async function insertCategory() {
 }
 
 async function addCategory() {
+	if (!isValid('categoryForm'))
+		return;
+	
 	const url = '?action=new-category';
 	const category = await insertCategory();
 	const attrSelect = document.getElementById('attributeName');
