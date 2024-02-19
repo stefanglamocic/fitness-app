@@ -184,4 +184,24 @@ public class CategoryDAO implements ICategoryDAO{
 				connectionPool.checkIn(conn);
 			}
 	}
+
+	@Override
+	public void deleteCategory(int id) {
+		Connection conn = null;
+		Object[] values = {id};
+		
+		try {
+			conn = connectionPool.checkOut();
+			PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_DELETE_CATEGORY, false, values);
+			ps.executeUpdate();
+			ps.close();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connectionPool.checkIn(conn);
+		}
+	}
+	
 }

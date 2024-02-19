@@ -7,6 +7,7 @@
 <jsp:include page="/WEB-INF/common/header.jsp" flush="true"></jsp:include>
 <script type="application/javascript" src="scripts/categories-script.js"></script>
 <jsp:include page="/WEB-INF/dialogs/add_category_dialog.jsp" flush="true"></jsp:include>
+<jsp:include page="/WEB-INF/dialogs/pop_up.jsp" flush="true"></jsp:include>
 
 <div class="v-cont table-cont">
 	<button class="btn-style btn-small m-1 bg-accent icon btn-icon btn-add"
@@ -30,7 +31,7 @@
 						<a href="#" class="icon btn-link btn-change clr-accent f-3"></a>
 					</td>
 					<td>
-						<a href="#" class="icon btn-link btn-remove clr-red f-3"></a>
+						<a href="#" class="icon btn-link btn-remove clr-red f-3" onclick="showRemoveDialog(event)"></a>
 					</td>
 				</tr>
 			<% } %>

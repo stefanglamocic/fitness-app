@@ -1,6 +1,7 @@
 function init(text) {
 	addToTitle(text);
 	addModalEventListener('addCategoryDialog');
+	addModalEventListener('pop-up');
 }
 
 function showAddCategoryModal() {
@@ -133,5 +134,30 @@ function getChangeBtn(){
 }
 
 function getRemoveBtn(){
-	return `<a href="#" class="icon btn-link btn-remove clr-red f-3"></a>`;
+	return `<a href="#" class="icon btn-link btn-remove clr-red f-3" onclick="showRemoveDialog(event)"></a>`;
+}
+
+function showRemoveDialog(event) {
+	const row = event.currentTarget.parentNode.parentNode;
+	const categoryId = row.id;
+	const categoryName = row.children[0].innerText;
+	
+	const dialog = getConfirmDialog('Brisanje kategorije', `Da li ste sigurni da želite ukloniti ${categoryName}`);
+	document.querySelector('#cancelBtn').addEventListener('click', closePopUp);
+	document.querySelector('#confirmBtn').addEventListener('click', () => removeCategory(categoryId));
+	
+	dialog.showModal();
+}
+
+function removeCategory(categoryId) {
+	const url = `?action=remove-category&id=${categoryId}`;
+	
+	fetch(url)
+	.then(response => {
+		if(response.ok)
+			document.getElementById(categoryId.toString()).remove();
+	})
+	.catch(error => console.log(error));
+	
+	closePopUp();
 }

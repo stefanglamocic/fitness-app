@@ -33,3 +33,7 @@
 .h-gap {
     gap: .6em;
 }
+
+.pop-up-content {
+	text-align: center;
+}

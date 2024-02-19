@@ -32,4 +32,8 @@ public class CategoryBean {
 	public void addCategory(int categoryId, String attribute) {
 		categoryDAO.addCategory(categoryId, attribute);
 	}
+	
+	public void deleteCategory(int id) {
+		categoryDAO.deleteCategory(id);
+	}
 }
