@@ -24,11 +24,11 @@
 				<label class="form-label" for="newAttribute">Atribut</label>
 				<input class="form-input" type="text" name="newAttribute" id="newAttribute" placeholder="Dodajte novi atribut...">
 			</div>
-			<button type="button" class="btn-style btn-small m-2 bg-accent" id="addAttributeBtn">Dodaj</button>
+			<button type="button" class="btn-style btn-small m-2 bg-accent" id="addAttributeBtn" onclick="addAttribute()">Dodaj</button>
 		</div>
 	</form>
 	<div class="h-cont btn-cont">
-		<button class="btn-style btn-small m-2 bg-secondary" id="btnCancel">Poništi</button>
+		<button class="btn-style btn-small m-2 bg-secondary" id="btnCancel" onclick="closeModal('addCategoryDialog')">Poništi</button>
 		<button class="btn-style btn-small m-2 bg-accent" id="btnSave">Sačuvaj</button>
 	</div>
 </dialog>

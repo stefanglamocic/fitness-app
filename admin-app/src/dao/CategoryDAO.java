@@ -203,5 +203,23 @@ public class CategoryDAO implements ICategoryDAO{
 			connectionPool.checkIn(conn);
 		}
 	}
-	
+
+	@Override
+	public void changeCategory(int id, String categoryName) {
+		Connection conn = null;
+		Object[] values = {categoryName, id};
+		
+		try {
+			conn = connectionPool.checkOut();
+			PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_CHANGE_CATEGORY, false, values);
+			ps.executeUpdate();
+			ps.close();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connectionPool.checkIn(conn);
+		}
+	}
 }

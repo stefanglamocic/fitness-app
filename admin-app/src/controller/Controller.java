@@ -105,6 +105,10 @@ public class Controller extends HttpServlet {
 			removeCategory(request, response);
 			return;
 		}
+		case "change-category": {
+			changeCategory(request, response);
+			return;
+		}
 		default: {
 			path = pageSwitch(session, action);
 		}
@@ -300,5 +304,12 @@ public class Controller extends HttpServlet {
 		CategoryBean categoryBean = userBean.getCategoryBean();
 		int id = Integer.parseInt(request.getParameter("id"));
 		categoryBean.deleteCategory(id);
+	}
+	
+	public void changeCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		CategoryBean categoryBean = userBean.getCategoryBean();
+		JSONObject obj = new JSONObject(readRequestBody(request));
+		categoryBean.changeCategory(obj.getInt("categoryId"), obj.getString("categoryName"));
 	}
 }

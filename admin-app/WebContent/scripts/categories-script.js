@@ -1,3 +1,5 @@
+var previousEventFunction = null;
+
 function init(text) {
 	addToTitle(text);
 	addModalEventListener('addCategoryDialog');
@@ -7,15 +9,12 @@ function init(text) {
 function showAddCategoryModal() {
 	const modal = document.getElementById('addCategoryDialog');
 	const modalTitle = document.querySelector('.modal-title');
-	const addAttributeBtn = document.getElementById('addAttributeBtn');
-	const btnCancel = document.getElementById('btnCancel');
 	const btnSave = document.getElementById('btnSave');
 	const categoriesUrl = '?action=categories';
 	const attributesUrl = '?action=attributes';
 	
 	modalTitle.innerText = 'Dodajte novu kategoriju';
-	addAttributeBtn.addEventListener('click', addAttribute);
-	btnCancel.addEventListener('click', () => closeModal('addCategoryDialog'));
+	resetSaveBtnListener(btnSave);
 	btnSave.addEventListener('click', addCategory);
 	
 	fetch(attributesUrl)
@@ -130,7 +129,7 @@ function joinAttributes(attributes) {
 }
 
 function getChangeBtn(){
-	return `<a href="#" class="icon btn-link btn-change clr-accent f-3"></a>`;
+	return `<a href="#" class="icon btn-link btn-change clr-accent f-3" onclick="showEditCategoryModal(event)"></a>`;
 }
 
 function getRemoveBtn(){
@@ -142,7 +141,7 @@ function showRemoveDialog(event) {
 	const categoryId = row.id;
 	const categoryName = row.children[0].innerText;
 	
-	const dialog = getConfirmDialog('Brisanje kategorije', `Da li ste sigurni da želite ukloniti ${categoryName}`);
+	const dialog = getConfirmDialog('Brisanje kategorije', `Da li ste sigurni da želite ukloniti ${categoryName}?`);
 	document.querySelector('#cancelBtn').addEventListener('click', closePopUp);
 	document.querySelector('#confirmBtn').addEventListener('click', () => removeCategory(categoryId));
 	
@@ -160,4 +159,89 @@ function removeCategory(categoryId) {
 	.catch(error => console.log(error));
 	
 	closePopUp();
+}
+
+async function showEditCategoryModal(event) {
+	const row = event.currentTarget.parentNode.parentNode;
+	const modal = document.getElementById('addCategoryDialog');
+	const modalTitle = document.querySelector('.modal-title');
+	const categoryInput = document.getElementById('newCategory');
+	const attributeSelect = document.getElementById('attributeName');
+	const btnSave = document.getElementById('btnSave');
+	const saveFunc = () => saveChanges(row.id);
+	const attributesUrl = '?action=attributes';
+	
+	modalTitle.innerText = 'Uredite kategoriju';
+	
+	resetSaveBtnListener(btnSave);
+	btnSave.addEventListener('click', saveFunc);
+	previousEventFunction = saveFunc;
+	
+	categoryInput.value = row.children[0].innerText;
+	
+	await fetch(attributesUrl)
+	.then(response => response.json())
+	.then(data => populateSelect(data, 'attributeName'))
+	.catch(error => console.log(`Greska: ${error}`));
+	
+	const optionsArr = row.children[1].innerText.split(', ');
+	for(const attribute of attributeSelect.options) {
+		for (const option of optionsArr) {
+			if (attribute.value === option)
+				attribute.selected = true;
+		}
+	}
+	
+	modal.showModal();
+}
+
+async function saveChanges(categoryId) {
+	const categoryInput = document.getElementById('newCategory');
+	const attributeSelect = document.getElementById('attributeName');
+	
+	let attributes = [];
+	for(const option of attributeSelect.options){
+		if (option.selected)
+			attributes.push(option.value);
+	}
+	
+	const category = {categoryId, categoryName: categoryInput.value, attributes};
+	const changeUrl = '?action=change-category';
+	const removeUrl = `?action=remove-category&id=${category.categoryId}`;
+	const addUrl = '?action=new-category';
+	//category name change
+	fetch(changeUrl, {
+		method: 'POST',
+		body: JSON.stringify(category)
+	})
+	.catch(error => console.log(error));
+	//remove category
+	await fetch(removeUrl)
+	.catch(error => console.log(error));
+	//add category with new attributes
+	for (const attribute of category.attributes) {
+		fetch(addUrl, {
+			method: 'POST',
+			body: JSON.stringify({
+				id: category.categoryId,
+				attribute
+			})
+		})
+		.catch(error => console.log(error));
+	}
+	
+	changeTableRow(category);
+	closeModal('addCategoryDialog');
+}
+
+function resetSaveBtnListener(btnSave) {
+	btnSave.removeEventListener('click', addCategory);
+	if (previousEventFunction)
+		btnSave.removeEventListener('click', previousEventFunction);
+}
+
+function changeTableRow(category) {
+	const row = document.getElementById(category.categoryId.toString());
+	row.children[0].innerText = category.categoryName;
+	row.children[1].innerText = joinAttributes(category.attributes);
 }

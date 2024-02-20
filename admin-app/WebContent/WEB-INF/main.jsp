@@ -28,7 +28,7 @@
 					<td> <%= c.getName() %> </td>
 					<td> <%= c.buildAttributes() %> </td>
 					<td> 
-						<a href="#" class="icon btn-link btn-change clr-accent f-3"></a>
+						<a href="#" class="icon btn-link btn-change clr-accent f-3" onclick="showEditCategoryModal(event)"></a>
 					</td>
 					<td>
 						<a href="#" class="icon btn-link btn-remove clr-red f-3" onclick="showRemoveDialog(event)"></a>

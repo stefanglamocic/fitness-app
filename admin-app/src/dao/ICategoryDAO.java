@@ -16,6 +16,7 @@ public interface ICategoryDAO extends IDAO<Category>{
 	public static final String SQL_INSERT_ATTRIBUTE = "INSERT INTO attribute(name) VALUES (?)";
 	public static final String SQL_ADD_CATEGORY = "INSERT INTO category_has_attribute(category_id, attribute_name) VALUES (?,?)";
 	public static final String SQL_DELETE_CATEGORY = "DELETE FROM category_has_attribute WHERE category_id=?";
+	public static final String SQL_CHANGE_CATEGORY = "UPDATE category SET name=? WHERE id=?";
 	
 	List<String> getCategoryNames();
 	List<String> getAttributeNames();
@@ -23,4 +24,5 @@ public interface ICategoryDAO extends IDAO<Category>{
 	int insertCategory(String category);
 	void addCategory(int categoryId, String attribute);
 	void deleteCategory(int id);
+	void changeCategory(int id, String categoryName);
 }
