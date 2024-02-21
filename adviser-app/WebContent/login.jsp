@@ -31,7 +31,7 @@
     <div class="form-cont v-cont crossa-center">
         <p class="form-title m-4">Unesite korisničke podatke</p>
         <div style="flex-grow: 1;"></div>
-        <form method="POST" action="?action=login" id="login" class="form v-cont full-width">
+        <form method="POST" action="login.jsp" id="login" class="form v-cont full-width">
             <div class="v-cont form-group">
                 <label class="form-label" for="username">
                     Korisničko ime 
