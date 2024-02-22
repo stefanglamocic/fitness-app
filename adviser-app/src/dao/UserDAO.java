@@ -64,6 +64,6 @@ public class UserDAO {
 	
 	private User getUser(ResultSet rs) throws SQLException{
 		return new User(rs.getString("username"), rs.getString("password"), rs.getString("user_type"), rs.getString("name"), 
-				rs.getString("surname"), rs.getString("mail"), rs.getBoolean("activated	"));
+				rs.getString("surname"), rs.getString("mail"), rs.getBoolean("activated"));
 	}
 }

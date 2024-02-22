@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="userBean" class="beans.UserBean" scope="session"/>
+
+<% 
+	if (userBean == null || !userBean.isLoggedIn())
+		response.sendRedirect("login.jsp");
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +43,7 @@
                 <input type="search" placeholder="Pretraga...">
             </div>
         </div>
-        <a href="#" class="icon btn-link btn-logout f-3 clr-text"></a>
+        <a href="login.jsp" class="icon btn-link btn-logout f-3 clr-text"></a>
 	</div>
 	
 	<div class="main-cont v-cont">

@@ -1,5 +1,22 @@
+<%@page import="util.LoginResult"%>
+<%@page import="beans.UserBean"%>
+<%@page import="dao.UserDAO"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="userBean" class="beans.UserBean" scope="session"/>
+
+<% 
+	LoginResult loginResult = null;
+	if (request.getParameter("submit") != null) {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		loginResult = userBean.login(username, password);
+		if (loginResult == LoginResult.SUCCESS)
+			response.sendRedirect("messages.jsp");
+	}
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +52,13 @@
             <div class="v-cont form-group">
                 <label class="form-label" for="username">
                     Korisničko ime 
+                    <%
+                    	if(loginResult != null && 
+                    		(loginResult == LoginResult.NO_USER || 
+                    			loginResult == LoginResult.WRONG_USERTYPE || loginResult == LoginResult.NOT_ACTIVATED)) {
+                    %>
+                    	<span class="msg-span icon"><%= loginResult.getMessage() %></span>
+                    <% } %>
                     </label>
                 <input class="form-input" type="text" id="username" name="username">
             </div>
@@ -42,12 +66,17 @@
             <div class="v-cont form-group">
                 <label class="form-label" for="password">
                     Lozinka
+                    <% 
+                    	if (loginResult != null && loginResult == LoginResult.WRONG_PASSWORD) {
+                    %>
+                    	<span class="msg-span icon"><%= loginResult.getMessage() %></span>
+                    <% } %>
                    </label>
                 <input class="form-input" type="password" id="password" name="password">
             </div>
         </form>
         <button class="btn-style m-4 bg-accent btn-large 
-            full-width" type="submit" form="login">Prijavi se</button>
+            full-width" type="submit" form="login" name="submit">Prijavi se</button>
     </div>
 </body>
 </html>
