@@ -43,7 +43,7 @@
                 <input type="search" placeholder="Pretraga...">
             </div>
         </div>
-        <a href="login.jsp" class="icon btn-link btn-logout f-3 clr-text"></a>
+        <a href="logout.jsp" class="icon btn-link btn-logout f-3 clr-text"></a>
 	</div>
 	
 	<div class="main-cont v-cont">
