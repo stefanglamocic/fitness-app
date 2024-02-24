@@ -1,3 +1,5 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="dto.Message"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean id="userBean" class="beans.UserBean" scope="session"/>
@@ -29,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="styles/modal.css">
     <link rel="stylesheet" type="text/css" href="styles/form.css">
     <link rel="stylesheet" type="text/css" href="styles/select.css">
+    <script type="application/javascript" src="scripts/script.js"></script>
 </head>
 <body class="v-cont">
 	<div class="header">
@@ -47,7 +50,34 @@
 	</div>
 	
 	<div class="main-cont v-cont">
-		
+		<div class="v-cont table-cont">
+			<div class="table-wrapper">
+				<table>
+					<tr>
+						<th>Pošiljalac</th>
+						<th>Datum</th>
+						<th>Vrijeme</th>
+						<th>Sadržaj</th>
+					</tr>
+					<%
+						DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+						DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+						for(Message m : userBean.getMessages()) {
+					%>
+						<tr id="<%= m.getSender() + ";" + m.getReceiver() + ";" + m.getTimeSent() %>" onclick="openMsg(event)"
+							<% if (m.getOpened()) {%>
+								class="msg-opened"
+							<% } %>	
+						>
+							<td><%= m.getSender() %></td>
+							<td><%= m.getTime().format(dateFormatter) %></td>
+							<td><%= m.getTime().format(timeFormatter) %></td>
+							<td><%= m.getContent().length() > 20 ? m.getContent().substring(0, 19) + "..." : m.getContent() %></td>
+						</tr>
+					<% } %>
+				</table>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

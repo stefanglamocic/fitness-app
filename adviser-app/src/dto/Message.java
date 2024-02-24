@@ -1,11 +1,13 @@
 package dto;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Message implements Serializable{
 	private String content, timeSent;
 	private Boolean opened;
-	private User sender, receiver;
+	private String sender, receiver;
 	
 	/**
 	 * 
@@ -14,7 +16,7 @@ public class Message implements Serializable{
 	
 	public Message() {}
 
-	public Message(String content, String timeSent, Boolean opened, User sender, User receiver) {
+	public Message(String content, String timeSent, Boolean opened, String sender, String receiver) {
 		super();
 		this.content = content;
 		this.timeSent = timeSent;
@@ -47,20 +49,24 @@ public class Message implements Serializable{
 		this.opened = opened;
 	}
 
-	public User getSender() {
+	public String getSender() {
 		return sender;
 	}
 
-	public void setSender(User sender) {
+	public void setSender(String sender) {
 		this.sender = sender;
 	}
 
-	public User getReceiver() {
+	public String getReceiver() {
 		return receiver;
 	}
 
-	public void setReceiver(User receiver) {
+	public void setReceiver(String receiver) {
 		this.receiver = receiver;
 	}
 	
+	public LocalDateTime getTime() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		return LocalDateTime.parse(timeSent, formatter);
+	}
 }
