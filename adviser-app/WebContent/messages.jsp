@@ -33,7 +33,8 @@
     <link rel="stylesheet" type="text/css" href="styles/select.css">
     <script type="application/javascript" src="scripts/script.js"></script>
 </head>
-<body class="v-cont">
+<body class="v-cont" onload="init()">
+<jsp:include page="/WEB-INF/modals/msg-modal.jsp" flush="true"></jsp:include>
 	<div class="header">
 		<input type="checkbox" id="nav-toggle" class="nav-toggle">
         <label for="nav-toggle" class="nav-toggle-lbl icon"></label>

@@ -37,3 +37,20 @@
 .pop-up-content {
 	text-align: center;
 }
+
+.info {
+    align-self: flex-start;
+}
+
+.msg-content {
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.hr-line {
+    width: -webkit-fill-available;
+    width: -moz-available;
+    margin: 0.4rem;
+    color: var(--clr-text);
+}
