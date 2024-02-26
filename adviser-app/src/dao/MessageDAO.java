@@ -10,10 +10,35 @@ import java.util.List;
 import dto.Message;
 
 public class MessageDAO {
+	private static final String SQL_GET = "SELECT * FROM message WHERE sender=? AND receiver=? AND time_sent=?";
 	private static final String SQL_GET_MESSAGES = "SELECT * FROM message WHERE receiver=? ORDER BY time_sent";
 	private static final String SQL_OPEN_MSG = "UPDATE message SET opened='1' WHERE sender=? AND receiver=? AND time_sent=?";
 	
 	private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
+	
+	public Message get(String sender, String receiver, String timeSent) {
+		Message message = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		Object[] values = {sender, receiver, timeSent};
+		
+		try {
+			conn = connectionPool.checkOut();
+			PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_GET, false, values);
+			rs = ps.executeQuery();
+			if (rs.next())
+				message = getMessage(rs);
+			ps.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connectionPool.checkIn(conn);
+		}
+		
+		return message;
+	}
 	
 	public void openMessage(String sender, String receiver, String timeSent) {
 		Connection conn = null;

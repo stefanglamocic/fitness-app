@@ -13,6 +13,30 @@ public class UserDAO {
 	
 	private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
 	
+	public User get(String username) {
+		User user = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		Object[] values = {username};
+		
+		try {
+			conn = connectionPool.checkOut();
+			PreparedStatement ps = DAOUtil.prepareStatement(conn, SQL_USER_EXISTS, false, values);
+			rs = ps.executeQuery();
+			if (rs.next())
+				user = getUser(rs);
+			ps.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			connectionPool.checkIn(conn);
+		}
+		
+		return user;
+	}
+	
 	public boolean userExists(String username) {
 		boolean result = false;
 		Connection conn = null;

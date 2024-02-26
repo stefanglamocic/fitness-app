@@ -4,33 +4,66 @@ function init() {
 	addModalEventListener('msgModal');
 }
 
-function openMsg(event) {
+function rowIdToObj(rowId) {
+	const data = rowId.split(';');
+	return obj = {
+			sender: data[0],
+			receiver: data[1],
+			timeSent: data[2]
+	};
+}
+
+async function openMsg(event) {
 	const rowId = event.currentTarget.id;
 	const row = document.getElementById(rowId);
 	const style = getComputedStyle(document.body);
 	const modal = document.getElementById('msgModal');
 	
+	
+	const payload = rowIdToObj(rowId);
+	const usrUrl = baseUrl + `?action=get-user&username=${payload.sender}`;
+	const msgUrl = baseUrl + '?action=get-msg';
+	
+	const sender = await getSender(usrUrl);
+	const message = await getMessage(msgUrl, payload);
+	
+	populateInfo(sender, message);
 	modal.showModal();
 	
 	if (row.style.backgroundColor || row.getAttribute('class') === 'msg-opened')
 		return;
 	
 	row.style.backgroundColor = style.getPropertyValue('--clr-secondary-hover');
-	reqMsgOpen(rowId);
+	reqMsgOpen(payload);
 }
 
-function populateInfo() {
+async function getSender(usrUrl) {
+	return await fetch(usrUrl)
+		.then(response => response.json())
+		.catch(error => console.log(error));
+}
+
+async function getMessage(msgUrl, payload) {
+	return await fetch(msgUrl, {
+		method: 'POST',
+		body: JSON.stringify(payload)
+	})
+		.then(response => response.json())
+		.catch(error => console.log(error));
+}
+
+function populateInfo(sender, message) {
+	const fromTitle = document.getElementById('from');
+	const timeTitle = document.getElementById('timeSent');
+	const msgContent = document.querySelector('.msg-content');
 	
+	fromTitle.innerText = `Od: ${sender.name} ${sender.surname}`;
+	timeTitle.innerText = `Datum: ${(new Date(message.timeSent)).toLocaleString()}`;
+	msgContent.innerText = message.content;
 }
 
-function reqMsgOpen(rowId) {
+function reqMsgOpen(obj) {
 	const url = baseUrl + '?action=open-msg';
-	const data = rowId.split(';');
-	const obj = {
-			sender: data[0],
-			receiver: data[1],
-			timeSent: data[2]
-	};
 	
 	fetch(url, {
 		method: 'POST',

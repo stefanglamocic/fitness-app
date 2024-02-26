@@ -2,6 +2,7 @@ package controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 import beans.UserBean;
+import dto.Message;
+import dto.User;
 
 /**
  * Servlet implementation class RequestBay
@@ -47,6 +50,12 @@ public class RequestBay extends HttpServlet {
         case "open-msg": 
         	openMessage(request, response);
         	break;
+        case "get-user": 
+        	getUser(request, response);
+        	break;
+        case "get-msg":
+        	getMessage(request, response);
+        	break;
         	default:
         		break;
         }
@@ -79,6 +88,26 @@ public class RequestBay extends HttpServlet {
 		String source = readRequestBody(request);
 		JSONObject obj = new JSONObject(source);
 		userBean.openMessage(obj);
+	}
+	
+	private void getUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		String username = request.getParameter("username");
+		User user = userBean.getUser(username);
+		JSONObject obj = new JSONObject(user);
+		PrintWriter writer = response.getWriter();
+		writer.print(obj.toString(1));
+		writer.flush();
+	}
+	
+	private void getMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		String source = readRequestBody(request);
+		Message msg = userBean.getMessage(new JSONObject(source));
+		JSONObject obj = new JSONObject(msg);
+		PrintWriter writer = response.getWriter();
+		writer.print(obj.toString(1));
+		writer.flush();
 	}
 
 }
