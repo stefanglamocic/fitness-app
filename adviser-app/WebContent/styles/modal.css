@@ -54,3 +54,9 @@
     margin: 0.4rem;
     color: var(--clr-text);
 }
+
+textarea {
+    resize: none;
+    height: 8rem;
+    margin-bottom: .6rem;
+}

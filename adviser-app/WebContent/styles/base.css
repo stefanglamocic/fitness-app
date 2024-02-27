@@ -15,6 +15,8 @@
     --icn-change: '\f304';
     --icn-true: '\f00c';
     --icn-false: '\f00d';
+    --icn-upload: '\f574';
+    --icn-mail: '\f0e0';
 }
 
 *,
@@ -67,6 +69,10 @@ body {
     font-size: 1.35rem;
 }
 
+.f-4 {
+    font-size: 1.75rem;
+}
+
 .fg-1 {
     flex-grow: 1;
 }
@@ -77,6 +83,23 @@ body {
 
 .fg-3 {
     flex-grow: 3;
+}
+
+.g-1 {
+    gap: 0.3rem;
+}
+
+.g-2 {
+    gap: 0.7rem;
+}
+
+.g-3 {
+    gap: 1.2rem;
+}
+
+.f-width {
+	width: -webkit-fill-available;
+    width: -moz-available;
 }
 
 .clr-primary {
@@ -105,6 +128,10 @@ body {
 
 .maina-center {
     justify-content: center;
+}
+
+.maina-end {
+    justify-content: flex-end;
 }
 
 .crossa-center {
