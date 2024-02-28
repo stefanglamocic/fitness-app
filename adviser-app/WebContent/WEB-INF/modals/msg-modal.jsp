@@ -14,7 +14,7 @@
         <div class="h-cont maina-end f-width g-2" style="margin-bottom: 2rem;">
 			<label for="attachment" class="lbl-to-btn btn-style btn-small bg-secondary icon btn-icon btn-upload">Prikači datoteku</label>
 			<input type="file" id="attachment" name="attachment" accept="image/*, .pdf, .doc" hidden>
-			<button class="btn-style btn-small bg-accent icon btn-icon btn-mail">Odgovori</button>
+			<button id="replyBtn" class="btn-style btn-small bg-accent icon btn-icon btn-mail">Odgovori</button>
         </div>
 		<button class="btn-style btn-small m-2 bg-accent" onclick="closeModal('msgModal')">OK</button>
 	</div>

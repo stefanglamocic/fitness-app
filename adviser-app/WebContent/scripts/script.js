@@ -1,4 +1,6 @@
 const baseUrl = 'http://localhost:8080/adviser-app/RequestBay';
+var previousEventFunc = null;
+var adviser = null;
 
 function init() {
 	addModalEventListener('msgModal');
@@ -18,6 +20,7 @@ async function openMsg(event) {
 	const row = document.getElementById(rowId);
 	const style = getComputedStyle(document.body);
 	const modal = document.getElementById('msgModal');
+	const replyBtn = document.getElementById('replyBtn');
 	
 	
 	const payload = rowIdToObj(rowId);
@@ -26,6 +29,10 @@ async function openMsg(event) {
 	
 	const sender = await getSender(usrUrl);
 	const message = await getMessage(msgUrl, payload);
+	
+	resetBtnEvent(replyBtn);
+	previousEventFunc = () => reply(sender, message);
+	replyBtn.addEventListener('click', previousEventFunc);
 	
 	populateInfo(sender, message);
 	modal.showModal();
@@ -74,9 +81,53 @@ function reqMsgOpen(obj) {
 
 function closeModal(modalId) {
 	const modal = document.getElementById(modalId);
-	/*const form = modal.getElementsByTagName('form')[0];
-	form.reset();*/
+	const replyMsg = document.getElementById('reply');
+	const fileAtc = document.getElementById('attachment');
+	
+	replyMsg.value = '';
+	fileAtc.vallue = '';
+	
 	modal.close();
+}
+
+async function reply(sender, message) {
+	const getAdviserUrl = baseUrl + `?action=get-user&username=${message.receiver}`;
+	const replyMsg = document.getElementById('reply');
+	const fileAtc = document.getElementById('attachment');
+	
+	const replyUrl = 'https://formsubmit.co/ajax/' + sender.mail;	
+	const msg = replyMsg.value;
+	if(!adviser) {
+		adviser = await fetch(getAdviserUrl)
+		.then(response => response.json())
+		.catch(error => console.log(error));
+	}
+	
+	const payload = {
+			name: `${adviser.name} ${adviser.surname}`,
+			email: adviser.mail,
+			message: msg
+	};
+	
+	fetch(replyUrl, {
+		method: 'POST',
+		headers: { 
+	        'Content-Type': 'application/json',
+	        'Accept': 'application/json'
+	    },
+	    body: JSON.stringify(payload)
+	})
+	.then(response => response.json())
+    .then(data => console.log(data))
+	.catch(error => console.log(error));
+	
+	replyMsg.value = '';
+	fileAtc.value = '';
+}
+
+function resetBtnEvent(btn) {
+	if (previousEventFunc)
+		btn.removeEventListener('click', previousEventFunc);
 }
 
 function addModalEventListener(id) {
