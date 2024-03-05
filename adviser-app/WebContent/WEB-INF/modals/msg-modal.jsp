@@ -10,8 +10,17 @@
 		<p class="msg-content"></p>
 		<hr class="hr-line">
 		<h2 class="modal-title">Odgovor</h2>
-        <textarea id="reply" class="form-input" placeholder="Vaša poruka..."></textarea>
-        <div class="h-cont maina-end f-width g-2" style="margin-bottom: 2rem;">
+		
+        <div class="v-cont form-group f-width">
+			<label class="form-label" for="reply">Vasa poruka</label>
+			<textarea id="reply" class="form-input"></textarea>
+		</div>
+		<div class="v-cont form-group f-width">
+			<label class="form-label" for="mailPw">Lozinka za mail</label>
+			<input class="form-input" type="password" id="mailPw">
+		</div>
+		
+        <div class="h-cont maina-end f-width g-2" style="margin-bottom: 2rem; margin-top: .8rem;">
 			<label for="attachment" class="lbl-to-btn btn-style btn-small bg-secondary icon btn-icon btn-upload">Prikači datoteku</label>
 			<input type="file" id="attachment" name="attachment" accept="image/*, .pdf, .doc" hidden>
 			<button id="replyBtn" class="btn-style btn-small bg-accent icon btn-icon btn-mail">Odgovori</button>

@@ -94,9 +94,9 @@ async function reply(sender, message) {
 	const getAdviserUrl = baseUrl + `?action=get-user&username=${message.receiver}`;
 	const replyMsg = document.getElementById('reply');
 	const fileAtc = document.getElementById('attachment');
+	const mailPw = document.getElementById('mailPw');
+	const replyUrl = baseUrl + '?action=reply';	
 	
-	const replyUrl = 'https://formsubmit.co/ajax/' + sender.mail;	
-	const msg = replyMsg.value;
 	if(!adviser) {
 		adviser = await fetch(getAdviserUrl)
 		.then(response => response.json())
@@ -105,20 +105,21 @@ async function reply(sender, message) {
 	
 	const payload = {
 			name: `${adviser.name} ${adviser.surname}`,
-			email: adviser.mail,
-			message: msg
+			from: adviser.mail,
+			pw: mailPw.value,
+			to: sender.mail,
+			message: replyMsg.value
 	};
 	
 	fetch(replyUrl, {
 		method: 'POST',
-		headers: { 
-	        'Content-Type': 'application/json',
-	        'Accept': 'application/json'
-	    },
 	    body: JSON.stringify(payload)
 	})
-	.then(response => response.json())
-    .then(data => console.log(data))
+	.then(response => {
+		if (!response.ok) {
+			//handle error if the message isn't sent
+		}
+	})
 	.catch(error => console.log(error));
 	
 	replyMsg.value = '';
