@@ -69,4 +69,12 @@ public class Message implements Serializable{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		return LocalDateTime.parse(timeSent, formatter);
 	}
+	
+	public String getMessageId() {
+		return getSender() + ";" + getReceiver() + ";" + getTimeSent();
+	}
+	
+	public String getShortVersion() {
+		return getContent().length() > 20 ? getContent().substring(0, 19) + "..." : getContent();
+	}
 }

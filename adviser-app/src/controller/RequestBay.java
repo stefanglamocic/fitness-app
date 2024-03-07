@@ -3,6 +3,7 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import beans.UserBean;
@@ -56,6 +58,9 @@ public class RequestBay extends HttpServlet {
         String action = request.getParameter("action");
         
         switch (action) {
+        case "get-all-msg":
+        	getAllMessages(request, response);
+        	break;
         case "open-msg": 
         	openMessage(request, response);
         	break;
@@ -93,6 +98,17 @@ public class RequestBay extends HttpServlet {
 	private String readRequestBody(HttpServletRequest request) throws IOException {
 		BufferedReader reader = request.getReader();
 		return reader.lines().collect(Collectors.joining());
+	}
+	
+	private void getAllMessages(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UserBean userBean = setEnv(request, response);
+		String username = request.getParameter("username");
+		List<Message> messages = userBean.getMessages(username);
+		JSONArray msgArray = new JSONArray(messages);
+		
+		PrintWriter writer = response.getWriter();
+		writer.print(msgArray.toString(1));
+		writer.flush();
 	}
 	
 	private void openMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {

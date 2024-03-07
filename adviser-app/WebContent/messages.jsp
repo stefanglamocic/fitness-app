@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="styles/select.css">
     <script type="application/javascript" src="scripts/script.js"></script>
 </head>
-<body class="v-cont" onload="init()">
+<body class="v-cont" onload="init('<%= userBean.getUser().getUsername() %>')">
 <jsp:include page="/WEB-INF/modals/msg-modal.jsp" flush="true"></jsp:include>
 	<div class="header">
 		<input type="checkbox" id="nav-toggle" class="nav-toggle">
@@ -44,7 +44,7 @@
         <div style="flex-grow: 1;"></div>
         <div class="search-cont">
             <div class="search-bar icon">
-                <input type="search" placeholder="Pretraga...">
+                <input id="search" type="search" placeholder="Pretraga..." oninput="searchKeyPressed(event)">
             </div>
         </div>
         <a href="logout.jsp" class="icon btn-link btn-logout f-3 clr-text"></a>
@@ -53,8 +53,8 @@
 	<div class="main-cont v-cont">
 		<div class="v-cont table-cont">
 			<div class="table-wrapper">
-				<table>
-					<tr>
+				<table id="table">
+					<tr id="headerRow">
 						<th>Pošiljalac</th>
 						<th>Datum</th>
 						<th>Vrijeme</th>
@@ -65,7 +65,7 @@
 						DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 						for(Message m : userBean.getMessages()) {
 					%>
-						<tr id="<%= m.getSender() + ";" + m.getReceiver() + ";" + m.getTimeSent() %>" onclick="openMsg(event)"
+						<tr id="<%= m.getMessageId() %>" onclick="openMsg(event)"
 							<% if (m.getOpened()) {%>
 								class="msg-opened"
 							<% } %>	
@@ -73,7 +73,7 @@
 							<td><%= m.getSender() %></td>
 							<td><%= m.getTime().format(dateFormatter) %></td>
 							<td><%= m.getTime().format(timeFormatter) %></td>
-							<td><%= m.getContent().length() > 20 ? m.getContent().substring(0, 19) + "..." : m.getContent() %></td>
+							<td><%= m.getShortVersion() %></td>
 						</tr>
 					<% } %>
 				</table>

@@ -55,6 +55,10 @@ public class UserBean {
 		return messageDAO.getAll(user.getUsername());
 	}
 	
+	public List<Message> getMessages(String username) {
+		return messageDAO.getAll(username);
+	}
+	
 	public void openMessage(JSONObject data) {
 		messageDAO.openMessage(data.getString("sender"), data.getString("receiver"), data.getString("timeSent"));
 	}

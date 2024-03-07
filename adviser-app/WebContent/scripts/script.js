@@ -1,9 +1,32 @@
 const baseUrl = 'http://localhost:8080/adviser-app/RequestBay';
 var previousEventFunc = null;
 var adviser = null;
+var messages = null;
 
-function init() {
+function init(username) {
 	addModalEventListener('msgModal');
+	getAllMessages(username);
+}
+
+async function getAllMessages(username) {
+	const url = baseUrl + '?action=get-all-msg&username=' + username;
+	
+	messages = await fetch(url)
+	.then(response => response.json())
+	.catch(error => console.log(error));
+}
+
+function searchKeyPressed(event) {
+	const searchTerm = document.getElementById('search').value;
+	const table = document.getElementById('table');
+	const msgRows = Array.from(document.querySelectorAll('tr')).filter(r => r.id !== 'headerRow');
+	
+	msgRows.forEach(r => r.style.display = "");
+	
+	let filteredMessages = messages
+		.filter(m => !m.content.toLowerCase().includes(searchTerm));
+	
+	filteredMessages.forEach(msg => document.getElementById(msg.messageId).style.display = "none");
 }
 
 function rowIdToObj(rowId) {
