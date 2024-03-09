@@ -126,12 +126,21 @@ async function reply(sender, message) {
 		.catch(error => console.log(error));
 	}
 	
+	let file = fileAtc.files[0],
+		binary;
+	
+	if(file) {
+		binary = await readFileAsBinary(file);
+	}
+	
 	const payload = {
 			name: `${adviser.name} ${adviser.surname}`,
 			from: adviser.mail,
 			pw: mailPw.value,
 			to: sender.mail,
-			message: replyMsg.value
+			message: replyMsg.value,
+			attachmentName: adviser.username + file?.name ?? '',
+			attachment: binary
 	};
 	
 	fetch(replyUrl, {
@@ -171,4 +180,16 @@ function addModalEventListener(id) {
 	      modal.close();
 	    }
 	  });
+}
+
+function readFileAsBinary(file) {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.onload = function(event) {
+			const fileContents = event.target.result;
+			resolve(fileContents);
+		};
+		
+		reader.readAsBinaryString(file);
+	});
 }

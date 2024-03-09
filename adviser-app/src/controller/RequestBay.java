@@ -1,8 +1,11 @@
 package controller;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -35,6 +38,7 @@ import dto.User;
 @WebServlet("/RequestBay")
 public class RequestBay extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String TEMP_FILES_STORAGE = "/home/keks/Documents/ip/fitness-app/adviser-app/WebContent/WEB-INF/temp";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -155,6 +159,14 @@ public class RequestBay extends HttpServlet {
 		String password = obj.getString("pw");
 		String fromMail = username;
 		String toMail = obj.getString("to");
+		String fileName = obj.getString("attachmentName");
+		
+		//upload the file to the server into temporary storage
+		File file = new File(TEMP_FILES_STORAGE, fileName);
+		FileOutputStream out = new FileOutputStream(file);
+		out.write(obj.getString("attachment").getBytes(StandardCharsets.ISO_8859_1));
+		out.close();
+		
 		
 		Properties props = getMailProps();
 		Session session = Session.getInstance(props, new Authenticator() {
