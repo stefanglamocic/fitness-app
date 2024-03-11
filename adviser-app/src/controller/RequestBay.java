@@ -10,14 +10,18 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
+import javax.mail.AuthenticationFailedException;
 import javax.mail.Authenticator;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -160,12 +165,18 @@ public class RequestBay extends HttpServlet {
 		String fromMail = username;
 		String toMail = obj.getString("to");
 		String fileName = obj.getString("attachmentName");
+		String binaryFile = obj.getString("attachment");
+		File file = null;
+		boolean isMultipart = false;
 		
 		//upload the file to the server into temporary storage
-		File file = new File(TEMP_FILES_STORAGE, fileName);
-		FileOutputStream out = new FileOutputStream(file);
-		out.write(obj.getString("attachment").getBytes(StandardCharsets.ISO_8859_1));
-		out.close();
+		if (!binaryFile.equals("")) {
+			isMultipart = true;
+			file = new File(TEMP_FILES_STORAGE, fileName);
+			FileOutputStream out = new FileOutputStream(file);
+			out.write(binaryFile.getBytes(StandardCharsets.ISO_8859_1));
+			out.close();
+		}
 		
 		
 		Properties props = getMailProps();
@@ -180,11 +191,31 @@ public class RequestBay extends HttpServlet {
 			msg.setFrom(new InternetAddress(fromMail));
 			msg.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(toMail));
 			msg.setSubject("Odgovor od savjetnika " + obj.getString("name"));
-			msg.setText(obj.getString("message"));
+			
+			if (isMultipart) {
+				Multipart mailMultipart = new MimeMultipart();
+				
+				MimeBodyPart textPart = new MimeBodyPart();
+				textPart.setText(obj.getString("message"));
+				MimeBodyPart filePart = new MimeBodyPart();
+				filePart.attachFile(file);
+				
+				mailMultipart.addBodyPart(textPart);
+				mailMultipart.addBodyPart(filePart);
+				msg.setContent(mailMultipart);
+			}
+			else {
+				msg.setText(obj.getString("message"));
+			}
+			
 			Transport.send(msg);
+			if (file != null)
+				file.delete();
 		} catch (AddressException e) {
 			response.setStatus(401);
 			e.printStackTrace();
+		} catch (AuthenticationFailedException e) {
+			response.setStatus(535);
 		} catch (MessagingException e) {
 			response.setStatus(502);
 			e.printStackTrace();

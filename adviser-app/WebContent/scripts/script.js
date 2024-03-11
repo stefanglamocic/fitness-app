@@ -140,7 +140,7 @@ async function reply(sender, message) {
 			to: sender.mail,
 			message: replyMsg.value,
 			attachmentName: adviser.username + file?.name ?? '',
-			attachment: binary
+			attachment: binary ?? ''
 	};
 	
 	fetch(replyUrl, {
@@ -148,8 +148,8 @@ async function reply(sender, message) {
 	    body: JSON.stringify(payload)
 	})
 	.then(response => {
-		if (!response.ok) {
-			//handle error if the message isn't sent
+		if (response.status === 535) {
+			alert('Pogrešna lozinka za mail!');
 		}
 	})
 	.catch(error => console.log(error));
