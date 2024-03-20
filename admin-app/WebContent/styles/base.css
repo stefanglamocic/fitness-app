@@ -145,3 +145,22 @@ body {
 	width: 100%; 
 	gap: 1.5rem;
 }
+
+.pre {
+	white-space: pre-line;
+	align-self: stretch;
+	color: white;
+}
+
+.even-div {
+	background-color: var(--clr-secondary);
+}
+
+.odd-div {
+	background-color: var(--clr-secondary-hover);
+}
+
+.date {
+	color: var(--clr-primary);
+	font-size: 1.2rem;
+}

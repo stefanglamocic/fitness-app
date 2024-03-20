@@ -107,7 +107,7 @@ function openChangeUserModal(event) {
 	const changeModal = document.getElementById('changeModal');
 	const url = `?action=get-user&username=${rowId}`;
 	
-	changeModal.querySelector('.modal-title').innerText = `Izmjenite detalja o korisniku ${rowId}`;
+	changeModal.querySelector('.modal-title').innerText = `Izmjenite detalje korisnika ${rowId}`;
 	
 	fetch(url)
 	.then(response => response.json())
