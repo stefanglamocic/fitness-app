@@ -47,7 +47,11 @@ public class Logging {
 		return list;
 	}
 	
-	public static void addLog(String log) {
+	public static void addLog(String log, Exception e) {
+		addLog(log + System.lineSeparator() + e.getLocalizedMessage());
+	}
+	
+	private static void addLog(String log) {
 		try {
 			File logsFile = getLogsFile();
 			LocalDate fileLastModified = getLocalDate(logsFile.lastModified());

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.User;
+import util.Logging;
 
 public class UserDAO implements IUserDAO{
 	
@@ -45,7 +46,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			Logging.addLog("Greška pri dohvatanju korisnika: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -72,8 +73,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			//log exception
-			e.printStackTrace();
+			Logging.addLog("Greška pri dodavanju korisnika: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -100,8 +100,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			//log exception
-			e.printStackTrace();
+			Logging.addLog("Greška pri izmjeni korisnika: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -127,8 +126,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			//log exception
-			e.printStackTrace();
+			Logging.addLog("Greška pri izmjeni korisničkog imena: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -156,7 +154,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			Logging.addLog("Greška pri brisanju korisnika: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -181,8 +179,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch(SQLException e) {
-			//log exception...
-			e.printStackTrace();
+			Logging.addLog("Greška pri provjeri korisničog imena: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -208,8 +205,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			//log exception
-			e.printStackTrace();
+			Logging.addLog("Greška prilikom prijave: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -234,7 +230,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			// TODO: handle exception
+			Logging.addLog("Greška pri dohvatanju korisnika: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -265,7 +261,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			System.out.println(e);
+			Logging.addLog("Greška pri aktiviranju korisničkog računa: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);

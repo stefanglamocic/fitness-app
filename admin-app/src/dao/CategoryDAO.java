@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.Category;
+import util.Logging;
 
 public class CategoryDAO implements ICategoryDAO{
 	private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
@@ -44,7 +45,7 @@ public class CategoryDAO implements ICategoryDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			Logging.addLog("Greška pri dohvatanju svih kategorija: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -87,7 +88,7 @@ public class CategoryDAO implements ICategoryDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			Logging.addLog("Greška pri dohvatanju imena kategorija: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -110,7 +111,7 @@ public class CategoryDAO implements ICategoryDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			Logging.addLog("Greška pri dohvatanju atributa: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -133,7 +134,7 @@ public class CategoryDAO implements ICategoryDAO{
 			return false;
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			Logging.addLog("Greška pri dodavanju atributa: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -158,7 +159,7 @@ public class CategoryDAO implements ICategoryDAO{
 			}
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			Logging.addLog("Greška pri dodavanju kategorije: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -178,7 +179,7 @@ public class CategoryDAO implements ICategoryDAO{
 				ps.close();
 			}
 			catch (SQLException e) {
-				e.printStackTrace();
+				Logging.addLog("Greška pri dodavanju kategorije: ", e);
 			}
 			finally {
 				connectionPool.checkIn(conn);
@@ -197,7 +198,7 @@ public class CategoryDAO implements ICategoryDAO{
 			ps.close();
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			Logging.addLog("Greška pri brisanju kategorije: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
@@ -216,7 +217,7 @@ public class CategoryDAO implements ICategoryDAO{
 			ps.close();
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			Logging.addLog("Greška pri izmjeni kategorije: ", e);
 		}
 		finally {
 			connectionPool.checkIn(conn);
