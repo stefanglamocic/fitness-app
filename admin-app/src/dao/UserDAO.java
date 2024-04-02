@@ -179,6 +179,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch(SQLException e) {
+			e.printStackTrace();
 			Logging.addLog("Greška pri provjeri korisničog imena: ", e);
 		}
 		finally {
@@ -205,6 +206,7 @@ public class UserDAO implements IUserDAO{
 			ps.close();
 		}
 		catch (SQLException e) {
+			e.printStackTrace();
 			Logging.addLog("Greška prilikom prijave: ", e);
 		}
 		finally {
