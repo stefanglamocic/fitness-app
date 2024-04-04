@@ -1,5 +1,8 @@
-20.03.2024 20:47:44
-test
-test 1231
-proba novi log
+02.04.2024 23:50:04
+Greška pri brisanju korisnika: 
+Cannot delete or update a parent row: a foreign key constraint fails (`fitdb`.`comment`, CONSTRAINT `fk_comment_comment1` FOREIGN KEY (`comment_fitness_program_id`, `comment_username`, `comment_published`) REFERENCES `comment` (`fitness_program_id`, `username`, )
+-----
+02.04.2024 23:50:35
+Greška pri brisanju korisnika: 
+Cannot delete or update a parent row: a foreign key constraint fails (`fitdb`.`comment`, CONSTRAINT `fk_comment_comment1` FOREIGN KEY (`comment_fitness_program_id`, `comment_username`, `comment_published`) REFERENCES `comment` (`fitness_program_id`, `username`, )
 -----
