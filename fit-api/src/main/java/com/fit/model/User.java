@@ -1,16 +1,25 @@
 package com.fit.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
+@JsonIgnoreProperties(value = {"inbox", "sentMessages", "password"})
 @Entity
 public class User {
 	@Id
 	private String username;
 	private String password;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(length = 1)
 	private UserType userType;
@@ -19,6 +28,12 @@ public class User {
 	private String city;
 	private String mail;
 	private Boolean activated;
+	
+	@OneToMany(mappedBy = "sender")
+	private List<Message> sentMessages = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "receiver")
+	private List<Message> inbox = new ArrayList<>();
 	
 	public User() {
 		super();
@@ -99,6 +114,31 @@ public class User {
 
 	public void setActivated(Boolean activated) {
 		this.activated = activated;
+	}
+
+	public List<Message> getSentMessages() {
+		return sentMessages;
+	}
+
+	public List<Message> getInbox() {
+		return inbox;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(username);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(username, other.username);
 	}
 	
 	
