@@ -13,7 +13,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@JsonIgnoreProperties(value = {"inbox", "sentMessages", "password"})
+@JsonIgnoreProperties(value = {"inbox", "sentMessages", "password", "comments"})
 @Entity
 public class User {
 	@Id
@@ -34,6 +34,9 @@ public class User {
 	
 	@OneToMany(mappedBy = "receiver")
 	private List<Message> inbox = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "publishedBy")
+	private List<Comment> comments = new ArrayList<>();
 	
 	public User() {
 		super();
@@ -122,6 +125,10 @@ public class User {
 
 	public List<Message> getInbox() {
 		return inbox;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
 	}
 
 	@Override

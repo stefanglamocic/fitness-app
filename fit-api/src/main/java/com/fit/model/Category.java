@@ -1,9 +1,15 @@
 package com.fit.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Category {
@@ -11,6 +17,11 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	@ManyToMany
+	@JoinTable(name = "category_has_attribute", 
+			joinColumns = @JoinColumn(name = "category_id"), 
+			inverseJoinColumns = @JoinColumn(name = "attribute_name"))
+	private List<Attribute> attributes = new ArrayList<>();
 	
 	public Category() {
 		super();
@@ -37,6 +48,10 @@ public class Category {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Attribute> getAttributes() {
+		return attributes;
 	}
 	
 	
