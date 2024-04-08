@@ -38,6 +38,12 @@ public class User {
 	@OneToMany(mappedBy = "publishedBy")
 	private List<Comment> comments = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "createdBy")
+	private List<FitnessProgram> createdFitnessPrograms = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<Participation> fitnessProgramParticipations = new ArrayList<>();
+	
 	public User() {
 		super();
 	}
@@ -129,6 +135,14 @@ public class User {
 
 	public List<Comment> getComments() {
 		return comments;
+	}
+
+	public List<FitnessProgram> getCreatedFitnessPrograms() {
+		return createdFitnessPrograms;
+	}
+
+	public List<Participation> getFitnessProgramParticipations() {
+		return fitnessProgramParticipations;
 	}
 
 	@Override

@@ -1,0 +1,167 @@
+:root, ::backdrop {
+    --clr-primary: #5f0f40;
+    --clr-primary-dark: #4d0933;
+    --clr-secondary: #86717B;
+    --clr-secondary-hover: #79666f;
+    --clr-text: #EEF0E5;
+    --clr-highlight: #F1F6F9;
+    --clr-accent: #FB8B24;
+    --clr-accent-hover: #e98120;
+
+    --icn-warning: '\f071';
+    --icn-error: '\f06a';
+    --icn-remove: '\f1f8';
+    --icn-add: '\2b';
+    --icn-change: '\f304';
+    --icn-true: '\f00c';
+    --icn-false: '\f00d';
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.v-cont {
+    display: flex;
+    flex-direction: column;
+}
+
+.h-cont {
+    display: flex;
+}
+
+.m-1 {
+    margin: 0.25rem;
+}
+
+.m-2 {
+    margin: 0.5rem;
+}
+
+.m-3 {
+    margin: 0.75rem;
+}
+
+.m-4 {
+    margin: 1rem;
+}
+
+.f-1 {
+    font-size: 0.85rem;
+}
+
+.f-2 {
+    font-size: 1rem;
+}
+
+.f-3 {
+    font-size: 1.35rem;
+}
+
+.fg-1 {
+    flex-grow: 1;
+}
+
+.fg-2 {
+    flex-grow: 2;
+}
+
+.fg-3 {
+    flex-grow: 3;
+}
+
+.clr-primary {
+    color: var(--clr-primary);
+}
+
+.clr-secondary {
+    color: var(--clr-secondary);
+}
+
+.clr-text {
+    color: var(--clr-text);
+}
+
+.clr-accent {
+    color: var(--clr-accent);
+}
+
+.clr-red {
+    color: rgb(185, 3, 3);
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.maina-center {
+    justify-content: center;
+}
+
+.crossa-center {
+    align-items: center;
+}
+
+.crossa-lbaseline {
+	align-items: last baseline;
+}
+
+.main-cont {
+    flex-basis: 0px;
+    flex-grow: 1;
+    overflow-y: auto;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.icon::before {
+    display: inline-block;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 600;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.t-text {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: var(--clr-text);
+    color: transparent;
+}
+
+.table-cont {
+	padding: 1.2rem;
+	flex-grow: 1;
+	width: 100%; 
+	gap: 1.5rem;
+}
+
+.pre {
+	white-space: pre-line;
+	align-self: stretch;
+	color: white;
+	padding: 1.1rem;
+}
+
+.even-div {
+	background-color: var(--clr-secondary);
+}
+
+.odd-div {
+	background-color: var(--clr-secondary-hover);
+}
+
+.date {
+	color: var(--clr-primary);
+	font-size: 1.2rem;
+}

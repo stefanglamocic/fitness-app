@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -43,6 +44,14 @@ public class FitnessProgram {
 	
 	@OneToMany(mappedBy = "fitnessProgram")
 	private List<Comment> comments = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "created_by", 
+			referencedColumnName = "username")
+	private User createdBy;
+	
+	@OneToMany(mappedBy = "fitnessProgram")
+	private List<Participation> participations = new ArrayList<>();
 
 	public FitnessProgram() {
 		super();
@@ -133,6 +142,18 @@ public class FitnessProgram {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public User getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public List<Participation> getParticipations() {
+		return participations;
 	}
 
 	@Override
