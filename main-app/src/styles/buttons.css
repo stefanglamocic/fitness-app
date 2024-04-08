@@ -93,6 +93,10 @@
     content: var(--icn-remove);
 }
 
+.btn-user::before {
+    content: var(--icn-user);
+}
+
 .btn-check {
     display: none;
 }
