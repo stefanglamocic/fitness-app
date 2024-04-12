@@ -1,0 +1,17 @@
+.title {
+    font-weight: bold;
+    align-self: center;
+}
+
+.content {
+    text-align: center;
+    margin-top: .7rem;
+}
+
+.link:link {
+    color: var(--clr-primary-dark);
+}
+
+.link:visited {
+    color: var(--clr-primary);
+}

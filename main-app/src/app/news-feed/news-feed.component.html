@@ -1,0 +1,6 @@
+<div class="title f-3 clr-primary">{{ title }}</div>
+<div class="content f-2 fg-1 clr-text">
+    {{ description }}
+    <a *ngIf="showLink" 
+        [href]="link" class="link" target="_blank"> -&gt; Pročitajte više</a>
+</div>

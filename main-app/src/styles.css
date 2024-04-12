@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.news-container {
+    flex-basis: 110px;
+    background-color: var(--clr-secondary);
+    padding: .9rem;
+}

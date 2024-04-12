@@ -68,6 +68,10 @@ body {
     font-size: 1.35rem;
 }
 
+.fb-0 {
+    flex-basis: 0;
+}
+
 .fg-1 {
     flex-grow: 1;
 }
