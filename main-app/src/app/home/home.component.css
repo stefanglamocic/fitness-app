@@ -1,0 +1,13 @@
+.news-container {
+    flex-basis: 110px;
+    background-color: var(--clr-secondary);
+    padding: .9rem;
+}
+
+fitness-programs-view {
+    height: 100%;
+    padding: 2.4rem;
+    gap: 3.1rem;
+    overflow-y: scroll;
+    justify-content: space-evenly;
+}

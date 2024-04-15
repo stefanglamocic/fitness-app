@@ -3,6 +3,8 @@ package com.fit.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -12,6 +14,7 @@ public class Image {
 	@Id
 	private String path;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "images")
 	private List<FitnessProgram> fitnessPrograms = new ArrayList<>();
 

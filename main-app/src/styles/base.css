@@ -84,6 +84,10 @@ body {
     flex-grow: 3;
 }
 
+.fg-4 {
+    flex-grow: 4;
+}
+
 .clr-primary {
     color: var(--clr-primary);
 }

@@ -4,8 +4,10 @@ app-root {
     height: 100vh;
 }
 
-.news-container {
-    flex-basis: 110px;
-    background-color: var(--clr-secondary);
-    padding: .9rem;
+home {
+    height: 100%;
 }
+
+html, body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
