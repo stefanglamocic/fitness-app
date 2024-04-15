@@ -5,9 +5,8 @@
 }
 
 fitness-programs-view {
-    height: 100%;
     padding: 2.4rem;
     gap: 3.1rem;
-    overflow-y: scroll;
     justify-content: space-evenly;
+    overflow-y: scroll;
 }

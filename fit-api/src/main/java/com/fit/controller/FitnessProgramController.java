@@ -43,7 +43,7 @@ public class FitnessProgramController {
 	public MappingJacksonValue getFitnessProgram(@PathVariable Integer id) {
 		FilterProvider filterProvider = new SimpleFilterProvider()
 				.addFilter("fitnessProgramFilter", 
-						SimpleBeanPropertyFilter.serializeAll());
+						SimpleBeanPropertyFilter.serializeAllExcept("participations"));
 		
 		FitnessProgram fitnessProgram = fitnessProgramRepo.findById(id).orElse(new FitnessProgram());
         List<Comment> filteredComments = fitnessProgram.getComments().stream()

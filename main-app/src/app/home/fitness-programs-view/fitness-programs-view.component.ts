@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FitnessProgramsService } from './service/fitness-programs.service';
-import { Subscription, finalize } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FitnessProgram } from 'src/interfaces/fitness-program.interface';
 
 @Component({
