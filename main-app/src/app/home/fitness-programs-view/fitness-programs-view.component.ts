@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FitnessProgramsService } from './service/fitness-programs.service';
 import { Subscription } from 'rxjs';
 import { FitnessProgram } from 'src/interfaces/fitness-program.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fitness-programs-view',
@@ -12,7 +13,8 @@ export class FitnessProgramsViewComponent implements OnInit, OnDestroy{
   fitnessPrograms: Array<FitnessProgram> = [];
   private subscriptions: Array<Subscription> = []
 
-  constructor(private fitnessProgramsService: FitnessProgramsService) {}
+  constructor(private fitnessProgramsService: FitnessProgramsService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.getFitnessPrograms();
@@ -32,5 +34,9 @@ export class FitnessProgramsViewComponent implements OnInit, OnDestroy{
     );
 
     this.subscriptions.push(subscription);
+  }
+
+  routeToPage(fitnessProgram: FitnessProgram): void {
+    this.router.navigate(['fitness-program', fitnessProgram.id]);
   }
 }

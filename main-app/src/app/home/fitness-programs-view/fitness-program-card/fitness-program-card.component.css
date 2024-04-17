@@ -1,6 +1,6 @@
 .description {
-    background-color: var(--clr-primary);
-    flex-basis: 80px;
+    background-color: var(--clr-secondary);
+    flex-basis: 70px;
     flex-shrink: 1;
     align-items: flex-end;
 }
@@ -8,7 +8,8 @@
 .title {
     align-self: center;
     text-align: center;
-    width: 100%;
+    color: var(--clr-primary-dark);
+    font-weight: bold;
 }
 
 img {

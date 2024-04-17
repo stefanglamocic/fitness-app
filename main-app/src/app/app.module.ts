@@ -10,7 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FitnessProgramsViewComponent } from './home/fitness-programs-view/fitness-programs-view.component';
 import { HomeComponent } from './home/home.component';
-import { FitnessProgramCardComponent } from './home/fitness-programs-view/fitness-program-card/fitness-program-card.component'; 
+import { FitnessProgramCardComponent } from './home/fitness-programs-view/fitness-program-card/fitness-program-card.component';
+import { FitnessProgramDetailsComponent } from './fitness-program-details/fitness-program-details.component'; 
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FitnessProgramCardComponent } from './home/fitness-programs-view/fitnes
     NewsFeedComponent,
     FitnessProgramsViewComponent,
     HomeComponent,
-    FitnessProgramCardComponent
+    FitnessProgramCardComponent,
+    FitnessProgramDetailsComponent
   ],
   imports: [
     BrowserModule,

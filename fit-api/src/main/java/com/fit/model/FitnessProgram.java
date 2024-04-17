@@ -24,6 +24,7 @@ public class FitnessProgram {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	private String description;
 	private Double price;
 	private String difficultyLevel;
 	private Double duration;
@@ -57,11 +58,12 @@ public class FitnessProgram {
 		super();
 	}
 
-	public FitnessProgram(Integer id, String name, Double price, String difficultyLevel, Double duration,
+	public FitnessProgram(Integer id, String name, String description, Double price, String difficultyLevel, Double duration,
 			String location) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.description = description;
 		this.price = price;
 		this.difficultyLevel = difficultyLevel;
 		this.duration = duration;
@@ -82,6 +84,14 @@ public class FitnessProgram {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Double getPrice() {

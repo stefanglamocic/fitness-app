@@ -13,7 +13,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@JsonIgnoreProperties(value = {"inbox", "sentMessages", "password", "comments", "createdFitnessPrograms"})
+@JsonIgnoreProperties(value = {"inbox", "sentMessages", "password", "comments", 
+		"createdFitnessPrograms", "fitnessProgramParticipations"})
 @Entity
 public class User {
 	@Id

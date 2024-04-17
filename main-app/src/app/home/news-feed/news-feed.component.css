@@ -9,9 +9,9 @@
 }
 
 .link:link {
-    color: var(--clr-primary-dark);
+    color: var(--clr-accent-hover);
 }
 
 .link:visited {
-    color: var(--clr-primary);
+    color: var(--clr-accent);
 }
