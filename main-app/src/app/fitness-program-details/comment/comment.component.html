@@ -1,0 +1,7 @@
+<div class="v-cont f-2 container">
+    <div class="clr-primary">{{ comment.publishedBy.username }}</div>
+    <div class="f-1 clr-secondary">{{ comment.published | date : 'd.M.yyyy - H:mm:ss' }}</div>
+    <div style="margin-top: .5rem;">
+        {{ comment.content }}
+    </div>
+</div>

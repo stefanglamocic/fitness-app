@@ -51,6 +51,47 @@
     </div>
 </div>
 
+<!-- program description -->
+<div class="v-cont description crossa-center" >
+    <div class="m-2 desc-title">Opis programa</div>
+    <div>{{ fitnessProgram.description }}</div>
+</div>
+
 <!-- instructor info -->
+<div class="instructor-info v-cont crossa-center">
+    <h2>Instruktor {{ fitnessProgram.instructor?.name }}</h2>
+    <div>
+        {{ fitnessProgram.instructor?.information }}
+    </div>
+    <div class="clr-primary">
+        {{ fitnessProgram.instructor?.contact }}
+    </div>
+</div>
 
 <!-- comments -->
+<div class="v-cont comments-cont">
+    <div class="m-2 desc-title">{{ getCommentNumber(fitnessProgram.comments || []) }} Komentara</div>
+    
+    <!-- template -->
+    <ng-template 
+        #commentsTree
+        let-comments>
+        <div class="comments-tree v-cont" *ngIf="comments">
+            <ng-template ngFor let-c [ngForOf]="comments">
+                <comment [comment]="c"></comment>
+                <div class="indent">
+                    <ng-template
+                        [ngTemplateOutlet]="commentsTree"
+                        [ngTemplateOutletContext]="{ $implicit: c.childComments }">
+                    </ng-template>
+                </div>
+            </ng-template>
+        </div>
+    </ng-template>
+    
+    <!-- displaying template -->
+    <ng-template
+        [ngTemplateOutlet]="commentsTree"
+        [ngTemplateOutletContext]="{ $implicit: fitnessProgram.comments}">
+    </ng-template>
+</div>

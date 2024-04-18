@@ -17,7 +17,7 @@ import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-@JsonIgnoreProperties(value = {"fitnessProgram", "publishedBy"})
+@JsonIgnoreProperties(value = {"fitnessProgram"})
 @Entity
 @IdClass(CommentId.class)
 public class Comment {

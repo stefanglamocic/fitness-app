@@ -11,4 +11,6 @@ fitness-program-card:hover {
     cursor: pointer;
     transform: scale(1.03);
     border: 3px solid var(--clr-accent);
+    box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.2),
+     0 6px 20px 3px rgba(0, 0, 0, 0.19);
 }
