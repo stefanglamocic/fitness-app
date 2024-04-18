@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FitnessProgramsService } from '../home/fitness-programs-view/service/fitness-programs.service';
 import { FitnessProgram } from 'src/interfaces/fitness-program.interface';
 import { CommentInterface } from 'src/interfaces/comment.interface';
+import { Title } from '@angular/platform-browser';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'fitness-program-details',
@@ -21,7 +23,8 @@ export class FitnessProgramDetailsComponent implements OnInit{
     price: 0
   };
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
+    private title: Title, 
     private fitnessProgramsService: FitnessProgramsService) {
     this.id = Number(this.route.snapshot.params['id']);
   }
@@ -32,6 +35,9 @@ export class FitnessProgramDetailsComponent implements OnInit{
 
   getDetails(): void {
     this.fitnessProgramsService.getFitnessProgram(this.id)
+      .pipe(
+        finalize(() => this.title.setTitle(this.fitnessProgram.name))
+      )
       .subscribe(
         {
           next: (data) => this.fitnessProgram = data,
