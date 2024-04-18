@@ -1,0 +1,4 @@
+<div class="v-cont crossa-center fg-1 fb-0 container">
+    <mat-spinner *ngIf="!loadingComplete" class="v-cont fg-1 maina-center"></mat-spinner>
+    <exercise *ngFor="let e of dailyExercises" [exercise]="e"></exercise>
+</div>

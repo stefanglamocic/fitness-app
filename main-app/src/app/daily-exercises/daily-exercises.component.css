@@ -1,0 +1,8 @@
+::ng-deep mat-spinner circle {
+    stroke: var(--clr-primary);
+}
+
+.container {
+    padding: 3.6rem 9rem;
+    gap: .9rem;
+}

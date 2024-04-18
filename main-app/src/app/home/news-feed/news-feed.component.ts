@@ -13,6 +13,7 @@ export class NewsFeedComponent implements OnInit, OnDestroy {
   title!: string;
   description!: string;
   link!: string;
+  loadingComplete: boolean = false;
 
   news!: Array<News>;
   index: number = 0;
@@ -35,6 +36,7 @@ export class NewsFeedComponent implements OnInit, OnDestroy {
   getData(): void {
     this.subscription = this.newsService.getNews().pipe(
       finalize(() => {
+        this.loadingComplete = true;
         this.setNewsToDisplay();
         this.setNewsCycle();
       })

@@ -15,3 +15,11 @@
 .link:visited {
     color: var(--clr-accent);
 }
+
+.loading {
+    align-self: center;
+}
+
+::ng-deep mat-spinner circle {
+    stroke: var(--clr-text);
+}
