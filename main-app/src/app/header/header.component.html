@@ -16,6 +16,12 @@
     <!-- spacing -->
     <div style="flex-grow: 1;"></div>
 
+    <div *ngIf="showSearchBar" class="search-cont">
+        <div class="search-bar icon">
+            <input type="search" placeholder="Pretraga..." (input)="getInput($event)">
+        </div>
+    </div>
+
     <dropdown-menu>
         <a dd-header href="#" 
             class="icon btn-link btn-user f-3 clr-text"></a>

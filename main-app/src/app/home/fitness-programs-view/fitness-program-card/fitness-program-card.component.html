@@ -1,11 +1,14 @@
-<!-- image -->
-<div class="fg-3">
-    <img [src]="fitnessProgram.images?.[0]?.path" >
-</div>
-<!-- description -->
-<div class="v-cont fg-1 description">
-    <div class="f-3 m-2 title fg-1 v-cont maina-center">
-        <span>{{ fitnessProgram.name }}</span>
+<div class="v-cont fg-1">
+    <!-- image -->
+    <div class="fg-3">
+        <img [src]="fitnessProgram.images?.[0]?.path">
     </div>
-    <div class="clr-text f-2 price">Cijena: {{ fitnessProgram.price }}KM</div>
+    <!-- description -->
+    <div class="v-cont fg-1 description">
+        <div class="f-3 m-2 title fg-1 v-cont maina-center">
+            <span>{{ fitnessProgram.name }}</span>
+        </div>
+        <div class="clr-text f-2 price">Cijena: {{ fitnessProgram.price }}KM</div>
+    </div>
+
 </div>

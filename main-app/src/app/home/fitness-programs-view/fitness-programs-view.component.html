@@ -1,3 +1,4 @@
-<fitness-program-card class="v-cont" 
+<fitness-program-card class="v-cont"
+        #cardRef
         *ngFor="let fp of fitnessPrograms" [fitnessProgram]="fp"
         (click)="routeToPage(fp)"></fitness-program-card>
