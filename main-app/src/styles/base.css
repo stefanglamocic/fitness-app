@@ -16,6 +16,8 @@
     --icn-true: '\f00c';
     --icn-false: '\f00d';
     --icn-user: '\f007';
+
+    --hdr-height: 60px;
 }
 
 *,
@@ -173,4 +175,8 @@ body {
 .date {
 	color: var(--clr-primary);
 	font-size: 1.2rem;
+}
+
+.content {
+    height: calc(100vh - var(--hdr-height));
 }

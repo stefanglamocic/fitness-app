@@ -1,97 +1,97 @@
-<!-- title -->
-<h1 class="clr-primary">{{ fitnessProgram.name }}</h1>
+<div class="details v-cont fg-1 crossa-center">
+    <!-- title -->
+    <h1 class="clr-primary">{{ fitnessProgram.name }}</h1>
 
-<!-- short info -->
-<div class="h-cont short-info clr-secondary">
-    <div class="h-cont">
-        <img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" class="user-image">
-        <div class="v-cont m-1">
-            <div>
-                <span class="item-name">Kreirao: </span>
-                {{ fitnessProgram.createdBy?.name }} {{ fitnessProgram.createdBy?.surname }}
-            </div>
-            <div>
-                <span class="item-name">E-mail: </span>
-                {{ fitnessProgram.createdBy?.mail }}
-            </div>
-        </div>
-    </div>
-    <div><span class="item-name">Cijena: </span> {{ fitnessProgram.price }}KM</div>
-</div>
-
-<!-- images -->
-<div class="image">
-    <img [src]="fitnessProgram.images?.[0]?.path">
-</div>
-
-<!-- info -->
-<div class="v-cont info">
-    <h2 class="m-3">Informacije o programu</h2>
-    <div class="h-cont separator">
-        <span class="item-name clr-primary">Težina</span>
-        <span>{{ fitnessProgram.difficultyLevel }}</span>
-    </div>
-    <div class="h-cont separator">
-        <span class="item-name clr-primary">Trajanje</span>
-        <span>{{ fitnessProgram.duration }} sedmica</span>
-    </div>
-    <div class="h-cont separator">
-        <span class="item-name clr-primary">Lokacija izvođenja</span>
-        <span>{{ fitnessProgram.location }}</span>
-    </div>
-    <div class="h-cont separator">
-        <span class="item-name clr-primary">Kategorija</span>
-        <span>{{ fitnessProgram.category?.name }}</span>
-    </div>
-    <div class="h-cont separator">
-        <span class="item-name clr-primary">Atributi</span>
-        <span *ngIf="fitnessProgram.category?.attributes">
-            {{ concatAttributes() }}
-        </span>
-    </div>
-</div>
-
-<!-- program description -->
-<div class="v-cont description crossa-center" >
-    <div class="m-2 desc-title">Opis programa</div>
-    <div>{{ fitnessProgram.description }}</div>
-</div>
-
-<!-- instructor info -->
-<div class="instructor-info v-cont crossa-center">
-    <h2>Instruktor {{ fitnessProgram.instructor?.name }}</h2>
-    <div>
-        {{ fitnessProgram.instructor?.information }}
-    </div>
-    <div class="clr-primary">
-        {{ fitnessProgram.instructor?.contact }}
-    </div>
-</div>
-
-<!-- comments -->
-<div class="v-cont comments-cont">
-    <div class="m-2 desc-title">{{ getCommentNumber(fitnessProgram.comments || []) }} Komentara</div>
-    
-    <!-- template -->
-    <ng-template 
-        #commentsTree
-        let-comments>
-        <div class="comments-tree v-cont" *ngIf="comments">
-            <ng-template ngFor let-c [ngForOf]="comments">
-                <comment [comment]="c"></comment>
-                <div class="indent">
-                    <ng-template
-                        [ngTemplateOutlet]="commentsTree"
-                        [ngTemplateOutletContext]="{ $implicit: c.childComments }">
-                    </ng-template>
+    <!-- short info -->
+    <div class="h-cont short-info clr-secondary">
+        <div class="h-cont">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+                class="user-image">
+            <div class="v-cont m-1">
+                <div>
+                    <span class="item-name">Kreirao: </span>
+                    {{ fitnessProgram.createdBy?.name }} {{ fitnessProgram.createdBy?.surname }}
                 </div>
-            </ng-template>
+                <div>
+                    <span class="item-name">E-mail: </span>
+                    {{ fitnessProgram.createdBy?.mail }}
+                </div>
+            </div>
         </div>
-    </ng-template>
-    
-    <!-- displaying template -->
-    <ng-template
-        [ngTemplateOutlet]="commentsTree"
-        [ngTemplateOutletContext]="{ $implicit: fitnessProgram.comments}">
-    </ng-template>
+        <div><span class="item-name">Cijena: </span> {{ fitnessProgram.price }}KM</div>
+    </div>
+
+    <!-- images -->
+    <div class="image">
+        <img [src]="fitnessProgram.images?.[0]?.path">
+    </div>
+
+    <!-- info -->
+    <div class="v-cont info">
+        <h2 class="m-3">Informacije o programu</h2>
+        <div class="h-cont separator">
+            <span class="item-name clr-primary">Težina</span>
+            <span>{{ fitnessProgram.difficultyLevel }}</span>
+        </div>
+        <div class="h-cont separator">
+            <span class="item-name clr-primary">Trajanje</span>
+            <span>{{ fitnessProgram.duration }} sedmica</span>
+        </div>
+        <div class="h-cont separator">
+            <span class="item-name clr-primary">Lokacija izvođenja</span>
+            <span>{{ fitnessProgram.location }}</span>
+        </div>
+        <div class="h-cont separator">
+            <span class="item-name clr-primary">Kategorija</span>
+            <span>{{ fitnessProgram.category?.name }}</span>
+        </div>
+        <div class="h-cont separator">
+            <span class="item-name clr-primary">Atributi</span>
+            <span *ngIf="fitnessProgram.category?.attributes">
+                {{ concatAttributes() }}
+            </span>
+        </div>
+    </div>
+
+    <!-- program description -->
+    <div class="v-cont description crossa-center">
+        <div class="m-2 desc-title">Opis programa</div>
+        <div>{{ fitnessProgram.description }}</div>
+    </div>
+
+    <!-- instructor info -->
+    <div class="instructor-info v-cont crossa-center">
+        <h2>Instruktor {{ fitnessProgram.instructor?.name }}</h2>
+        <div>
+            {{ fitnessProgram.instructor?.information }}
+        </div>
+        <div class="clr-primary">
+            {{ fitnessProgram.instructor?.contact }}
+        </div>
+    </div>
+
+    <!-- comments -->
+    <div class="v-cont comments-cont">
+        <div class="m-2 desc-title">{{ getCommentNumber(fitnessProgram.comments || []) }} Komentara</div>
+
+        <!-- template -->
+        <ng-template #commentsTree let-comments>
+            <div class="comments-tree v-cont" *ngIf="comments">
+                <ng-template ngFor let-c [ngForOf]="comments">
+                    <comment [comment]="c"></comment>
+                    <div class="indent">
+                        <ng-template [ngTemplateOutlet]="commentsTree"
+                            [ngTemplateOutletContext]="{ $implicit: c.childComments }">
+                        </ng-template>
+                    </div>
+                </ng-template>
+            </div>
+        </ng-template>
+
+        <!-- displaying template -->
+        <ng-template [ngTemplateOutlet]="commentsTree"
+            [ngTemplateOutletContext]="{ $implicit: fitnessProgram.comments}">
+        </ng-template>
+    </div>
+
 </div>

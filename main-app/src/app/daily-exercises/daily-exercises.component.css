@@ -5,4 +5,6 @@
 .container {
     padding: 3.6rem 9rem;
     gap: .9rem;
+    overflow-y: scroll;
+    height: calc(100vh - 60px);
 }

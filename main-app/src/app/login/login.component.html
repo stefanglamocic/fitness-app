@@ -1,0 +1,44 @@
+<div class="content v-cont  maina-center crossa-center bg-img">
+    <div class="form-cont v-cont crossa-center">
+        <p class="form-title m-4">Unesite korisničke podatke</p>
+        <div style="flex-grow: 1;"></div>
+        
+        <form 
+            class="form v-cont full-width"
+            id="loginForm"
+            (ngSubmit)="login()">
+
+            <div class="v-cont form-group">
+                <label class="form-label" for="username">
+                    Korisničko ime
+                </label>
+                <input 
+                    class="form-input" 
+                    type="text" 
+                    id="username" 
+                    name="username"
+                    [(ngModel)]="userCredentials.username">
+            </div>
+
+            <div class="v-cont form-group">
+                <label class="form-label" for="password">
+                    Lozinka
+                   </label>
+                <input 
+                    class="form-input" 
+                    type="password" 
+                    id="password" 
+                    name="password"
+                    [(ngModel)]="userCredentials.password">
+            </div>
+
+        </form>
+
+        <button 
+            class="btn-style m-4 bg-accent btn-large full-width"
+            form="loginForm">
+            Prijavi se
+        </button>
+
+    </div>
+</div>

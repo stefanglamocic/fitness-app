@@ -9,10 +9,7 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'fitness-program-details',
   templateUrl: './fitness-program-details.component.html',
-  styleUrls: ['./fitness-program-details.component.css'],
-  host: {
-    class: 'v-cont fg-1 crossa-center'
-  }
+  styleUrls: ['./fitness-program-details.component.css']
 })
 export class FitnessProgramDetailsComponent implements OnInit{
   id: number = 0;

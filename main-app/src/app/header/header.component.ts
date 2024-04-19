@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.router.events.subscribe(val => {
       if(val instanceof NavigationEnd) {
-        this.showSearchBar = val.url == '/home'; 
+        this.showSearchBar = (val.url == '/home') || (val.url == '/'); 
       }
     });
   }

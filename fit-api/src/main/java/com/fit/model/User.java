@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,12 +15,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@JsonIgnoreProperties(value = {"inbox", "sentMessages", "password", "comments", 
+@JsonIgnoreProperties(value = {"inbox", "sentMessages", "comments", 
 		"createdFitnessPrograms", "fitnessProgramParticipations"})
 @Entity
 public class User {
 	@Id
 	private String username;
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
 	@Enumerated(EnumType.STRING)

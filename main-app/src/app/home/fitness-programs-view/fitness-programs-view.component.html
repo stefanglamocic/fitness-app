@@ -1,4 +1,11 @@
-<fitness-program-card class="v-cont"
-        #cardRef
-        *ngFor="let fp of fitnessPrograms" [fitnessProgram]="fp"
-        (click)="routeToPage(fp)"></fitness-program-card>
+<div 
+        infiniteScroll 
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="10"
+        class="programs h-cont wrap fg-1 fb-0">
+        <fitness-program-card 
+                class="v-cont" 
+                #cardRef 
+                *ngFor="let fp of fitnessPrograms" [fitnessProgram]="fp"
+                (click)="routeToPage(fp)"></fitness-program-card>
+</div>

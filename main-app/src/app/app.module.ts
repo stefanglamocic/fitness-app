@@ -8,6 +8,7 @@ import { DropdownMenuComponent } from './header/dropdown-menu/dropdown-menu.comp
 import { NewsFeedComponent } from './home/news-feed/news-feed.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { FitnessProgramsViewComponent } from './home/fitness-programs-view/fitness-programs-view.component';
 import { HomeComponent } from './home/home.component';
@@ -16,6 +17,9 @@ import { FitnessProgramDetailsComponent } from './fitness-program-details/fitnes
 import { CommentComponent } from './fitness-program-details/comment/comment.component';
 import { DailyExercisesComponent } from './daily-exercises/daily-exercises.component';
 import { ExerciseComponent } from './daily-exercises/exercise/exercise.component'; 
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,14 +33,18 @@ import { ExerciseComponent } from './daily-exercises/exercise/exercise.component
     FitnessProgramDetailsComponent,
     CommentComponent,
     DailyExercisesComponent,
-    ExerciseComponent
+    ExerciseComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    InfiniteScrollModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,12 @@
+.programs {
+    padding: 2.4rem 5rem;
+    gap: 3.1rem;
+    justify-content: space-evenly;
+    overflow-y: scroll;
+    height: 
+        calc(100vh - var(--hdr-height) - 110px);
+}
+
 fitness-program-card {
     border: 2px solid var(--clr-primary);
     flex-basis: 380px;

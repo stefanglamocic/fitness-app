@@ -4,14 +4,4 @@ app-root {
     height: 100vh;
 }
 
-home {
-    height: 100%;
-}
-
-html, body { height: 100%; }
-
-fitness-program-details {
-    padding: 1.4rem;
-    gap: .9rem;
-    overflow-y: scroll;
-}
+html, body { height: 100%;}
