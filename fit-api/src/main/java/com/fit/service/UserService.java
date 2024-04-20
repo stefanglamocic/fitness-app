@@ -28,4 +28,16 @@ public class UserService {
 		
 		return json;
 	}
+	
+	public User updateUser(User other) {
+		User user = userRepository.findByUsername(other.getUsername());
+		user.setName(other.getName());
+		user.setSurname(other.getSurname());
+		user.setCity(other.getCity());
+		user.setMail(other.getMail());
+		if (other.getPassword() != null && !"".equals(other.getPassword()))
+			user.setPassword(other.getPassword());
+		
+		return userRepository.save(user);
+	}
 }

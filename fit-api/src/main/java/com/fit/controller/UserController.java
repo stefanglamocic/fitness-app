@@ -7,6 +7,7 @@ import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,9 +47,14 @@ public class UserController {
 		return userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 	}
 	
-	@PostMapping("create")
+	@PostMapping("add")
 	public User createProfile(@RequestBody User user) {
 		return userRepo.save(user);
+	}
+	
+	@PutMapping("update")
+	public User updateProfile(@RequestBody User user) {
+		return userService.updateUser(user);
 	}
 	
 	@GetMapping("{username}/inbox")

@@ -26,6 +26,7 @@
         <a dd-header
             [routerLink]="userLoggedIn() ? ['/user-form'] : ['/login']" 
             class="icon btn-link btn-user f-3 clr-text">
+            <span class="f-2 m-2">{{ getUsername() }}</span>
         </a>
         <ul class="dropdown-options">
             <ng-container 
@@ -40,6 +41,5 @@
                 <li><a routerLink="/user-form">Napravi profil</a></li>
             </ng-template>
         </ul>
-        <span userName class="m-1">{{ getUsername() }}</span>
     </dropdown-menu>
 </div>
