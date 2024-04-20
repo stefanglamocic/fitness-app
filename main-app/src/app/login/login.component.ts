@@ -3,7 +3,7 @@ import { UserService } from '../service/user.service';
 import { Subscription, config, filter, finalize } from 'rxjs';
 import { User } from 'src/interfaces/user.interface';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -36,8 +36,16 @@ export class LoginComponent implements OnInit, OnDestroy{
       .pipe(
         finalize(() => {
           form.reset();
-          if (this.currentUser)
+          if (this.currentUser && this.currentUser.activated) {
             this.router.navigate(['/']);
+          }
+          else if (this.currentUser && !this.currentUser.activated) {
+            this.currentUser = null;
+            this.snackBar
+              .open('Vaš korisnički profil nije aktiviran.', '', {
+                duration: 4000
+              });
+          }
           else
             this.snackBar
               .open('Pogrešni kredencijali, pokušajte ponovo.', '', {

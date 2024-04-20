@@ -11,23 +11,36 @@ import { Title } from '@angular/platform-browser';
 })
 export class DynamicUserFormComponent implements OnInit{
   edit: boolean = false;
-  user!: User | null;
+  user: User = {
+    name: '',
+    surname: '',
+    username: '',
+    city: '',
+    mail: '',
+    activated: false,
+    userType: 'F'
+  };
+  private defaultData: User = {...this.user};
 
   constructor(private userService: UserService,
     private title: Title){
-    if (userService.loggedIn){
+    if (userService.loggedIn && userService.currentUser){
       this.edit = true;
       this.user = userService.currentUser;
+      this.defaultData = {...this.user};
     }
   }
 
   ngOnInit(): void {
-    if (this.edit)
-      this.title.setTitle('Uredi profil');
-    else
-      this.title.setTitle('Novi profil');
+    this.edit ? this.title.setTitle('Uredi profil') : this.title.setTitle('Novi profil');  
   }
 
-  submit(form: NgForm): void {}
+  reset(): void {
+    this.user = {...this.defaultData};
+  }
+
+  submit(form: NgForm): void {
+    console.log(this.user);
+  }
 
 }

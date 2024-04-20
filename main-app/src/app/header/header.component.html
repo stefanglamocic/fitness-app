@@ -7,7 +7,7 @@
             routerLink="/home" 
             routerLinkActive="activated">
                 Početna</a></li>
-        <li><a 
+        <li *ngIf="userLoggedIn()"><a 
             routerLink="/daily-exercises" 
             routerLinkActive="activated">
                 Dnevni prijedlozi</a></li>
@@ -24,7 +24,7 @@
 
     <dropdown-menu>
         <a dd-header
-            routerLink="/user-form" 
+            [routerLink]="userLoggedIn() ? ['/user-form'] : ['/login']" 
             class="icon btn-link btn-user f-3 clr-text">
         </a>
         <ul class="dropdown-options">
@@ -32,6 +32,7 @@
                 *ngIf="userLoggedIn(); then loggedIn else loggedOut">
             </ng-container>
             <ng-template #loggedIn>
+                <li><a routerLink="/user-form">Moj profil</a></li>
                 <li><a (click)="logout()">Odjavi se</a></li>
             </ng-template>
             <ng-template #loggedOut>

@@ -17,7 +17,8 @@ export class FitnessProgramDetailsComponent implements OnInit{
   fitnessProgram: FitnessProgram = {
     id: this.id,
     name: 'Nepoznato',
-    price: 0
+    price: 0,
+    hidden: false
   };
 
   constructor(private route: ActivatedRoute,

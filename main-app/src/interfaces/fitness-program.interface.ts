@@ -7,6 +7,7 @@ export interface FitnessProgram {
     id: number;
     name: string;
     price: number;
+    hidden: boolean;
     description?: string;
     images?: Array<{ path: string }>;
     difficultyLevel?: string;

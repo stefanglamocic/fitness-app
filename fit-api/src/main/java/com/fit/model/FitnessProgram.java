@@ -29,6 +29,7 @@ public class FitnessProgram {
 	private String difficultyLevel;
 	private Double duration;
 	private String location;
+	private Boolean hidden;
 	@OneToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
@@ -59,7 +60,7 @@ public class FitnessProgram {
 	}
 
 	public FitnessProgram(Integer id, String name, String description, Double price, String difficultyLevel, Double duration,
-			String location) {
+			String location, Boolean hidden) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -68,6 +69,7 @@ public class FitnessProgram {
 		this.difficultyLevel = difficultyLevel;
 		this.duration = duration;
 		this.location = location;
+		this.hidden = hidden;
 	}
 
 	public Integer getId() {
@@ -164,6 +166,14 @@ public class FitnessProgram {
 
 	public List<Participation> getParticipations() {
 		return participations;
+	}
+
+	public Boolean getHidden() {
+		return hidden;
+	}
+
+	public void setHidden(Boolean hidden) {
+		this.hidden = hidden;
 	}
 
 	@Override

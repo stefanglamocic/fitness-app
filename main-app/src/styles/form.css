@@ -1,9 +1,20 @@
 .bg-img {
     background-color: var(--clr-secondary);
-    background-image: url(img/5.jpg);
     background-size: cover;
     background-position: center;
     background-blend-mode: soft-light;
+}
+
+.bg-1 {
+    background-image: url(img/5.jpg);
+}
+
+.bg-2 {
+    background-image: url(img/4.jpg);
+}
+
+.bg-3 {
+    background-image: url(img/2.jpg);
 }
 
 .form-cont {

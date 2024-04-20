@@ -1,4 +1,5 @@
-<div class="content v-cont  maina-center crossa-center">
+<div class="content v-cont  maina-center crossa-center bg-img"
+    [ngClass]="edit ? 'bg-3' : 'bg-2'">
     <div class="form-cont v-cont crossa-center">
         <p class="form-title m-4" *ngIf="edit; else otherTitle">Uredi profil</p>
         <ng-template #otherTitle>
@@ -20,7 +21,8 @@
                         type="text" 
                         id="name" 
                         name="name" 
-                        required>
+                        required
+                        [(ngModel)]="user.name">
                 </div>
 
                 <div class="v-cont form-group">
@@ -30,7 +32,8 @@
                         type="text" 
                         id="surname" 
                         name="surname" 
-                        required>
+                        required
+                        [(ngModel)]="user.surname">
                 </div>
             </div>
 
@@ -44,19 +47,21 @@
                     id="username" 
                     name="username"
                     required
-                    [disabled]="edit">
+                    [disabled]="edit"
+                    [(ngModel)]="user.username">
             </div>
 
             <div class="v-cont form-group">
                 <label class="form-label" for="password">
-                    Lozinka
+                    {{ edit ? 'Nova lozinka' : 'Lozinka' }}
                    </label>
                 <input 
                     class="form-input" 
                     type="password" 
                     id="password" 
                     name="password"
-                    required>
+                    required
+                    [(ngModel)]="user.password">
             </div>
 
             <div class="h-cont h-gap">
@@ -66,7 +71,8 @@
                         class="form-input" 
                         type="text" 
                         id="city" 
-                        name="city">
+                        name="city"
+                        [(ngModel)]="user.city">
                 </div>
 
                 <div class="v-cont form-group">
@@ -76,25 +82,21 @@
                         type="email" 
                         id="mail" 
                         name="mail" 
-                        required>
+                        required
+                        [(ngModel)]="user.mail">
                 </div>
             </div>
         
         </form>
 
         <div class="h-cont btn-cont">
-            <button class="btn-style btn-small m-2 bg-secondary">Poništi</button>
+            <button class="btn-style btn-medium m-2 bg-secondary"
+                (click)="reset()">Poništi</button>
             <button 
-                class="btn-style btn-small m-2 bg-accent"
-                *ngIf="edit; else submitBtn">
-                    Sačuvaj
+                class="btn-style btn-medium m-2 bg-accent"
+                form="dynamicForm">
+                    {{ edit ? 'Sačuvaj' : 'Napravi profil' }}
             </button>
-            <ng-template #submitBtn>
-                <button 
-                    class="btn-style btn-small m-2 bg-accent">
-                    Napravi profil
-                </button>
-            </ng-template>
         </div>
 
     </div>

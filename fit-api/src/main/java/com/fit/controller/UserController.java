@@ -46,6 +46,11 @@ public class UserController {
 		return userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 	}
 	
+	@PostMapping("create")
+	public User createProfile(@RequestBody User user) {
+		return userRepo.save(user);
+	}
+	
 	@GetMapping("{username}/inbox")
 	public MappingJacksonValue getUserInbox(@PathVariable String username) {
 		FilterProvider filterProvider = new SimpleFilterProvider()

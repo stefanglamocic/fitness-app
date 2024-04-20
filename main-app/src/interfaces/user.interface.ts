@@ -6,4 +6,5 @@ export interface User {
     city: string;
     mail: string;
     activated: boolean;
+    password?: string;
 }

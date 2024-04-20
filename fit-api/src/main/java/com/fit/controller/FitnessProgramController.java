@@ -21,7 +21,7 @@ import com.fit.repo.FitnessProgramRepository;
 @RestController
 @RequestMapping(path = "/api/fitness-programs")
 public class FitnessProgramController {
-	private static final String[] includeProperties = {"id", "name", "price", "images"};
+	private static final String[] includeProperties = {"id", "name", "price", "images", "hidden"};
 	
 	@Autowired
 	FitnessProgramRepository fitnessProgramRepo;
@@ -33,7 +33,7 @@ public class FitnessProgramController {
 						SimpleBeanPropertyFilter.filterOutAllExcept(includeProperties));
 		
 		MappingJacksonValue json = new MappingJacksonValue(
-				fitnessProgramRepo.findAll());
+				fitnessProgramRepo.findByHiddenFalse());
 		json.setFilters(filterProvider);
 		
 		return json;
