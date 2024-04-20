@@ -3,6 +3,7 @@ import { UserService } from '../service/user.service';
 import { User } from 'src/interfaces/user.interface';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'dynamic-user-form',
@@ -21,9 +22,13 @@ export class DynamicUserFormComponent implements OnInit{
     userType: 'F'
   };
   private defaultData: User = {...this.user};
+  private sbConfig: MatSnackBarConfig = {
+    duration: 4000
+  };
 
   constructor(private userService: UserService,
-    private title: Title){
+    private title: Title,
+    private snackBar: MatSnackBar){
     if (userService.loggedIn && userService.currentUser){
       this.edit = true;
       this.user = userService.currentUser;
@@ -40,7 +45,19 @@ export class DynamicUserFormComponent implements OnInit{
   }
 
   submit(form: NgForm): void {
-    console.log(this.user);
+    if(!this.edit) {
+      //create profile
+      this.userService.createProfile(this.user).subscribe(
+        {
+          next: (data) => this.snackBar
+            .open(`Kreiran profil korisnika ${data.username}`, '', this.sbConfig),
+          error: (err) => this.snackBar
+            .open('Greška pri kreiranju korisničkog profila', '', this.sbConfig)
+        }
+      );
+
+      form.reset();
+    }
   }
 
 }

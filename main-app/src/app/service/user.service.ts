@@ -32,4 +32,8 @@ export class UserService {
     this.router.navigate(['/']);
   }
 
+  createProfile(user: User): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/create`, user);
+  }
+
 }
