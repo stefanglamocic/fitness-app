@@ -20,6 +20,7 @@ import { ExerciseComponent } from './daily-exercises/exercise/exercise.component
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { DynamicUserFormComponent } from './dynamic-user-form/dynamic-user-form.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FormsModule } from '@angular/forms';
     CommentComponent,
     DailyExercisesComponent,
     ExerciseComponent,
-    LoginComponent
+    LoginComponent,
+    DynamicUserFormComponent
   ],
   imports: [
     BrowserModule,

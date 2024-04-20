@@ -1,0 +1,101 @@
+<div class="content v-cont  maina-center crossa-center">
+    <div class="form-cont v-cont crossa-center">
+        <p class="form-title m-4" *ngIf="edit; else otherTitle">Uredi profil</p>
+        <ng-template #otherTitle>
+            <p class="form-title m-4">Novi profil</p>
+        </ng-template>
+        <div style="flex-grow: 1;"></div>
+
+        <form 
+            class="form v-cont full-width"
+            id="dynamicForm"
+            #dynamicForm="ngForm"
+            (ngSubmit)="submit(dynamicForm)">
+        
+            <div class="h-cont h-gap">
+                <div class="v-cont form-group">
+                    <label class="form-label" for="name">Ime</label>
+                    <input 
+                        class="form-input" 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        required>
+                </div>
+
+                <div class="v-cont form-group">
+                    <label class="form-label" for="surname">Prezime</label>
+                    <input 
+                        class="form-input" 
+                        type="text" 
+                        id="surname" 
+                        name="surname" 
+                        required>
+                </div>
+            </div>
+
+            <div class="v-cont form-group">
+                <label class="form-label" for="username">
+                    Korisničko ime
+                </label>
+                <input 
+                    class="form-input" 
+                    type="text" 
+                    id="username" 
+                    name="username"
+                    required
+                    [disabled]="edit">
+            </div>
+
+            <div class="v-cont form-group">
+                <label class="form-label" for="password">
+                    Lozinka
+                   </label>
+                <input 
+                    class="form-input" 
+                    type="password" 
+                    id="password" 
+                    name="password"
+                    required>
+            </div>
+
+            <div class="h-cont h-gap">
+                <div class="v-cont form-group">
+                    <label class="form-label" for="city">Grad</label>
+                    <input 
+                        class="form-input" 
+                        type="text" 
+                        id="city" 
+                        name="city">
+                </div>
+
+                <div class="v-cont form-group">
+                    <label class="form-label" for="mail">E-mail</label>
+                    <input 
+                        class="form-input" 
+                        type="email" 
+                        id="mail" 
+                        name="mail" 
+                        required>
+                </div>
+            </div>
+        
+        </form>
+
+        <div class="h-cont btn-cont">
+            <button class="btn-style btn-small m-2 bg-secondary">Poništi</button>
+            <button 
+                class="btn-style btn-small m-2 bg-accent"
+                *ngIf="edit; else submitBtn">
+                    Sačuvaj
+            </button>
+            <ng-template #submitBtn>
+                <button 
+                    class="btn-style btn-small m-2 bg-accent">
+                    Napravi profil
+                </button>
+            </ng-template>
+        </div>
+
+    </div>
+</div>

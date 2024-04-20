@@ -23,7 +23,8 @@
     </div>
 
     <dropdown-menu>
-        <a dd-header href="#" 
+        <a dd-header
+            routerLink="/user-form" 
             class="icon btn-link btn-user f-3 clr-text">
         </a>
         <ul class="dropdown-options">
@@ -35,6 +36,7 @@
             </ng-template>
             <ng-template #loggedOut>
                 <li><a routerLink="/login">Prijavi se</a></li>
+                <li><a routerLink="/user-form">Napravi profil</a></li>
             </ng-template>
         </ul>
         <span userName class="m-1">{{ getUsername() }}</span>
