@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FitnessProgramsService } from './service/fitness-programs.service';
-import { Subscription, skip } from 'rxjs';
+import { Subscription, finalize, skip } from 'rxjs';
 import { FitnessProgram } from 'src/interfaces/fitness-program.interface';
 import { Router } from '@angular/router';
 import { InputService } from 'src/app/service/input.service';
@@ -14,6 +14,7 @@ import { FitnessProgramCardComponent } from './fitness-program-card/fitness-prog
 export class FitnessProgramsViewComponent implements OnInit, AfterViewInit, OnDestroy{
   fitnessPrograms: Array<FitnessProgram> = [];
   searchTerm: string = '';
+  contentLoaded: boolean = false;
   private subscriptions: Array<Subscription> = []
 
   @ViewChildren('cardRef')
@@ -37,6 +38,9 @@ export class FitnessProgramsViewComponent implements OnInit, AfterViewInit, OnDe
 
   getFitnessPrograms(): void {
     let subscription = this.fitnessProgramsService.getAll()
+    .pipe(
+      finalize(() => this.contentLoaded = true)
+    )
     .subscribe(
       {
         next: (data) => this.fitnessPrograms = data,

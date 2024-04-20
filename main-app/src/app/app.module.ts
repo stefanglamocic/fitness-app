@@ -9,6 +9,7 @@ import { NewsFeedComponent } from './home/news-feed/news-feed.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { FitnessProgramsViewComponent } from './home/fitness-programs-view/fitness-programs-view.component';
 import { HomeComponent } from './home/home.component';
@@ -45,6 +46,7 @@ import { DynamicUserFormComponent } from './dynamic-user-form/dynamic-user-form.
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     InfiniteScrollModule,
     FormsModule
   ],
