@@ -6,7 +6,8 @@
         <form 
             class="form v-cont full-width"
             id="loginForm"
-            (ngSubmit)="login()">
+            (ngSubmit)="login(loginForm)"
+            #loginForm="ngForm">
 
             <div class="v-cont form-group">
                 <label class="form-label" for="username">

@@ -24,10 +24,19 @@
 
     <dropdown-menu>
         <a dd-header href="#" 
-            class="icon btn-link btn-user f-3 clr-text"></a>
+            class="icon btn-link btn-user f-3 clr-text">
+        </a>
         <ul class="dropdown-options">
-            <li><a routerLink="/login">Prijavi se</a></li>
-            <li><a href="#">Odjavi se</a></li>
+            <ng-container 
+                *ngIf="userLoggedIn(); then loggedIn else loggedOut">
+            </ng-container>
+            <ng-template #loggedIn>
+                <li><a (click)="logout()">Odjavi se</a></li>
+            </ng-template>
+            <ng-template #loggedOut>
+                <li><a routerLink="/login">Prijavi se</a></li>
+            </ng-template>
         </ul>
+        <span userName class="m-1">{{ getUsername() }}</span>
     </dropdown-menu>
 </div>

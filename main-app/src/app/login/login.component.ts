@@ -4,6 +4,7 @@ import { Subscription, config, filter, finalize } from 'rxjs';
 import { User } from 'src/interfaces/user.interface';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'login',
@@ -30,10 +31,11 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  login(): void {
+  login(form: NgForm): void {
     let subscription = this.userService.login(this.userCredentials)
       .pipe(
         finalize(() => {
+          form.reset();
           if (this.currentUser)
             this.router.navigate(['/']);
           else

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { InputService } from '../service/input.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'header',
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit, OnDestroy{
   showSearchBar: boolean = false;
 
   constructor(private router: Router,
-    private inputService: InputService) {}
+    private inputService: InputService,
+    private userService: UserService) {}
 
   ngOnInit(): void {
     this.router.events.subscribe(val => {
@@ -31,6 +33,18 @@ export class HeaderComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     if(this.subscritpion)
       this.subscritpion.unsubscribe();
+  }
+
+  logout(): void {
+    this.userService.logout();
+  }
+
+  userLoggedIn(): boolean {
+    return this.userService.loggedIn;
+  }
+
+  getUsername(): string {
+    return this.userService.currentUser?.username || '';
   }
 
 }
