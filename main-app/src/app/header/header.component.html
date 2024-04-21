@@ -11,6 +11,17 @@
             routerLink="/daily-exercises" 
             routerLinkActive="activated">
                 Dnevni prijedlozi</a></li>
+        <li *ngIf="userLoggedIn()"
+            >
+            <dropdown-menu>
+                <a dd-header href="#">Moji programi</a>
+                <ul class="dropdown-options f-2">
+                    <li><a href="#">Kreirani</a></li>
+                    <li><a href="#">Kupljeni</a></li>
+                    <li><a href="#">Dodaj novi</a></li>
+                </ul>
+            </dropdown-menu>
+        </li>
     </ul>
 
     <!-- spacing -->
@@ -22,7 +33,8 @@
         </div>
     </div>
 
-    <dropdown-menu>
+    <dropdown-menu 
+        [ngClass]="{'cond-dd': !userLoggedIn()}">
         <a dd-header
             [routerLink]="userLoggedIn() ? ['/user-form'] : ['/login']" 
             class="icon btn-link btn-user f-3 clr-text">

@@ -80,6 +80,7 @@ li>a {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: white;
 }
 
 .dropdown > a {
@@ -88,12 +89,14 @@ li>a {
     /*text-align: center;
     line-height: 60px;
     cursor: pointer;*/
-    padding: 20px
+    padding: 20px;
+    color: inherit;
 }
 
 .dropdown-menu {
     position: absolute;
-    right: -20px;
+    left: 0px;
+    right: 0px;
     top: 100%;
     background-color: var(--clr-secondary);
     padding: .75rem 0 .75rem 0;
@@ -103,6 +106,11 @@ li>a {
     transform: translateY(-10px);
     transition: opacity .1s ease-in-out,
         transform .1s ease-in-out;
+    width: 100%;
+}
+
+.cond-dd .dropdown-menu{
+    left: -50px;
     width: max-content;
 }
 
@@ -119,6 +127,8 @@ li>a {
 .dropdown-options>li {
     width: 100%;
     cursor: pointer;
+    font-weight: normal;
+    transition-duration: 0s;
 }
 
 .dropdown-options a {
@@ -129,10 +139,11 @@ li>a {
 
 .dropdown-options>li:hover {
     color: var(--clr-accent);
+    text-decoration: none;
 }
 
 /* media query */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1100px) {
     .nav-toggle-lbl {
         display: flex;
     }
