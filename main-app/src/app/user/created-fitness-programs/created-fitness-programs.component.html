@@ -1,0 +1,26 @@
+<div class="content v-cont table-cont">
+    <button 
+        class="btn-style btn-small m-1 bg-accent icon btn-icon btn-add">
+        Novi program</button>
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>Naziv</th>
+                <th>&nbsp;</th>
+            </tr>
+
+            <!-- fitness programs -->
+            <tr *ngFor="let fp of createdFitnessPrograms">
+                <td style="font-size: 1.1rem;"> {{ fp.name }} </td>
+                <td>
+                    <a 
+                        class="icon btn-link btn-remove clr-red f-2"
+                        style="cursor: pointer;">
+                        <span class="f-2 m-2">Obriši</span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+</div>

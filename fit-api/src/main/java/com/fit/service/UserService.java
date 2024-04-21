@@ -1,5 +1,7 @@
 package com.fit.service;
 
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Service;
@@ -18,13 +20,16 @@ public class UserService {
 	private final FilterProvider simpleFilter = 
 			new SimpleFilterProvider()
 			.addFilter("fitnessProgramFilter",
-					SimpleBeanPropertyFilter.filterOutAllExcept("id", "name"));
+					SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "hidden"));
 	
 	public MappingJacksonValue getCreatedFitnessPrograms(String username) {
 		User user = userRepository.findByUsername(username);
 		
 		MappingJacksonValue json = new MappingJacksonValue(
-				user.getCreatedFitnessPrograms());
+				user.getCreatedFitnessPrograms().stream()
+					.filter(fp -> !fp.getHidden())
+					.collect(Collectors.toList())
+				);
 		json.setFilters(simpleFilter);
 		
 		return json;

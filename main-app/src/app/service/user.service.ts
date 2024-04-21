@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { FitnessProgram } from 'src/interfaces/fitness-program.interface';
 import { User } from 'src/interfaces/user.interface';
 
 @Injectable({
@@ -45,6 +46,11 @@ export class UserService {
 
   updateProfile(user: User): Observable<User> {
     return this.http.put<User>(`${this.baseUrl}/update`, user);
+  }
+
+  getCreatedFitnessPrograms(): Observable<FitnessProgram[]> {
+    return this.http
+      .get<FitnessProgram[]>(`${this.baseUrl}/${this.currentUser?.username}/created-fitness-programs`);
   }
 
 }

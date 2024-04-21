@@ -5,6 +5,8 @@ import { FitnessProgramDetailsComponent } from './fitness-program-details/fitnes
 import { DailyExercisesComponent } from './daily-exercises/daily-exercises.component';
 import { LoginComponent } from './login/login.component';
 import { DynamicUserFormComponent } from './dynamic-user-form/dynamic-user-form.component';
+import { CreatedFitnessProgramsComponent } from './user/created-fitness-programs/created-fitness-programs.component';
+import { FitnessProgramsParticipationsComponent } from './user/fitness-programs-participations/fitness-programs-participations.component';
 
 const routes: Routes = [
   {
@@ -34,6 +36,21 @@ const routes: Routes = [
   {
     path: 'user-form',
     component: DynamicUserFormComponent
+  },
+  {
+    path: 'user',
+    redirectTo: 'user/created-fitness-programs',
+    pathMatch: 'full'
+  },
+  {
+    path: 'user/created-fitness-programs',
+    component: CreatedFitnessProgramsComponent,
+    title: 'Kreirani fitnes programi'
+  },
+  {
+    path: 'user/fitness-programs-participations',
+    component: FitnessProgramsParticipationsComponent,
+    title: 'Kupljeni programi'
   }
 ];
 

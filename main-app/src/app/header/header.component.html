@@ -14,11 +14,12 @@
         <li *ngIf="userLoggedIn()"
             >
             <dropdown-menu>
-                <a dd-header href="#">Moji programi</a>
+                <a dd-header routerLink="/user">Moji programi</a>
                 <ul class="dropdown-options f-2">
-                    <li><a href="#">Kreirani</a></li>
-                    <li><a href="#">Kupljeni</a></li>
-                    <li><a href="#">Dodaj novi</a></li>
+                    <li><a routerLink="/user/created-fitness-programs">
+                        Kreirani</a></li>
+                    <li><a routerLink="/user/fitness-programs-participations">
+                        Kupljeni</a></li>
                 </ul>
             </dropdown-menu>
         </li>
