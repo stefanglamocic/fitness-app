@@ -42,6 +42,11 @@ public class UserController {
 		return userService.getCreatedFitnessPrograms(username);
 	}
 	
+	@GetMapping("{username}/fitness-program-participations")
+	public MappingJacksonValue getFitnessProgramParticipations(@PathVariable String username) {
+		return userService.getFitnessProgramParticipations(username);
+	}
+	
 	@PostMapping("login")
 	public User login(@RequestBody User user) {
 		return userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());

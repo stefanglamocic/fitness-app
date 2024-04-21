@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +19,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.fit.model.Comment;
 import com.fit.model.FitnessProgram;
 import com.fit.repo.FitnessProgramRepository;
+import com.fit.service.FitnessProgramService;
 
 @RestController
 @RequestMapping(path = "/api/fitness-programs")
@@ -24,7 +27,14 @@ public class FitnessProgramController {
 	private static final String[] includeProperties = {"id", "name", "price", "images", "hidden"};
 	
 	@Autowired
-	FitnessProgramRepository fitnessProgramRepo;
+	private FitnessProgramRepository fitnessProgramRepo;
+	@Autowired
+	private FitnessProgramService service;
+	
+	@PostMapping("add")
+	public MappingJacksonValue addFitnessProgram(@RequestBody FitnessProgram fitnessProgram) {
+		return service.addFitnessProgram(fitnessProgram);
+	}
 	
 	@GetMapping
 	public MappingJacksonValue getAll() {

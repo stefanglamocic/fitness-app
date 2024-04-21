@@ -15,16 +15,27 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	private final FilterProvider simpleFilter = 
+			new SimpleFilterProvider()
+			.addFilter("fitnessProgramFilter",
+					SimpleBeanPropertyFilter.filterOutAllExcept("id", "name"));
+	
 	public MappingJacksonValue getCreatedFitnessPrograms(String username) {
 		User user = userRepository.findByUsername(username);
 		
-		FilterProvider filterProvider = new SimpleFilterProvider()
-				.addFilter("fitnessProgramFilter",
-						SimpleBeanPropertyFilter.filterOutAllExcept("id", "name"));
-		
 		MappingJacksonValue json = new MappingJacksonValue(
 				user.getCreatedFitnessPrograms());
-		json.setFilters(filterProvider);
+		json.setFilters(simpleFilter);
+		
+		return json;
+	}
+	
+	public MappingJacksonValue getFitnessProgramParticipations(String username) {
+		User user = userRepository.findByUsername(username);
+		
+		MappingJacksonValue json = new MappingJacksonValue(
+				user.getFitnessProgramParticipations());
+		json.setFilters(simpleFilter);
 		
 		return json;
 	}
