@@ -53,4 +53,9 @@ export class UserService {
       .get<FitnessProgram[]>(`${this.baseUrl}/${this.currentUser?.username}/created-fitness-programs`);
   }
 
+  getFitnessProgramParticipations(): Observable<FitnessProgram[]> {
+    return this.http
+      .get<FitnessProgram[]>(`${this.baseUrl}/${this.currentUser?.username}/fitness-program-participations`);
+  }
+
 }

@@ -39,7 +39,10 @@ public class UserService {
 		User user = userRepository.findByUsername(username);
 		
 		MappingJacksonValue json = new MappingJacksonValue(
-				user.getFitnessProgramParticipations());
+				user.getFitnessProgramParticipations()
+					.stream()
+					.map(participation -> participation.getFitnessProgram())
+					.collect(Collectors.toList()));
 		json.setFilters(simpleFilter);
 		
 		return json;
