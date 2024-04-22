@@ -104,6 +104,22 @@ body {
     gap: 1.2rem;
 }
 
+.p-1 {
+    padding: 0.75rem;
+}
+
+.p-2 {
+    padding: 1.4rem;
+}
+
+.p-3 {
+    padding: 2.8rem;
+}
+
+.p-4 {
+    padding: 4.2rem;
+}
+
 .f-width {
 	width: -webkit-fill-available;
     width: -moz-available;
@@ -172,7 +188,7 @@ body {
 .table-cont {
 	padding: 1.2rem;
 	flex-grow: 1;
-	width: 100%; 
+	width: 80%; 
 	gap: 1.5rem;
 }
 

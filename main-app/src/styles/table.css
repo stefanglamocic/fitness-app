@@ -32,3 +32,7 @@ table td, th {
 table tr:hover:not(tr:first-child) {
     background-color: var(--clr-primary);
 }
+
+.msg-opened {
+	background-color: var(--clr-secondary-hover);
+}

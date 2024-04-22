@@ -1,1 +1,61 @@
-<p>messages works!</p>
+<div class="content v-cont g-3 crossa-center p-2"
+    style="overflow-y: scroll;">
+
+    <div class="v-cont table-cont fg-1">
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>Od</th>
+                    <th>Dana</th>
+                </tr>
+
+                <tr *ngFor="let msg of inbox"
+                    [ngClass]="{'msg-opened': msg.opened}"
+                    (click)="openMessage(msg)">
+                    <td>{{ msg.sender.username }}</td>
+                    <td>{{ msg.timeSent | date : 'd.M.yyyy - H:mm:ss' }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="msg-form crossa-center p-2"
+        style="border-radius: 10px;">
+        <form class="form v-cont full-width fg-1"
+            style="padding-bottom: 0px; height: 100%;"
+            #msgForm="ngForm"
+            (ngSubmit)="sendMessage(msgForm)">
+
+            <div class="v-cont form-group">
+                <label class="form-label" for="username">Kome</label>
+                <input 
+                    class="form-input"
+                    style="width: 30%;" 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    required
+                    [(ngModel)]="messageToSend.receiver.username">
+            </div>
+
+            <div class="v-cont form-group f-width fg-1">
+                <label class="form-label" for="content">Poruka</label>
+                <textarea 
+                    id="content" 
+                    class="form-input fg-1"
+                    style="resize: none;"
+                    required
+                    name="content"
+                    [(ngModel)]="messageToSend.content"></textarea>
+            </div>
+
+            <button 
+                class="btn-style btn-medium m-2 bg-accent"
+                style="width: 110px; align-self: center;"
+                [disabled]="msgForm.invalid">
+                Pošalji
+            </button>
+
+        </form>
+    </div>
+</div>

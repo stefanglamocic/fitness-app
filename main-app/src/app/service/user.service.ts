@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { FitnessProgram } from 'src/interfaces/fitness-program.interface';
+import { MessageInterface } from 'src/interfaces/message.interface';
 import { User } from 'src/interfaces/user.interface';
 
 @Injectable({
@@ -56,6 +57,10 @@ export class UserService {
   getFitnessProgramParticipations(): Observable<FitnessProgram[]> {
     return this.http
       .get<FitnessProgram[]>(`${this.baseUrl}/${this.currentUser?.username}/fitness-program-participations`);
+  }
+
+  getInbox(): Observable<MessageInterface[]> {
+    return this.http.get<MessageInterface[]>(`${this.baseUrl}/${this.currentUser?.username}/inbox`);
   }
 
 }

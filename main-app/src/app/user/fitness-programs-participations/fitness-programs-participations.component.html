@@ -1,29 +1,29 @@
-<div class="content v-cont table-cont">
+<div class="content v-cont p-2 crossa-center">
+    <div class="v-cont table-cont">
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Završen</th>
+                </tr>
     
-    <div class="table-wrapper">
-        <table>
-            <tr>
-                <th>Naziv</th>
-                <th>Završen</th>
-            </tr>
-
-            <!-- fitness programs -->
-            <tr *ngFor="let fp of fitnessPrograms">
-                <td style="font-size: 1.1rem;"> {{ fp.name }} </td>
-                <td>
-                    <input 
-                        type="checkbox" 
-                        class="btn-check" 
-                        [id]="fp.id" 
-                        disabled
-                        [checked]="fp.hidden">
-                    <label [for]="fp.id" 
-                        class="icon clr-text check-lbl"
-                        style="cursor: auto;"></label>
-                </td>
-            </tr>
-        </table>
-    </div>
-    
+                <!-- fitness programs -->
+                <tr *ngFor="let fp of fitnessPrograms">
+                    <td style="font-size: 1.1rem;"> {{ fp.name }} </td>
+                    <td>
+                        <input 
+                            type="checkbox" 
+                            class="btn-check" 
+                            [id]="fp.id" 
+                            disabled
+                            [checked]="fp.hidden">
+                        <label [for]="fp.id" 
+                            class="icon clr-text check-lbl"
+                            style="cursor: auto;"></label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>    
 </div>
 

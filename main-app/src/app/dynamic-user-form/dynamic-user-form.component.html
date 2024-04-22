@@ -94,7 +94,8 @@
                 (click)="reset()">Poništi</button>
             <button 
                 class="btn-style btn-medium m-2 bg-accent"
-                form="dynamicForm">
+                form="dynamicForm"
+                [disabled]="dynamicForm.invalid">
                     {{ edit ? 'Sačuvaj' : 'Napravi profil' }}
             </button>
         </div>

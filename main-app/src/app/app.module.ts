@@ -23,7 +23,6 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { DynamicUserFormComponent } from './dynamic-user-form/dynamic-user-form.component';
 import { CreatedFitnessProgramsComponent } from './user/created-fitness-programs/created-fitness-programs.component';
-import { AddFitnessProgramComponent } from './user/add-fitness-program/add-fitness-program.component';
 import { FitnessProgramsParticipationsComponent } from './user/fitness-programs-participations/fitness-programs-participations.component';
 import { MessagesComponent } from './user/messages/messages.component';
 
@@ -43,7 +42,6 @@ import { MessagesComponent } from './user/messages/messages.component';
     LoginComponent,
     DynamicUserFormComponent,
     CreatedFitnessProgramsComponent,
-    AddFitnessProgramComponent,
     FitnessProgramsParticipationsComponent,
     MessagesComponent
   ],
