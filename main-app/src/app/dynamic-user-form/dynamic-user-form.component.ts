@@ -52,7 +52,13 @@ export class DynamicUserFormComponent implements OnInit, OnDestroy{
   }
 
   submit(form: NgForm): void {
+    if (form.invalid){
+      this.snackBar.open('Nepravilno popunjena forma', '', this.sbConfig);
+      return;
+    }
+    
     let sub;
+
     if(!this.edit) {
       //create profile
       sub = this.userService.createProfile(this.user).subscribe(

@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +32,12 @@ public class FitnessProgramController {
 	private FitnessProgramRepository fitnessProgramRepo;
 	@Autowired
 	private FitnessProgramService service;
+	
+	
+	@GetMapping("{id}/images")
+	public ResponseEntity<List<byte[]>> getImages(@PathVariable Integer id) {
+		return service.getImages(id);
+	}
 	
 	@PostMapping("add")
 	public MappingJacksonValue addFitnessProgram(@RequestBody FitnessProgram fitnessProgram) {
@@ -65,4 +73,12 @@ public class FitnessProgramController {
         json.setFilters(filterProvider);
         return json;
 	}
+	
+	@DeleteMapping("{id}")
+	public void deleteFitnessProgram(@PathVariable Integer id) {
+		FitnessProgram program = fitnessProgramRepo.findById(id).get();
+		program.setHidden(true);
+		fitnessProgramRepo.save(program);
+	}
+	
 }

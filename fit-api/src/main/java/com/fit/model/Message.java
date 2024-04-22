@@ -3,33 +3,35 @@ package com.fit.model;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @JsonFilter("messageFilter")
 @Entity
+@IdClass(MessageId.class)
 public class Message {
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "sender", 
 			referencedColumnName = "username")
 	private User sender;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "receiver", 
 			referencedColumnName = "username")
 	private User receiver;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private LocalDateTime timeSent;
 	private String content;
-	private Boolean opened;
+	private Boolean opened = false;
 	
 	public Message() {
 		super();

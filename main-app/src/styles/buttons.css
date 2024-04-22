@@ -101,6 +101,15 @@
     display: none;
 }
 
+.btn-upload::before {
+    content: var(--icn-upload);
+    cursor: pointer;
+}
+
+.btn-mail::before {
+    content: var(--icn-mail);
+}
+
 .check-lbl {
     cursor: pointer;
 }
@@ -111,4 +120,12 @@
 
 .check-lbl::before {
     content: var(--icn-false);
+}
+
+.lbl-to-btn {
+    appearance: button;
+    -moz-appearance: button;
+    -webkit-appearance: button;
+    text-align: center;
+    line-height: 1.7rem;
 }

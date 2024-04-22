@@ -16,6 +16,8 @@
     --icn-true: '\f00c';
     --icn-false: '\f00d';
     --icn-user: '\f007';
+    --icn-upload: '\f574';
+    --icn-mail: '\f0e0';
 
     --hdr-height: 60px;
 }
@@ -88,6 +90,23 @@ body {
 
 .fg-4 {
     flex-grow: 4;
+}
+
+.g-1 {
+    gap: 0.3rem;
+}
+
+.g-2 {
+    gap: 0.7rem;
+}
+
+.g-3 {
+    gap: 1.2rem;
+}
+
+.f-width {
+	width: -webkit-fill-available;
+    width: -moz-available;
 }
 
 .clr-primary {

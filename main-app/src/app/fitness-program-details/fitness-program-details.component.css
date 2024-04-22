@@ -11,6 +11,7 @@ h1 {
 }
 
 .image {
+    position: relative;
     text-align: center;
     width: 65%;
 }
@@ -95,4 +96,31 @@ span {
 
 .indent {
     margin-left: 15px;
+}
+
+.gallery-btn {
+    position: absolute;
+    cursor: pointer; 
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    padding: .4rem;
+    border-radius: 50%;
+    opacity: 40%;
+    border: 0;
+    color: var(--clr-primary);
+    background-color: var(--clr-accent);
+}
+
+.gallery-btn:active{
+    color: var(--clr-primary-dark);
+    background-color: var(--clr-accent-hover);
+}
+
+.l-btn {
+    left: 10px;
+}
+
+.r-btn {
+    right: 10px;
 }

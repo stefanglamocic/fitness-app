@@ -18,4 +18,8 @@ export class FitnessProgramsService {
   getFitnessProgram(id: number): Observable<FitnessProgram> {
     return this.http.get<FitnessProgram>(`${this.fitnessProgramsUrl}/${id}`);
   }
+
+  removeFitnessProgram(id: number): Observable<any>{
+    return this.http.delete(`${this.fitnessProgramsUrl}/${id}`);
+  }
 }

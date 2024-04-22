@@ -60,7 +60,7 @@
                     type="password" 
                     id="password" 
                     name="password"
-                    required
+                    [required]="!edit"
                     [(ngModel)]="user.password">
             </div>
 

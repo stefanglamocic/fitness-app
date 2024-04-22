@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { DynamicUserFormComponent } from './dynamic-user-form/dynamic-user-form.component';
 import { CreatedFitnessProgramsComponent } from './user/created-fitness-programs/created-fitness-programs.component';
 import { FitnessProgramsParticipationsComponent } from './user/fitness-programs-participations/fitness-programs-participations.component';
+import { MessagesComponent } from './user/messages/messages.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,11 @@ const routes: Routes = [
     path: 'user/fitness-programs-participations',
     component: FitnessProgramsParticipationsComponent,
     title: 'Kupljeni programi'
+  },
+  {
+    path: 'user/messages',
+    component: MessagesComponent,
+    title: 'Poruke'
   }
 ];
 

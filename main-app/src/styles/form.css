@@ -74,3 +74,7 @@
 .form-input:focus {
     outline: 2px solid var(--clr-accent);
 }
+
+textarea {
+    resize: vertical;
+}

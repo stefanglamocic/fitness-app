@@ -23,7 +23,13 @@
 
     <!-- images -->
     <div class="image">
-        <img [src]="fitnessProgram.images?.[0]?.path">
+        <img [src]="fitnessProgram.images?.[image]?.path">
+        <button 
+            class="gallery-btn l-btn f-2"
+            (click)="cycleImages(-1)">&lt;</button>
+        <button 
+            class="gallery-btn r-btn f-2"
+            (click)="cycleImages()">&gt;</button>
     </div>
 
     <!-- info -->

@@ -5,14 +5,16 @@ import { FitnessProgram } from 'src/interfaces/fitness-program.interface';
 import { CommentInterface } from 'src/interfaces/comment.interface';
 import { Title } from '@angular/platform-browser';
 import { finalize } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'fitness-program-details',
   templateUrl: './fitness-program-details.component.html',
   styleUrls: ['./fitness-program-details.component.css']
 })
-export class FitnessProgramDetailsComponent implements OnInit{
+export class FitnessProgramDetailsComponent implements OnInit {
   id: number = 0;
+  image: number = 0;
 
   fitnessProgram: FitnessProgram = {
     id: this.id,
@@ -22,8 +24,9 @@ export class FitnessProgramDetailsComponent implements OnInit{
   };
 
   constructor(private route: ActivatedRoute,
-    private title: Title, 
-    private fitnessProgramsService: FitnessProgramsService) {
+    private title: Title,
+    private fitnessProgramsService: FitnessProgramsService,
+    private http: HttpClient) {
     this.id = Number(this.route.snapshot.params['id']);
   }
 
@@ -34,7 +37,9 @@ export class FitnessProgramDetailsComponent implements OnInit{
   getDetails(): void {
     this.fitnessProgramsService.getFitnessProgram(this.id)
       .pipe(
-        finalize(() => this.title.setTitle(this.fitnessProgram.name))
+        finalize(() => {
+          this.title.setTitle(this.fitnessProgram.name);
+        })
       )
       .subscribe(
         {
@@ -57,5 +62,12 @@ export class FitnessProgramDetailsComponent implements OnInit{
     }
 
     return temp;
+  }
+  
+  cycleImages(direction: number = 1): void {
+    let length = 0;
+    if (this.fitnessProgram.images?.length)
+      length = this.fitnessProgram.images.length;
+    this.image = ((this.image + direction) < 0 ? length - 1 : this.image + direction) % length;
   }
 }

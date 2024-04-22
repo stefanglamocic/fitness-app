@@ -1,6 +1,7 @@
 <div class="content v-cont table-cont">
     <button 
-        class="btn-style btn-small m-1 bg-accent icon btn-icon btn-add">
+        class="btn-style btn-small m-1 bg-accent icon btn-icon btn-add"
+        (click)="showModal(modal)">
         Novi program</button>
     <div class="table-wrapper">
         <table>
@@ -15,7 +16,8 @@
                 <td>
                     <a 
                         class="icon btn-link btn-remove clr-red f-2"
-                        style="cursor: pointer;">
+                        style="cursor: pointer;"
+                        (click)="deleteProgram(fp.id)">
                         <span class="f-2 m-2">Obriši</span>
                     </a>
                 </td>
@@ -24,3 +26,114 @@
     </div>
     
 </div>
+
+<dialog class="modal" #modal>
+    <h2 class="modal-title">Novi fitnes program</h2>
+
+    <form 
+        class="form v-cont modal-form"
+        id="fpForm"
+        #fpForm="ngForm"
+        >
+
+        <div class="v-cont form-group">
+            <label class="form-label" for="fpName">Naziv</label>
+            <input 
+                class="form-input" 
+                type="text" 
+                name="fpName" 
+                id="fpName" 
+                required
+                [(ngModel)]="newFitnessProgram.name">
+        </div>
+
+        <div class="h-cont h-gap">
+            <div class="v-cont form-group">
+                <label class="form-label" for="price">Cijena</label>
+                <input 
+                    class="form-input" 
+                    type="text"
+                    name="price"
+                    id="price"
+                    pattern="\d+(\.\d+)?"
+                    [(ngModel)]="newFitnessProgram.price">
+            </div>
+
+            <div class="v-cont form-group">
+                <label class="form-label" for="duration">Trajanje</label>
+                <input 
+                    class="form-input" 
+                    type="text"
+                    name="duration"
+                    id="duration"
+                    [(ngModel)]="newFitnessProgram.duration">
+            </div>
+        </div>
+
+        <div class="h-cont h-gap">
+
+            <div class="v-cont form-group">
+                <label class="form-label" for="difficulty">Težina</label>
+                <input 
+                    class="form-input" 
+                    type="text"
+                    name="difficulty"
+                    id="difficulty"
+                    [(ngModel)]="newFitnessProgram.difficultyLevel">
+            </div>
+
+            <div class="v-cont form-group">
+                <label class="form-label" for="location">Lokacija</label>
+                <input 
+                    class="form-input" 
+                    type="text"
+                    name="location"
+                    id="location"
+                    [(ngModel)]="newFitnessProgram.location">
+            </div>
+
+        </div>
+
+        <div class="h-cont h-gap">
+
+            <div class="v-cont form-group fg-1">
+                <label for="category" class="form-label">Kategorija</label>
+                    <div class="custom-select">
+                        <select id="category" name="category" >
+                        </select>
+                    </div>
+            </div>
+
+            <div class="v-cont form-group fg-1">
+                <label for="instructor" class="form-label">Instruktor</label>
+                    <div class="custom-select">
+                        <select id="instructor" name="instructor" >
+                        </select>
+                    </div>
+            </div>
+
+        </div>
+
+        <div class="v-cont form-group f-width">
+			<label class="form-label" for="description">Opis</label>
+			<textarea id="description" class="form-input"></textarea>
+		</div>
+
+        <div class="h-cont maina-center f-width g-2">
+			<label for="attachment" class="lbl-to-btn btn-style btn-small bg-secondary icon btn-icon btn-upload">Prikači datoteku</label>
+			<input type="file" id="attachment" name="attachment" accept="image/*" hidden>
+        </div>
+
+    </form>
+
+    <div class="h-cont btn-cont m-3 crossa-center">
+		<button class="btn-style btn-small m-2 bg-secondary" id="btnCancel"
+            (click)="reset(fpForm, modal)">Poništi</button>
+		<button 
+            class="btn-style btn-small m-2 bg-accent" 
+            id="btnSave"
+            form="fpForm"
+            (click)="add(fpForm, modal)">Dodaj</button>
+	</div>
+
+</dialog>
