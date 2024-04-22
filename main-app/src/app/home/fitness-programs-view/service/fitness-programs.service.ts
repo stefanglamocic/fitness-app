@@ -11,8 +11,9 @@ export class FitnessProgramsService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<FitnessProgram[]> {
-    return this.http.get<FitnessProgram[]>(this.fitnessProgramsUrl);
+  getAll(offset: number = 0, items: number = 10): Observable<FitnessProgram[]> {
+    return this.http
+      .get<FitnessProgram[]>(`${this.fitnessProgramsUrl}?offset=${offset}&items=${items}`);
   }
 
   getFitnessProgram(id: number): Observable<FitnessProgram> {

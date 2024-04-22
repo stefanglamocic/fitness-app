@@ -3,11 +3,8 @@
         *ngIf="!contentLoaded">
 </mat-progress-bar>
 <div 
-        infiniteScroll 
-        [infiniteScrollDistance]="2"
-        [infiniteScrollThrottle]="10"
-        class="programs h-cont wrap fg-1 fb-0">
-
+        class="programs h-cont wrap fg-1 fb-0"
+        (scroll)="onScroll($event)">
         <fitness-program-card 
                 class="v-cont" 
                 #cardRef 

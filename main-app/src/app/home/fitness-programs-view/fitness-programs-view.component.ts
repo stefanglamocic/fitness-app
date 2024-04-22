@@ -15,6 +15,9 @@ export class FitnessProgramsViewComponent implements OnInit, AfterViewInit, OnDe
   fitnessPrograms: Array<FitnessProgram> = [];
   searchTerm: string = '';
   contentLoaded: boolean = false;
+  dataEnd: boolean = false;
+  offset: number = 0;
+  private readonly itemsNumber = 12;
   private subscriptions: Array<Subscription> = []
 
   @ViewChildren('cardRef')
@@ -25,7 +28,7 @@ export class FitnessProgramsViewComponent implements OnInit, AfterViewInit, OnDe
     private inputService: InputService) {}
 
   ngOnInit(): void {
-    this.getFitnessPrograms();
+    this.getFitnessPrograms(0, this.itemsNumber);
     this.getSearchTerm();
   }
 
@@ -36,14 +39,20 @@ export class FitnessProgramsViewComponent implements OnInit, AfterViewInit, OnDe
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  getFitnessPrograms(): void {
-    let subscription = this.fitnessProgramsService.getAll()
+  getFitnessPrograms(offset: number, items: number): void {
+    this.contentLoaded = false;
+    let subscription = this.fitnessProgramsService.getAll(offset, items)
     .pipe(
       finalize(() => this.contentLoaded = true)
     )
     .subscribe(
       {
-        next: (data) => this.fitnessPrograms = data,
+        next: (data) => {
+          this.fitnessPrograms = this.fitnessPrograms.concat(data);
+          this.offset += items;
+          if (data.length < this.itemsNumber)
+            this.dataEnd = true;
+        },
         error: (err) => console.log(err)
       }
     );
@@ -58,7 +67,8 @@ export class FitnessProgramsViewComponent implements OnInit, AfterViewInit, OnDe
       )
       .subscribe(msg => {
         this.searchTerm = msg;
-        this.filterCards();
+        this.loadAllData()
+          .then(() => this.filterCards());
       });
 
     this.subscriptions.push(sub);
@@ -81,4 +91,23 @@ export class FitnessProgramsViewComponent implements OnInit, AfterViewInit, OnDe
   routeToPage(fitnessProgram: FitnessProgram): void {
     this.router.navigate(['fitness-program', fitnessProgram.id]);
   }
+
+  onScroll(event: any): void {
+    if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight
+        && !this.dataEnd) {
+      this.getFitnessPrograms(this.offset, this.itemsNumber);
+    }
+  }
+
+  async loadAllData(): Promise<void> {
+    while(!this.dataEnd) {
+      let temp = this.offset;
+      await new Promise<void>((resolve, reject) => {
+        this.getFitnessPrograms(this.offset, this.itemsNumber);
+        if (this.offset > temp)
+          resolve();
+      });
+    }
+  }
+
 }

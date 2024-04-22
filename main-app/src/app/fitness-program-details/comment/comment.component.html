@@ -4,4 +4,21 @@
     <div style="margin-top: .5rem;">
         {{ comment.content }}
     </div>
+    <a 
+        style="align-self: flex-end;
+            color: var(--clr-accent);
+            cursor: pointer;"
+            (click)="toggleReplyForm()">
+        {{ showReplyForm ? '[Zatvori]' : '[Odgovori]'}}</a>
+
+    <form 
+        class="v-cont g-2 p-1"
+        *ngIf="showReplyForm">
+        <textarea name="text" id="text" placeholder="Odgovor..." 
+            style="resize: none; height: 90px;"></textarea>
+
+        <button class="btn-style btn-small bg-accent" style="align-self: flex-end;">
+            Postavi
+        </button>
+    </form>
 </div>

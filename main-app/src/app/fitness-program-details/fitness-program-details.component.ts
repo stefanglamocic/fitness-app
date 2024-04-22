@@ -6,6 +6,7 @@ import { CommentInterface } from 'src/interfaces/comment.interface';
 import { Title } from '@angular/platform-browser';
 import { finalize } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'fitness-program-details',
@@ -26,6 +27,7 @@ export class FitnessProgramDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private title: Title,
     private fitnessProgramsService: FitnessProgramsService,
+    private userService: UserService,
     private http: HttpClient) {
     this.id = Number(this.route.snapshot.params['id']);
   }
@@ -69,5 +71,9 @@ export class FitnessProgramDetailsComponent implements OnInit {
     if (this.fitnessProgram.images?.length)
       length = this.fitnessProgram.images.length;
     this.image = ((this.image + direction) < 0 ? length - 1 : this.image + direction) % length;
+  }
+
+  userLoggedIn(): boolean {
+    return this.userService.loggedIn;
   }
 }
