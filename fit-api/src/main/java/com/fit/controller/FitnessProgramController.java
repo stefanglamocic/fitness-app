@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ser.FilterProvider;
@@ -45,13 +46,13 @@ public class FitnessProgramController {
 	}
 	
 	@GetMapping
-	public MappingJacksonValue getAll() {
+	public MappingJacksonValue getItems(@RequestParam(defaultValue = "10") int items,
+			@RequestParam(defaultValue="0") int offset) {
 		FilterProvider filterProvider = new SimpleFilterProvider()
 				.addFilter("fitnessProgramFilter", 
 						SimpleBeanPropertyFilter.filterOutAllExcept(includeProperties));
-		
 		MappingJacksonValue json = new MappingJacksonValue(
-				fitnessProgramRepo.findByHiddenFalse());
+				fitnessProgramRepo.findByItemCountAndOffset(items, offset));
 		json.setFilters(filterProvider);
 		
 		return json;
