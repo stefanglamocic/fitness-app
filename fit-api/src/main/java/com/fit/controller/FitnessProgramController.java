@@ -2,6 +2,7 @@ package com.fit.controller;
 
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,11 @@ public class FitnessProgramController {
 		FitnessProgram program = fitnessProgramRepo.findById(id).get();
 		program.setHidden(true);
 		fitnessProgramRepo.save(program);
+	}
+	
+	@PostMapping("{id}/comment")
+	public MappingJacksonValue postComment(@PathVariable int id, @RequestBody Map<String, Comment> body) {
+		return service.postComment(id, body);
 	}
 	
 }

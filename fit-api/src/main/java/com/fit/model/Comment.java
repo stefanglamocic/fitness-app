@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
@@ -21,18 +19,19 @@ import jakarta.persistence.OneToMany;
 @Entity
 @IdClass(CommentId.class)
 public class Comment {
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "fitness_program_id", 
 			referencedColumnName = "id")
 	private FitnessProgram fitnessProgram;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "username", 
 			referencedColumnName = "username")
 	private User publishedBy;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private LocalDateTime published;
 	
 	@JsonBackReference

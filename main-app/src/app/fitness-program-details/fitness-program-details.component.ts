@@ -16,6 +16,7 @@ import { UserService } from '../service/user.service';
 export class FitnessProgramDetailsComponent implements OnInit {
   id: number = 0;
   image: number = 0;
+  commentNumber: number = 0;
 
   fitnessProgram: FitnessProgram = {
     id: this.id,
@@ -41,6 +42,7 @@ export class FitnessProgramDetailsComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.title.setTitle(this.fitnessProgram.name);
+          this.commentNumber = this.getCommentNumber(this.fitnessProgram.comments || []);
         })
       )
       .subscribe(

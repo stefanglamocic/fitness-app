@@ -1,7 +1,9 @@
 package com.fit.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -14,9 +16,13 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.fit.model.Comment;
 import com.fit.model.FitnessProgram;
 import com.fit.model.Image;
+import com.fit.model.User;
+import com.fit.repo.CommentRepository;
 import com.fit.repo.FitnessProgramRepository;
+import com.fit.repo.UserRepository;
 
 @Service
 public class FitnessProgramService {
@@ -25,6 +31,10 @@ public class FitnessProgramService {
 	
 	@Autowired
 	private FitnessProgramRepository fpRepo;
+	@Autowired
+	private UserRepository userRepo;
+	@Autowired
+	private CommentRepository commentRepo;
 	
 	public MappingJacksonValue addFitnessProgram(FitnessProgram fitnessProgram) {
 		FilterProvider filterProvider = new SimpleFilterProvider()
@@ -49,5 +59,38 @@ public class FitnessProgramService {
 		}
 		
 		 return new ResponseEntity<>(images, HttpStatus.OK);
+	}
+	
+	public MappingJacksonValue postComment(int id, Map<String, Comment> body) {
+		FilterProvider filterProvider = new SimpleFilterProvider()
+				.addFilter("fitnessProgramFilter", 
+						SimpleBeanPropertyFilter.serializeAllExcept("participations"));
+		
+		FitnessProgram fitnessProgram = fpRepo.findById(id).get();
+		Comment comment = body.get("comment");
+		User user = userRepo.findByUsername(comment.getPublishedBy().getUsername());
+		
+		Comment post = new Comment();
+		post.setFitnessProgram(fitnessProgram);
+		post.setPublishedBy(user);
+		post.setContent(comment.getContent());
+		post.setPublished(LocalDateTime.now());
+		
+		if (body.containsKey("replyTo")) {
+			Comment temp = body.get("replyTo");
+			
+			Comment parentComment = new Comment();
+			parentComment.setPublishedBy(userRepo.findByUsername(temp.getPublishedBy().getUsername()));
+			parentComment.setFitnessProgram(fitnessProgram);
+			parentComment.setPublished(temp.getPublished());
+			
+			post.setParentComment(parentComment);
+		}
+		
+		commentRepo.save(post);
+		
+		MappingJacksonValue json = new MappingJacksonValue(fitnessProgram);
+        json.setFilters(filterProvider);
+        return json;
 	}
 }

@@ -81,7 +81,7 @@
         <div 
             class="v-cont"
             style="background-color: #f5f5f5;">
-            <div class="m-3 desc-title">{{ getCommentNumber(fitnessProgram.comments || []) }} Komentara</div>
+            <div class="m-3 desc-title">{{ commentNumber }} Komentara</div>
             <form class="v-cont g-2 p-1"
                 *ngIf="userLoggedIn()">
                 <textarea name="text"
