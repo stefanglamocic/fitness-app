@@ -10,8 +10,9 @@
                 </tr>
 
                 <tr *ngFor="let msg of inbox"
+                    #msgRow
                     [ngClass]="{'msg-opened': msg.opened}"
-                    (click)="openMessage(msg)">
+                    (click)="openMessage(msg, msgRow)">
                     <td>{{ msg.sender.username }}</td>
                     <td>{{ msg.timeSent | date : 'd.M.yyyy - H:mm:ss' }}</td>
                 </tr>
@@ -59,3 +60,24 @@
         </form>
     </div>
 </div>
+
+<dialog 
+    class="modal"
+    id="msgModal"
+    #msgModal>
+    <div class="v-cont p-2 g-1">
+        <div class="f-2 clr-accent">
+            {{openedMessage.sender.username}}</div>
+        <div class="f-1 clr-secondary">
+            {{openedMessage.timeSent | date : 'd.M.yyyy - H:mm:ss'}}
+        </div>
+        <div class="f-2 m-2">
+            {{openedMessage.content}}
+        </div>
+        <button class="btn-style btn-small bg-accent"
+            style="margin-top: 2rem;width: 100px;align-self: center;"
+            (click)="closeModal(msgModal)">
+            OK</button>
+    </div>
+
+</dialog>

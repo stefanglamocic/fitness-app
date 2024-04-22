@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
@@ -16,6 +16,7 @@ export class MessagesComponent implements OnInit, OnDestroy{
 
   inbox: Array<MessageInterface> = [];
   messageToSend: MessageInterface;
+  openedMessage: MessageInterface;
 
   constructor(private userService: UserService,
     private messagesService: MessagesService,
@@ -25,6 +26,7 @@ export class MessagesComponent implements OnInit, OnDestroy{
       receiver: { username: ''},
       content: ''
     };
+    this.openedMessage = {...this.messageToSend};
   }
 
   ngOnInit(): void {
@@ -44,7 +46,14 @@ export class MessagesComponent implements OnInit, OnDestroy{
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  openMessage(message: MessageInterface): void {
+  openMessage(message: MessageInterface, msgRow: HTMLTableRowElement): void {
+    message.receiver = {
+      username: this.userService.currentUser?.username || ''
+    };
+    this.openedMessage = message;
+    (document.querySelector('#msgModal') as HTMLDialogElement).showModal();
+
+    msgRow.classList.add('msg-opened');
     let sub = this.messagesService.openMessage(message).subscribe();
     this.subscriptions.push(sub);
   }
@@ -58,6 +67,10 @@ export class MessagesComponent implements OnInit, OnDestroy{
     );
     this.subscriptions.push(sub);
     form.reset();
+  }
+
+  closeModal(modal: HTMLDialogElement) {
+    modal.close();
   }
 
 }
