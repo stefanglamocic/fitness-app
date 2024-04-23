@@ -83,14 +83,21 @@
             style="background-color: #f5f5f5;">
             <div class="m-3 desc-title">{{ commentNumber }} Komentara</div>
             <form class="v-cont g-2 p-1"
-                *ngIf="userLoggedIn()">
+                *ngIf="userLoggedIn()"
+                #commentForm="ngForm"
+                id="commentForm"
+                (ngSubmit)="postComment(commentForm)">
                 <textarea name="text"
                     id="text"
                     placeholder="Komentar..."
-                    style="resize: none; height: 120px;"></textarea>
+                    style="resize: none; height: 120px;"
+                    required
+                    [(ngModel)]="reply"></textarea>
 
                     <button class="btn-style btn-small bg-accent"
-                        style="align-self: flex-end;">
+                        style="align-self: flex-end;"
+                        form="commentForm"
+                        [disabled]="commentForm.invalid">
                         Postavi
                     </button>
             </form>
@@ -101,7 +108,9 @@
         <ng-template #commentsTree let-comments>
             <div class="comments-tree v-cont" *ngIf="comments">
                 <ng-template ngFor let-c [ngForOf]="comments">
-                    <comment [comment]="c"></comment>
+                    <comment [comment]="c" 
+                        [fitnessProgramId]="fitnessProgram.id"
+                        (replied)="userReplied($event)"></comment>
                     <div class="indent">
                         <ng-template [ngTemplateOutlet]="commentsTree"
                             [ngTemplateOutletContext]="{ $implicit: c.childComments }">

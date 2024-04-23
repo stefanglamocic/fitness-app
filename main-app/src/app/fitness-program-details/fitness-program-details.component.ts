@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FitnessProgramsService } from '../home/fitness-programs-view/service/fitness-programs.service';
+import { FitnessProgramsService, PostCommentTemplate } from '../home/fitness-programs-view/service/fitness-programs.service';
 import { FitnessProgram } from 'src/interfaces/fitness-program.interface';
 import { CommentInterface } from 'src/interfaces/comment.interface';
 import { Title } from '@angular/platform-browser';
-import { finalize } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Subscription, finalize } from 'rxjs';
 import { UserService } from '../service/user.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'fitness-program-details',
   templateUrl: './fitness-program-details.component.html',
   styleUrls: ['./fitness-program-details.component.css']
 })
-export class FitnessProgramDetailsComponent implements OnInit {
+export class FitnessProgramDetailsComponent implements OnInit, OnDestroy {
+  private subscriptions: Subscription[] = [];
+
   id: number = 0;
   image: number = 0;
   commentNumber: number = 0;
+  reply: string = '';
 
   fitnessProgram: FitnessProgram = {
     id: this.id,
@@ -28,8 +31,7 @@ export class FitnessProgramDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private title: Title,
     private fitnessProgramsService: FitnessProgramsService,
-    private userService: UserService,
-    private http: HttpClient) {
+    private userService: UserService) {
     this.id = Number(this.route.snapshot.params['id']);
   }
 
@@ -37,8 +39,12 @@ export class FitnessProgramDetailsComponent implements OnInit {
     this.getDetails();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   getDetails(): void {
-    this.fitnessProgramsService.getFitnessProgram(this.id)
+    let sub = this.fitnessProgramsService.getFitnessProgram(this.id)
       .pipe(
         finalize(() => {
           this.title.setTitle(this.fitnessProgram.name);
@@ -51,6 +57,8 @@ export class FitnessProgramDetailsComponent implements OnInit {
           error: (err) => console.log(err)
         }
       );
+
+    this.subscriptions.push(sub);
   }
 
   concatAttributes(): string {
@@ -78,4 +86,28 @@ export class FitnessProgramDetailsComponent implements OnInit {
   userLoggedIn(): boolean {
     return this.userService.loggedIn;
   }
+
+  postComment(form: NgForm): void {
+    let body: PostCommentTemplate = {
+      comment: {
+        content: this.reply,
+        publishedBy: {username: this.userService.currentUser?.username || ''}
+      }
+    };
+
+    let sub = this.fitnessProgramsService.postComment(this.fitnessProgram.id, body)
+      .subscribe(data => {
+        this.fitnessProgram = data;
+        this.commentNumber++;
+      });
+    
+    this.subscriptions.push(sub);
+    form.reset();
+  }
+
+  userReplied(data: FitnessProgram): void {
+    this.commentNumber++;
+    this.fitnessProgram = data;
+  }
+
 }

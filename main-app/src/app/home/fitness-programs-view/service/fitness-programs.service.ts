@@ -23,4 +23,21 @@ export class FitnessProgramsService {
   removeFitnessProgram(id: number): Observable<any>{
     return this.http.delete(`${this.fitnessProgramsUrl}/${id}`);
   }
+
+  postComment(id: number, body: PostCommentTemplate): Observable<FitnessProgram> {
+    return this.http.post<FitnessProgram>(`${this.fitnessProgramsUrl}/${id}/comment`, 
+      body);
+  }
+
+}
+
+export interface PostCommentTemplate {
+  comment: {
+    publishedBy: {username: string},
+    content: string
+  },
+  replyTo?: {
+    publishedBy: {username: string},
+    published: string
+  }
 }
