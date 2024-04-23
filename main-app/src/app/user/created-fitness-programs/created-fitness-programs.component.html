@@ -45,7 +45,7 @@
                 name="fpName" 
                 id="fpName" 
                 required
-                [(ngModel)]="newFitnessProgram.name">
+                [(ngModel)]="name">
         </div>
 
         <div class="h-cont h-gap">
@@ -57,7 +57,8 @@
                     name="price"
                     id="price"
                     pattern="\d+(\.\d+)?"
-                    [(ngModel)]="newFitnessProgram.price">
+                    required
+                    [(ngModel)]="price">
             </div>
 
             <div class="v-cont form-group">
@@ -67,7 +68,8 @@
                     type="text"
                     name="duration"
                     id="duration"
-                    [(ngModel)]="newFitnessProgram.duration">
+                    required
+                    [(ngModel)]="duration">
             </div>
         </div>
 
@@ -80,7 +82,7 @@
                     type="text"
                     name="difficulty"
                     id="difficulty"
-                    [(ngModel)]="newFitnessProgram.difficultyLevel">
+                    [(ngModel)]="difficultyLevel">
             </div>
 
             <div class="v-cont form-group">
@@ -90,9 +92,23 @@
                     type="text"
                     name="location"
                     id="location"
-                    [(ngModel)]="newFitnessProgram.location">
+                    [(ngModel)]="location">
             </div>
 
+        </div>
+
+        <div class="v-cont form-group fg-1">
+            <label for="instructor" class="form-label">Instruktor</label>
+                <div class="custom-select">
+                    <select id="instructor" 
+                        name="instructor"
+                        [(ngModel)]="instructor">
+                        <option *ngFor="let i of instructors"
+                            [ngValue]="i">
+                            {{ i.name }}
+                        </option>
+                    </select>
+                </div>
         </div>
 
         <div class="h-cont h-gap">
@@ -100,15 +116,13 @@
             <div class="v-cont form-group fg-1">
                 <label for="category" class="form-label">Kategorija</label>
                     <div class="custom-select">
-                        <select id="category" name="category" >
-                        </select>
-                    </div>
-            </div>
-
-            <div class="v-cont form-group fg-1">
-                <label for="instructor" class="form-label">Instruktor</label>
-                    <div class="custom-select">
-                        <select id="instructor" name="instructor" >
+                        <select id="category" 
+                            name="category"
+                            [(ngModel)]="category">
+                            <option *ngFor="let c of categories"
+                                [ngValue]="c">
+                                {{ c.name }} - {{ getAttributes(c) }}
+                            </option>
                         </select>
                     </div>
             </div>
@@ -117,13 +131,19 @@
 
         <div class="v-cont form-group f-width">
 			<label class="form-label" for="description">Opis</label>
-			<textarea id="description" class="form-input"></textarea>
+			<textarea id="description" name="description" class="form-input"
+                [(ngModel)]="description"></textarea>
 		</div>
 
-        <div class="h-cont maina-center f-width g-2">
+        <div class="v-cont form-group f-width">
+			<label class="form-label" for="images">Slike</label>
+			<textarea id="images" name="images" class="form-input"></textarea>
+		</div>
+
+        <!--<div class="h-cont maina-center f-width g-2">
 			<label for="attachment" class="lbl-to-btn btn-style btn-small bg-secondary icon btn-icon btn-upload">Prikači datoteku</label>
 			<input type="file" id="attachment" name="attachment" accept="image/*" hidden>
-        </div>
+        </div>-->
 
     </form>
 
@@ -133,8 +153,10 @@
 		<button 
             class="btn-style btn-small m-2 bg-accent" 
             id="btnSave"
+            name="btnSave"
             form="fpForm"
-            (click)="add(fpForm, modal)">Dodaj</button>
+            (click)="add(fpForm, modal)"
+            [disabled]="fpForm.invalid">Dodaj</button>
 	</div>
 
 </dialog>

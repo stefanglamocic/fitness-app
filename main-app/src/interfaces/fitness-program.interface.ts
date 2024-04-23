@@ -16,5 +16,5 @@ export interface FitnessProgram {
     category?: Category;
     instructor?: Instructor;
     comments?: Array<CommentInterface>;
-    createdBy?: User;
+    createdBy?: User | null;
 }

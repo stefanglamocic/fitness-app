@@ -1,6 +1,6 @@
 export interface Instructor {
-    id?: number;
+    id: number;
     name: string;
-    information?: string;
-    contact?: string;
+    information: string;
+    contact: string;
 }

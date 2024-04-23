@@ -59,6 +59,23 @@ public class FitnessProgram {
 		super();
 	}
 
+	public FitnessProgram(String name, String description, Double price, String difficultyLevel, Double duration,
+			String location, Category category, Instructor instructor, List<Image> images, User createdBy) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.difficultyLevel = difficultyLevel;
+		this.duration = duration;
+		this.location = location;
+		this.category = category;
+		this.instructor = instructor;
+		this.images = images;
+		this.createdBy = createdBy;
+	}
+
+
+
 	public FitnessProgram(Integer id, String name, String description, Double price, String difficultyLevel, Double duration,
 			String location, Boolean hidden) {
 		super();

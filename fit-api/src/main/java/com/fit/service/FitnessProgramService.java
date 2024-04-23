@@ -36,10 +36,16 @@ public class FitnessProgramService {
 	@Autowired
 	private CommentRepository commentRepo;
 	
-	public MappingJacksonValue addFitnessProgram(FitnessProgram fitnessProgram) {
+	public MappingJacksonValue addFitnessProgram(FitnessProgram body) {
 		FilterProvider filterProvider = new SimpleFilterProvider()
 				.addFilter(FILTER_NAME, 
 						SimpleBeanPropertyFilter.filterOutAllExcept(BASIC_PROPS));
+		
+		FitnessProgram fitnessProgram = new FitnessProgram(
+				body.getName(), body.getDescription(), body.getPrice(), body.getDifficultyLevel(), body.getDuration(), 
+				body.getLocation(), body.getCategory(), body.getInstructor(), body.getImages(), body.getCreatedBy());
+		fitnessProgram.setHidden(false);
+		
 		
 		MappingJacksonValue json = new MappingJacksonValue(
 				fpRepo.save(fitnessProgram));
