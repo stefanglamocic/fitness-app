@@ -20,6 +20,7 @@ export class FitnessProgramDetailsComponent implements OnInit, OnDestroy {
   image: number = 0;
   commentNumber: number = 0;
   reply: string = '';
+  participating: boolean = false;
 
   fitnessProgram: FitnessProgram = {
     id: this.id,
@@ -49,6 +50,9 @@ export class FitnessProgramDetailsComponent implements OnInit, OnDestroy {
         finalize(() => {
           this.title.setTitle(this.fitnessProgram.name);
           this.commentNumber = this.getCommentNumber(this.fitnessProgram.comments || []);
+          if (this.userService.loggedIn) {
+            this.checkUserParticipation();
+          }
         })
       )
       .subscribe(
@@ -108,6 +112,22 @@ export class FitnessProgramDetailsComponent implements OnInit, OnDestroy {
   userReplied(data: FitnessProgram): void {
     this.commentNumber++;
     this.fitnessProgram = data;
+  }
+
+  checkUserParticipation(): void {
+    let sub = this.userService.getFitnessProgramParticipations()
+      .subscribe(data => {
+        this.participating = data.find(p => p.id === this.id) ? true : false;
+      });
+
+    this.subscriptions.push(sub);
+  }
+
+  participate(): void {
+    let sub = this.userService.setParticipation(this.id)
+      .subscribe(data => this.participating = true);
+
+    this.subscriptions.push(sub);
   }
 
 }

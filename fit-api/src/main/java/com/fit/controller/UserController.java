@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.fit.model.FitnessProgram;
+import com.fit.model.Participation;
 import com.fit.model.User;
+import com.fit.repo.FitnessProgramRepository;
+import com.fit.repo.ParticipationRepository;
 import com.fit.repo.UserRepository;
 import com.fit.service.UserService;
 
@@ -26,6 +30,10 @@ public class UserController {
 	UserRepository userRepo;
 	@Autowired
 	UserService userService;
+	@Autowired
+	FitnessProgramRepository fpRepo;
+	@Autowired
+	ParticipationRepository participationRepo;
 	
 	@GetMapping
 	public List<User> getUsers() {
@@ -45,6 +53,19 @@ public class UserController {
 	@GetMapping("{username}/fitness-program-participations")
 	public MappingJacksonValue getFitnessProgramParticipations(@PathVariable String username) {
 		return userService.getFitnessProgramParticipations(username);
+	}
+	
+	@PostMapping("{username}/fitness-program-participations")
+	public void setParticipation(@PathVariable String username, @RequestBody int fitnessProgramId) {
+		FitnessProgram fitnessProgram = fpRepo.findById(fitnessProgramId).get();
+		User user = userRepo.findByUsername(username);
+		
+		Participation participation = new Participation();
+		participation.setCompleted(false);
+		participation.setFitnessProgram(fitnessProgram);
+		participation.setUser(user);
+		
+		participationRepo.save(participation);
 	}
 	
 	@PostMapping("login")

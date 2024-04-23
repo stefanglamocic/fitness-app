@@ -63,4 +63,9 @@ export class UserService {
     return this.http.get<MessageInterface[]>(`${this.baseUrl}/${this.currentUser?.username}/inbox`);
   }
 
+  setParticipation(id: number): Observable<any> {
+    return this.http
+      .post<any>(`${this.baseUrl}/${this.currentUser?.username}/fitness-program-participations`, id);
+  }
+
 }

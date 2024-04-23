@@ -19,6 +19,10 @@
             </div>
         </div>
         <div><span class="item-name">Cijena: </span> {{ fitnessProgram.price }}KM</div>
+        <button class="btn-style btn-small bg-accent"
+            *ngIf="userLoggedIn()"
+            [disabled]="participating"
+            (click)="participate()">Učestvuj</button>
     </div>
 
     <!-- images -->
