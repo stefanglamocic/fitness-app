@@ -4,7 +4,7 @@
     <div style="margin-top: .5rem;">
         {{ comment.content }}
     </div>
-    <a 
+    <a *ngIf="showReplyButton()"
         style="align-self: flex-end;
             color: var(--clr-accent);
             cursor: pointer;"

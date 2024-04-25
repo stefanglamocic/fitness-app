@@ -59,4 +59,8 @@ export class CommentComponent implements OnDestroy{
     form.reset();
   }
 
+  showReplyButton(): boolean {
+    return this.userService.loggedIn;
+  }
+
 }
